@@ -15,3 +15,7 @@ Implementation sequence: (1) reproducible chart data and geometry QA, (2) seven 
 | Ageing | National population by age for2015/2024 | Sum65–69 through85+, both sexes/overall ethnicity; divide by all-age total; no rounded icon counts. |
 
 No numerical chart is blocked. A valid derived state map is subject to technical repair checks. Local implementation is authorized; publication reuse conditions and author attribution remain release items.
+
+## Outcome
+
+All seven views are implemented. The geometry gate passed; Sarawak was repaired only in a derived copy. The prior missing-data placeholders were removed, and all16state/federal-territory observations are present. See `V1_VERIFICATION.md` for final build/browser results and `DATA_VALIDATION.md` for data checks. The website is a local V1 draft; no deployment or V2 implementation occurred.

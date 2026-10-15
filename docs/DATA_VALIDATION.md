@@ -1,213 +1,30 @@
 # V1 data validation
 
-PASS — 195 assertions. Reproduce with `python3 scripts/prepare_data.py`.
+**PASS — 195 assertions.** Reproduce with `python3 scripts/prepare_data.py`. Full assertions, source/output hashes and geometry diagnostics: [data-validation.json](data-validation.json).
 
-- Original unchanged: facilities_master.csv
-- Original unchanged: population_malaysia.csv
-- Original unchanged: bedutil_state.csv
-- Original unchanged: HEALTH_FACTS_2025.pdf
-- Original unchanged: bedutil_facility.csv
-- Original unchanged: population_state.csv
-- Original unchanged: hospital_beds.csv
-- Original unchanged: administrative_1_state.geojson
-- Original unchanged: administrative_2_district.geojson
-- Original unchanged: administrative_0_malaysia.geojson
-- Original unchanged: population_district.csv
-- Acquired source unchanged: data/additional/raw/Kod UPI_1303024.xlsx
-- Acquired source unchanged: data/additional/raw/PETUNJUK_KESIHATAN_2024.pdf
-- Acquired source unchanged: data/additional/raw/PETUNJUK_KESIHATAN_2025.pdf
-- Acquired source unchanged: data/additional/raw/administrative_1_state.geojson
-- Acquired source unchanged: data/additional/raw/administrative_2_district.geojson
-- Acquired source unchanged: data/additional/raw/bed_util.json
-- Acquired source unchanged: data/additional/raw/bedutil_01_table_facility.parquet
-- Acquired source unchanged: data/additional/raw/bedutil_01_table_state.parquet
-- Acquired source unchanged: data/additional/raw/bedutil_02_timeseries_facility.parquet
-- Acquired source unchanged: data/additional/raw/bedutil_02_timeseries_state.parquet
-- Acquired source unchanged: data/additional/raw/bedutil_facility.csv
-- Acquired source unchanged: data/additional/raw/bedutil_state.csv
-- Acquired source unchanged: data/additional/raw/ckaps_private_hospitals.csv
-- Acquired source unchanged: data/additional/raw/covid_epidemic_README.md
-- Acquired source unchanged: data/additional/raw/covid_hospital.csv
-- Acquired source unchanged: data/additional/raw/covid_icu.csv
-- Acquired source unchanged: data/additional/raw/dosm_README.md
-- Acquired source unchanged: data/additional/raw/dosm_geo_commits.json
-- Acquired source unchanged: data/additional/raw/facilities_master.csv
-- Acquired source unchanged: data/additional/raw/healthcare_staff.csv
-- Acquired source unchanged: data/additional/raw/kkmnow_LICENSE
-- Acquired source unchanged: data/additional/raw/kkmnow_README.md
-- Acquired source unchanged: data/additional/raw/kkmnow_back_tree.json
-- Acquired source unchanged: data/additional/raw/kkmnow_commits.json
-- Acquired source unchanged: data/additional/raw/resources_README.md
-- Acquired source unchanged: data/additional/raw/resources_commits.json
-- All ten national years
-- indexed_growth has no null values
-- Complete 16 by 10 grid
-- State beds sum to national every year
-- Rounded state population within 1000 persons of national
-- state_rates has no null values
-- public_rates_2024 has no null values
-- PDF column count 137 Johor
-- PDF column count 137 Kedah
-- PDF column count 137 Kelantan
-- PDF column count 137 Melaka
-- PDF column count 137 Negeri Sembilan
-- PDF column count 137 Pahang
-- PDF column count 137 Perak
-- PDF column count 137 Perlis
-- PDF column count 137 Pulau Pinang
-- PDF column count 137 Sabah
-- PDF column count 137 Sarawak
-- PDF column count 137 Selangor
-- PDF column count 137 Terengganu
-- PDF column count 137 W.P. Kuala Lumpur
-- PDF column count 137 W.P. Labuan
-- PDF column count 137 W.P. Putrajaya
-- PDF column count 137 Malaysia
-- PDF column count 133 Johor
-- PDF column count 133 Kedah
-- PDF column count 133 Kelantan
-- PDF column count 133 Melaka
-- PDF column count 133 Negeri Sembilan
-- PDF column count 133 Pahang
-- PDF column count 133 Perak
-- PDF column count 133 Perlis
-- PDF column count 133 Pulau Pinang
-- PDF column count 133 Sabah
-- PDF column count 133 Sarawak
-- PDF column count 133 Selangor
-- PDF column count 133 Terengganu
-- PDF column count 133 W.P. Kuala Lumpur
-- PDF column count 133 W.P. Labuan
-- PDF column count 133 W.P. Putrajaya
-- PDF column count 133 Malaysia
-- PDF column count 160 Johor
-- PDF column count 160 Kedah
-- PDF column count 160 Kelantan
-- PDF column count 160 Melaka
-- PDF column count 160 Negeri Sembilan
-- PDF column count 160 Pahang
-- PDF column count 160 Perak
-- PDF column count 160 Perlis
-- PDF column count 160 Pulau Pinang
-- PDF column count 160 Sabah
-- PDF column count 160 Sarawak
-- PDF column count 160 Selangor
-- PDF column count 160 Terengganu
-- KL footnote attached to admissions value
-- PDF column count 160 W.P. Kuala Lumpur
-- PDF column count 160 W.P. Labuan
-- PDF column count 160 W.P. Putrajaya
-- PDF column count 160 Malaysia
-- private PDF unique complete 17-region rows
-- private national reconciliation private_hospitals
-- private national reconciliation private_beds
-- public PDF unique complete 17-region rows
-- public national reconciliation moh_hospitals
-- public national reconciliation moh_hospital_beds
-- public national reconciliation special_count
-- public national reconciliation special_beds
-- public national reconciliation moh_count
-- public national reconciliation moh_beds
-- public national reconciliation other_count
-- public national reconciliation other_beds
-- public national reconciliation public_count
-- public national reconciliation public_beds
-- admissions PDF unique complete 17-region rows
-- admissions national reconciliation moh_hospital
-- admissions national reconciliation moh_special
-- admissions national reconciliation other_government
-- admissions national reconciliation private
-- admissions national reconciliation total
-- Private 2024 table has explicit values
-- Public PDF totals match original state CSV
-- Capacity totals 52048/19920/71968
-- Pulau Pinang moves 15 to 4
-- combined_capacity has no null values
-- Annual occupancy all16state identifiers
-- MOH annual total official_beds
-- MOH annual total operational_beds
-- MOH annual total admissions
-- MOH annual total deaths
-- Annual occupancy reference72.61
-- MOH annual admissions reconcile
-- occupancy has no null values
-- Admissions total4270356
-- admissions has no null values
-- Five65+age bins 2015
-- Five65+age bins 2024
-- ageing has no null values
-- Polygon parts retained Selangor
-- Valid derived boundary Selangor
-- Area change under0.01percent Selangor
-- Polygon parts retained Pahang
-- Valid derived boundary Pahang
-- Area change under0.01percent Pahang
-- Polygon parts retained Pulau Pinang
-- Valid derived boundary Pulau Pinang
-- Area change under0.01percent Pulau Pinang
-- Polygon parts retained Sarawak
-- Valid derived boundary Sarawak
-- Area change under0.01percent Sarawak
-- Polygon parts retained Kedah
-- Valid derived boundary Kedah
-- Area change under0.01percent Kedah
-- Polygon parts retained Perak
-- Valid derived boundary Perak
-- Area change under0.01percent Perak
-- Polygon parts retained Sabah
-- Valid derived boundary Sabah
-- Area change under0.01percent Sabah
-- Polygon parts retained Kelantan
-- Valid derived boundary Kelantan
-- Area change under0.01percent Kelantan
-- Polygon parts retained Negeri Sembilan
-- Valid derived boundary Negeri Sembilan
-- Area change under0.01percent Negeri Sembilan
-- Polygon parts retained W.P. Kuala Lumpur
-- Valid derived boundary W.P. Kuala Lumpur
-- Area change under0.01percent W.P. Kuala Lumpur
-- Polygon parts retained W.P. Labuan
-- Valid derived boundary W.P. Labuan
-- Area change under0.01percent W.P. Labuan
-- Polygon parts retained Perlis
-- Valid derived boundary Perlis
-- Area change under0.01percent Perlis
-- Polygon parts retained Johor
-- Valid derived boundary Johor
-- Area change under0.01percent Johor
-- Polygon parts retained Melaka
-- Valid derived boundary Melaka
-- Area change under0.01percent Melaka
-- Polygon parts retained Terengganu
-- Valid derived boundary Terengganu
-- Area change under0.01percent Terengganu
-- Polygon parts retained W.P. Putrajaya
-- Valid derived boundary W.P. Putrajaya
-- Area change under0.01percent W.P. Putrajaya
-- All16boundaries join exactly
-- No material interstate area overlaps
-- After processing unchanged: facilities_master.csv
-- After processing unchanged: population_malaysia.csv
-- After processing unchanged: bedutil_state.csv
-- After processing unchanged: HEALTH_FACTS_2025.pdf
-- After processing unchanged: bedutil_facility.csv
-- After processing unchanged: population_state.csv
-- After processing unchanged: hospital_beds.csv
-- After processing unchanged: administrative_1_state.geojson
-- After processing unchanged: administrative_2_district.geojson
-- After processing unchanged: administrative_0_malaysia.geojson
-- After processing unchanged: population_district.csv
+| Chart table | Rows | Check |
+|---|---:|---|
+| indexed_growth | 20 | Complete; no null chart measures |
+| state_rates | 160 | Complete; no null chart measures |
+| public_rates_2024 | 16 | Complete; no null chart measures |
+| combined_capacity | 16 | Complete; no null chart measures |
+| occupancy | 16 | Complete; no null chart measures |
+| admissions | 4 | Complete; no null chart measures |
+| ageing | 2 | Complete; no null chart measures |
+
+## Reconciliation
+
+- All 11 originals and 26 acquired raw files match the Task 02 SHA-256 evidence. No source edits.
+- Ten annual observations per national series; all 160 state-year pairs. All 16 states/territories join exactly.
+- Public beds: 52,048; private hospital beds: 19,920; combined: 71,968 in 2024. PDF public totals match the original CSV.
+- MOH official/operational beds: 46,855 / 44,570; published national occupancy: 72.61%. State additive totals reconcile.
+- Four admission groups sum to 4,270,356 reported episodes. No missing-report adjustment.
+- Population is converted from thousands; both sexes / overall ethnicity selected once. National 65+ uses five bins, excludes all-age aggregate from the numerator, and uses the same-year overall denominator.
 
 ## Geometry
 
-Only Sarawak required `make_valid`. No simplification or source edits. Clockwise polygon winding supports D3 rendering; winding is not a coordinate change. All16identifiers join, all derived shapes are valid. Full area/component/bounds and overlap diagnostics in `data-validation.json`. Boundary vintage is undocumented; geographic analysis is at state level only.
+All 16 derived shapes valid. Only Sarawak required make_valid: 0.000000628446% planar area change, unchanged bounds and four polygon components. No simplification. Clockwise D3 winding changes ring order only. Small existing interstate boundary overlaps are recorded, not silently clipped (maximum about 0.000139 square degrees). This is adequate for the V1 state display, not a certified legal/statistical boundary revision. Effective vintage remains undocumented.
 
-## Definitions and limitations
+## Scope
 
-- 2024private licensed beds vs official public capacity; not operational availability
-- MOH submission97.94%, private response82.33%; no response-rate adjustment
-- Boundary effective vintage and reuse terms unresolved; local V1 only
-- Reported annual MOH occupancy, not present-day pressure
-- No invented/interpolated observations; all chart measures complete
-
-Year-end beds divided by same-year mid-year resident estimates. Population source units are thousands. Both/overall sex-age-ethnicity aggregate rows selected once; five65+bins summed without overall age. Full inputs and outputs are hashed in JSON. Source PDF is read directly at physical pages133,137,140–152,160; no sample Figma values used.
+Year-end beds use same-year mid-year resident estimates. Combined capacity adds licensed private hospital beds to public hospitals and special institutions; it is not operational or accessible capacity. Annual occupancy covers MOH only. MOH admissions submission: 97.94%; private response: 82.33%. Private admissions include maternity/nursing/hospice institutions. No invented or interpolated observations. PDF physical pages 133, 137, 140–152 and 160 are re-extracted directly. Public-release reuse conditions remain unresolved.

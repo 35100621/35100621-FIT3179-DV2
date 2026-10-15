@@ -1,0 +1,167 @@
+{
+  "sheet": "KOD UPI PINDAAN ",
+  "rows": 3321,
+  "columns": 8,
+  "schema": {
+    "state_code": "object",
+    "state_name": "object",
+    "district_code": "object",
+    "district_name": "object",
+    "locality_code": "object",
+    "locality_name": "object",
+    "section_code": "object",
+    "section_name": "object"
+  },
+  "missing": {
+    "state_code": {
+      "n": 26,
+      "pct": 0.7828967178560674
+    },
+    "state_name": {
+      "n": 25,
+      "pct": 0.7527853056308341
+    },
+    "district_code": {
+      "n": 0,
+      "pct": 0.0
+    },
+    "district_name": {
+      "n": 0,
+      "pct": 0.0
+    },
+    "locality_code": {
+      "n": 28,
+      "pct": 0.8431195423065342
+    },
+    "locality_name": {
+      "n": 28,
+      "pct": 0.8431195423065342
+    },
+    "section_code": {
+      "n": 1930,
+      "pct": 58.115025594700384
+    },
+    "section_name": {
+      "n": 1930,
+      "pct": 58.115025594700384
+    }
+  },
+  "duplicate_rows": 0,
+  "duplicate_code_keys": 0,
+  "states": [
+    {
+      "state_code": "01",
+      "state_name": "JOHOR"
+    },
+    {
+      "state_code": "02",
+      "state_name": "KEDAH"
+    },
+    {
+      "state_code": NaN,
+      "state_name": NaN
+    },
+    {
+      "state_code": "03 ",
+      "state_name": "KELANTAN"
+    },
+    {
+      "state_code": "04",
+      "state_name": "MELAKA"
+    },
+    {
+      "state_code": "05",
+      "state_name": "NEGERI SEMBILAN"
+    },
+    {
+      "state_code": "06",
+      "state_name": "PAHANG"
+    },
+    {
+      "state_code": "07",
+      "state_name": "PULAU PINANG"
+    },
+    {
+      "state_code": "08",
+      "state_name": "PERAK"
+    },
+    {
+      "state_code": "09",
+      "state_name": "PERLIS"
+    },
+    {
+      "state_code": "10",
+      "state_name": "SELANGOR"
+    },
+    {
+      "state_code": "11",
+      "state_name": "TERENGGANU"
+    },
+    {
+      "state_code": "12",
+      "state_name": "SABAH"
+    },
+    {
+      "state_code": "13",
+      "state_name": "SARAWAK"
+    },
+    {
+      "state_code": "14",
+      "state_name": "WP KUALA LUMPUR"
+    },
+    {
+      "state_code": NaN,
+      "state_name": "WP KUALA LUMPUR"
+    },
+    {
+      "state_code": "15",
+      "state_name": "WP LABUAN"
+    },
+    {
+      "state_code": "16",
+      "state_name": "WP PUTRAJAYA"
+    }
+  ],
+  "distinct_state_district_pairs": 146,
+  "district_code_multiple_names": {
+    "('08', '06')": 2
+  },
+  "population2024_district_names_absent_from_upi_any_state": [
+    "ASAJAYA",
+    "BAU",
+    "BELAGA",
+    "BELURAN",
+    "BELURU",
+    "BUKIT MABONG",
+    "DALAT",
+    "DARO",
+    "JULAU",
+    "KABONG",
+    "KANOWIT",
+    "LARUT DAN MATANG",
+    "LAWAS",
+    "LUBOK ANTU",
+    "LUNDU",
+    "MARADONG",
+    "MARUDI",
+    "MATU",
+    "NABAWAN",
+    "PAKAN",
+    "PERLIS",
+    "PUSA",
+    "SARATOK",
+    "SEBAUH",
+    "SELANGAU",
+    "SIMUNJAN",
+    "SONG",
+    "SUBIS",
+    "TANJUNG MANIS",
+    "TATAU",
+    "TEBEDU",
+    "TELANG USAN",
+    "TIMUR LAUT",
+    "W.P. KUALA LUMPUR",
+    "W.P. LABUAN",
+    "W.P. PUTRAJAYA"
+  ]
+}

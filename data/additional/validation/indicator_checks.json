@@ -1,0 +1,96 @@
+{
+  "private_state_minus_national": {
+    "private_hospitals": {
+      "2023": 0.0,
+      "2024": 0.0
+    },
+    "private_hospital_beds": {
+      "2023": 0.0,
+      "2024": 0.0
+    }
+  },
+  "public_state_minus_national": {
+    "moh_hospitals": {
+      "2023": 0.0,
+      "2024": 0.0
+    },
+    "moh_hospital_beds": {
+      "2023": 0.0,
+      "2024": 0.0
+    },
+    "moh_special_institutions": {
+      "2023": 0.0,
+      "2024": 0.0
+    },
+    "moh_special_beds": {
+      "2023": 0.0,
+      "2024": 0.0
+    },
+    "moh_total_facilities": {
+      "2023": 0.0,
+      "2024": 0.0
+    },
+    "moh_total_beds": {
+      "2023": 0.0,
+      "2024": 0.0
+    },
+    "other_public_hospitals": {
+      "2023": 0.0,
+      "2024": 0.0
+    },
+    "other_public_beds": {
+      "2023": 0.0,
+      "2024": 0.0
+    },
+    "public_total_facilities": {
+      "2023": 0.0,
+      "2024": 0.0
+    },
+    "public_total_beds": {
+      "2023": 0.0,
+      "2024": 0.0
+    }
+  },
+  "admissions_state_minus_national": {
+    "moh_hospital_admissions": {
+      "2023": 0.0,
+      "2024": 0.0
+    },
+    "moh_special_admissions": {
+      "2023": 0.0,
+      "2024": 0.0
+    },
+    "other_public_admissions": {
+      "2023": 0.0,
+      "2024": 0.0
+    },
+    "private_admissions": {
+      "2023": 0.0,
+      "2024": 0.0
+    },
+    "total_admissions": {
+      "2023": 0.0,
+      "2024": 0.0
+    }
+  },
+  "utilisation_additive_state_minus_national": {
+    "official_beds": {
+      "2023": 0.0,
+      "2024": 0.0
+    },
+    "operational_beds": {
+      "2023": 0.0,
+      "2024": 0.0
+    },
+    "admissions": {
+      "2023": 0.0,
+      "2024": 0.0
+    },
+    "deaths": {
+      "2023": 0.0,
+      "2024": 0.0
+    }
+  },
+  "public_pdf_csv_mismatches": [],
+  "moh_admissions_between_tables_mismatches": []
+}
