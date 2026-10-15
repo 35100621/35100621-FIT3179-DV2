@@ -1,0 +1,12 @@
+{
+  "bed_growth": 15.439040078071287,
+  "population_growth": 9.189991695017973,
+  "private_beds": 19920,
+  "private_share": 27.67896843041352,
+  "official_moh": 46855,
+  "operational_moh": 44570,
+  "operational_gap": 2285,
+  "national_occupancy": 72.61,
+  "age_increase": 1.8210456954938117,
+  "declining_states": 7
+}

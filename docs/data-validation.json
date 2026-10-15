@@ -1,0 +1,621 @@
+{
+  "status": "PASS",
+  "checks": [
+    "Original unchanged: facilities_master.csv",
+    "Original unchanged: population_malaysia.csv",
+    "Original unchanged: bedutil_state.csv",
+    "Original unchanged: HEALTH_FACTS_2025.pdf",
+    "Original unchanged: bedutil_facility.csv",
+    "Original unchanged: population_state.csv",
+    "Original unchanged: hospital_beds.csv",
+    "Original unchanged: administrative_1_state.geojson",
+    "Original unchanged: administrative_2_district.geojson",
+    "Original unchanged: administrative_0_malaysia.geojson",
+    "Original unchanged: population_district.csv",
+    "Acquired source unchanged: data/additional/raw/Kod UPI_1303024.xlsx",
+    "Acquired source unchanged: data/additional/raw/PETUNJUK_KESIHATAN_2024.pdf",
+    "Acquired source unchanged: data/additional/raw/PETUNJUK_KESIHATAN_2025.pdf",
+    "Acquired source unchanged: data/additional/raw/administrative_1_state.geojson",
+    "Acquired source unchanged: data/additional/raw/administrative_2_district.geojson",
+    "Acquired source unchanged: data/additional/raw/bed_util.json",
+    "Acquired source unchanged: data/additional/raw/bedutil_01_table_facility.parquet",
+    "Acquired source unchanged: data/additional/raw/bedutil_01_table_state.parquet",
+    "Acquired source unchanged: data/additional/raw/bedutil_02_timeseries_facility.parquet",
+    "Acquired source unchanged: data/additional/raw/bedutil_02_timeseries_state.parquet",
+    "Acquired source unchanged: data/additional/raw/bedutil_facility.csv",
+    "Acquired source unchanged: data/additional/raw/bedutil_state.csv",
+    "Acquired source unchanged: data/additional/raw/ckaps_private_hospitals.csv",
+    "Acquired source unchanged: data/additional/raw/covid_epidemic_README.md",
+    "Acquired source unchanged: data/additional/raw/covid_hospital.csv",
+    "Acquired source unchanged: data/additional/raw/covid_icu.csv",
+    "Acquired source unchanged: data/additional/raw/dosm_README.md",
+    "Acquired source unchanged: data/additional/raw/dosm_geo_commits.json",
+    "Acquired source unchanged: data/additional/raw/facilities_master.csv",
+    "Acquired source unchanged: data/additional/raw/healthcare_staff.csv",
+    "Acquired source unchanged: data/additional/raw/kkmnow_LICENSE",
+    "Acquired source unchanged: data/additional/raw/kkmnow_README.md",
+    "Acquired source unchanged: data/additional/raw/kkmnow_back_tree.json",
+    "Acquired source unchanged: data/additional/raw/kkmnow_commits.json",
+    "Acquired source unchanged: data/additional/raw/resources_README.md",
+    "Acquired source unchanged: data/additional/raw/resources_commits.json",
+    "All ten national years",
+    "indexed_growth has no null values",
+    "Complete 16 by 10 grid",
+    "State beds sum to national every year",
+    "Rounded state population within 1000 persons of national",
+    "state_rates has no null values",
+    "public_rates_2024 has no null values",
+    "PDF column count 137 Johor",
+    "PDF column count 137 Kedah",
+    "PDF column count 137 Kelantan",
+    "PDF column count 137 Melaka",
+    "PDF column count 137 Negeri Sembilan",
+    "PDF column count 137 Pahang",
+    "PDF column count 137 Perak",
+    "PDF column count 137 Perlis",
+    "PDF column count 137 Pulau Pinang",
+    "PDF column count 137 Sabah",
+    "PDF column count 137 Sarawak",
+    "PDF column count 137 Selangor",
+    "PDF column count 137 Terengganu",
+    "PDF column count 137 W.P. Kuala Lumpur",
+    "PDF column count 137 W.P. Labuan",
+    "PDF column count 137 W.P. Putrajaya",
+    "PDF column count 137 Malaysia",
+    "PDF column count 133 Johor",
+    "PDF column count 133 Kedah",
+    "PDF column count 133 Kelantan",
+    "PDF column count 133 Melaka",
+    "PDF column count 133 Negeri Sembilan",
+    "PDF column count 133 Pahang",
+    "PDF column count 133 Perak",
+    "PDF column count 133 Perlis",
+    "PDF column count 133 Pulau Pinang",
+    "PDF column count 133 Sabah",
+    "PDF column count 133 Sarawak",
+    "PDF column count 133 Selangor",
+    "PDF column count 133 Terengganu",
+    "PDF column count 133 W.P. Kuala Lumpur",
+    "PDF column count 133 W.P. Labuan",
+    "PDF column count 133 W.P. Putrajaya",
+    "PDF column count 133 Malaysia",
+    "PDF column count 160 Johor",
+    "PDF column count 160 Kedah",
+    "PDF column count 160 Kelantan",
+    "PDF column count 160 Melaka",
+    "PDF column count 160 Negeri Sembilan",
+    "PDF column count 160 Pahang",
+    "PDF column count 160 Perak",
+    "PDF column count 160 Perlis",
+    "PDF column count 160 Pulau Pinang",
+    "PDF column count 160 Sabah",
+    "PDF column count 160 Sarawak",
+    "PDF column count 160 Selangor",
+    "PDF column count 160 Terengganu",
+    "KL footnote attached to admissions value",
+    "PDF column count 160 W.P. Kuala Lumpur",
+    "PDF column count 160 W.P. Labuan",
+    "PDF column count 160 W.P. Putrajaya",
+    "PDF column count 160 Malaysia",
+    "private PDF unique complete 17-region rows",
+    "private national reconciliation private_hospitals",
+    "private national reconciliation private_beds",
+    "public PDF unique complete 17-region rows",
+    "public national reconciliation moh_hospitals",
+    "public national reconciliation moh_hospital_beds",
+    "public national reconciliation special_count",
+    "public national reconciliation special_beds",
+    "public national reconciliation moh_count",
+    "public national reconciliation moh_beds",
+    "public national reconciliation other_count",
+    "public national reconciliation other_beds",
+    "public national reconciliation public_count",
+    "public national reconciliation public_beds",
+    "admissions PDF unique complete 17-region rows",
+    "admissions national reconciliation moh_hospital",
+    "admissions national reconciliation moh_special",
+    "admissions national reconciliation other_government",
+    "admissions national reconciliation private",
+    "admissions national reconciliation total",
+    "Private 2024 table has explicit values",
+    "Public PDF totals match original state CSV",
+    "Capacity totals 52048/19920/71968",
+    "Pulau Pinang moves 15 to 4",
+    "combined_capacity has no null values",
+    "Annual occupancy all16state identifiers",
+    "MOH annual total official_beds",
+    "MOH annual total operational_beds",
+    "MOH annual total admissions",
+    "MOH annual total deaths",
+    "Annual occupancy reference72.61",
+    "MOH annual admissions reconcile",
+    "occupancy has no null values",
+    "Admissions total4270356",
+    "admissions has no null values",
+    "Five65+age bins 2015",
+    "Five65+age bins 2024",
+    "ageing has no null values",
+    "Polygon parts retained Selangor",
+    "Valid derived boundary Selangor",
+    "Area change under0.01percent Selangor",
+    "Polygon parts retained Pahang",
+    "Valid derived boundary Pahang",
+    "Area change under0.01percent Pahang",
+    "Polygon parts retained Pulau Pinang",
+    "Valid derived boundary Pulau Pinang",
+    "Area change under0.01percent Pulau Pinang",
+    "Polygon parts retained Sarawak",
+    "Valid derived boundary Sarawak",
+    "Area change under0.01percent Sarawak",
+    "Polygon parts retained Kedah",
+    "Valid derived boundary Kedah",
+    "Area change under0.01percent Kedah",
+    "Polygon parts retained Perak",
+    "Valid derived boundary Perak",
+    "Area change under0.01percent Perak",
+    "Polygon parts retained Sabah",
+    "Valid derived boundary Sabah",
+    "Area change under0.01percent Sabah",
+    "Polygon parts retained Kelantan",
+    "Valid derived boundary Kelantan",
+    "Area change under0.01percent Kelantan",
+    "Polygon parts retained Negeri Sembilan",
+    "Valid derived boundary Negeri Sembilan",
+    "Area change under0.01percent Negeri Sembilan",
+    "Polygon parts retained W.P. Kuala Lumpur",
+    "Valid derived boundary W.P. Kuala Lumpur",
+    "Area change under0.01percent W.P. Kuala Lumpur",
+    "Polygon parts retained W.P. Labuan",
+    "Valid derived boundary W.P. Labuan",
+    "Area change under0.01percent W.P. Labuan",
+    "Polygon parts retained Perlis",
+    "Valid derived boundary Perlis",
+    "Area change under0.01percent Perlis",
+    "Polygon parts retained Johor",
+    "Valid derived boundary Johor",
+    "Area change under0.01percent Johor",
+    "Polygon parts retained Melaka",
+    "Valid derived boundary Melaka",
+    "Area change under0.01percent Melaka",
+    "Polygon parts retained Terengganu",
+    "Valid derived boundary Terengganu",
+    "Area change under0.01percent Terengganu",
+    "Polygon parts retained W.P. Putrajaya",
+    "Valid derived boundary W.P. Putrajaya",
+    "Area change under0.01percent W.P. Putrajaya",
+    "All16boundaries join exactly",
+    "No material interstate area overlaps",
+    "After processing unchanged: facilities_master.csv",
+    "After processing unchanged: population_malaysia.csv",
+    "After processing unchanged: bedutil_state.csv",
+    "After processing unchanged: HEALTH_FACTS_2025.pdf",
+    "After processing unchanged: bedutil_facility.csv",
+    "After processing unchanged: population_state.csv",
+    "After processing unchanged: hospital_beds.csv",
+    "After processing unchanged: administrative_1_state.geojson",
+    "After processing unchanged: administrative_2_district.geojson",
+    "After processing unchanged: administrative_0_malaysia.geojson",
+    "After processing unchanged: population_district.csv"
+  ],
+  "chart_tables": {
+    "indexed_growth": {
+      "rows": 20,
+      "columns": [
+        "year",
+        "series",
+        "index",
+        "count"
+      ]
+    },
+    "state_rates": {
+      "rows": 160,
+      "columns": [
+        "year",
+        "state",
+        "beds",
+        "residents",
+        "rate"
+      ]
+    },
+    "public_rates_2024": {
+      "rows": 16,
+      "columns": [
+        "year",
+        "state",
+        "beds",
+        "residents",
+        "rate"
+      ]
+    },
+    "combined_capacity": {
+      "rows": 16,
+      "columns": [
+        "year",
+        "state",
+        "public_beds",
+        "residents",
+        "public_rate",
+        "private_hospitals",
+        "private_beds",
+        "combined_beds",
+        "combined_rate",
+        "public_rank",
+        "combined_rank",
+        "private_share"
+      ]
+    },
+    "occupancy": {
+      "rows": 16,
+      "columns": [
+        "state",
+        "year",
+        "occupancy",
+        "official_beds",
+        "operational_beds",
+        "national_occupancy"
+      ]
+    },
+    "admissions": {
+      "rows": 4,
+      "columns": [
+        "provider",
+        "admissions",
+        "year",
+        "coverage"
+      ]
+    },
+    "ageing": {
+      "rows": 2,
+      "columns": [
+        "year",
+        "older_residents",
+        "residents",
+        "share"
+      ]
+    }
+  },
+  "input_sha256": {
+    "hospital_beds.csv": "97cb4cd999b525728c134324732cfc39bfd401b13fa991cde8b6b57d3b784862",
+    "population_malaysia.csv": "ed287ef3277e96e74d27fd65f2dc4ab88b37817780e265e11b0d478e6bc9fe04",
+    "population_state.csv": "a3ac1a8831a4e66dbc0bc0d018b699b3810eaead3775fbee4c95e9eb2cc44945",
+    "administrative_1_state.geojson": "c808df58765eac095d8538fe74000934b97401b4c8816d28d5e8929624df8239",
+    "data/additional/raw/PETUNJUK_KESIHATAN_2025.pdf": "36abb366d7b3719dd2072ab1a7205f4253cdd95ccb7c7db9b2838fe566d3e74d"
+  },
+  "geometry": [
+    {
+      "state": "Selangor",
+      "valid_before": true,
+      "reason_before": "Valid Geometry",
+      "valid_after": true,
+      "area_change_percent": 0.0,
+      "parts_before": 13,
+      "parts_after": 13,
+      "bounds_unchanged": true,
+      "method": "clockwise D3 winding only"
+    },
+    {
+      "state": "Pahang",
+      "valid_before": true,
+      "reason_before": "Valid Geometry",
+      "valid_after": true,
+      "area_change_percent": 0.0,
+      "parts_before": 6,
+      "parts_after": 6,
+      "bounds_unchanged": true,
+      "method": "clockwise D3 winding only"
+    },
+    {
+      "state": "Pulau Pinang",
+      "valid_before": true,
+      "reason_before": "Valid Geometry",
+      "valid_after": true,
+      "area_change_percent": 0.0,
+      "parts_before": 8,
+      "parts_after": 8,
+      "bounds_unchanged": true,
+      "method": "clockwise D3 winding only"
+    },
+    {
+      "state": "Sarawak",
+      "valid_before": false,
+      "reason_before": "Self-intersection[111.283620239187 2.4254012198264]",
+      "valid_after": true,
+      "area_change_percent": 6.284460127846206e-07,
+      "parts_before": 4,
+      "parts_after": 4,
+      "bounds_unchanged": true,
+      "method": "make_valid then polygon components; clockwise D3 winding"
+    },
+    {
+      "state": "Kedah",
+      "valid_before": true,
+      "reason_before": "Valid Geometry",
+      "valid_after": true,
+      "area_change_percent": 0.0,
+      "parts_before": 67,
+      "parts_after": 67,
+      "bounds_unchanged": true,
+      "method": "clockwise D3 winding only"
+    },
+    {
+      "state": "Perak",
+      "valid_before": true,
+      "reason_before": "Valid Geometry",
+      "valid_after": true,
+      "area_change_percent": 0.0,
+      "parts_before": 3,
+      "parts_after": 3,
+      "bounds_unchanged": true,
+      "method": "clockwise D3 winding only"
+    },
+    {
+      "state": "Sabah",
+      "valid_before": true,
+      "reason_before": "Valid Geometry",
+      "valid_after": true,
+      "area_change_percent": 0.0,
+      "parts_before": 113,
+      "parts_after": 113,
+      "bounds_unchanged": true,
+      "method": "clockwise D3 winding only"
+    },
+    {
+      "state": "Kelantan",
+      "valid_before": true,
+      "reason_before": "Valid Geometry",
+      "valid_after": true,
+      "area_change_percent": 0.0,
+      "parts_before": 1,
+      "parts_after": 1,
+      "bounds_unchanged": true,
+      "method": "clockwise D3 winding only"
+    },
+    {
+      "state": "Negeri Sembilan",
+      "valid_before": true,
+      "reason_before": "Valid Geometry",
+      "valid_after": true,
+      "area_change_percent": 0.0,
+      "parts_before": 1,
+      "parts_after": 1,
+      "bounds_unchanged": true,
+      "method": "clockwise D3 winding only"
+    },
+    {
+      "state": "W.P. Kuala Lumpur",
+      "valid_before": true,
+      "reason_before": "Valid Geometry",
+      "valid_after": true,
+      "area_change_percent": 0.0,
+      "parts_before": 1,
+      "parts_after": 1,
+      "bounds_unchanged": true,
+      "method": "clockwise D3 winding only"
+    },
+    {
+      "state": "W.P. Labuan",
+      "valid_before": true,
+      "reason_before": "Valid Geometry",
+      "valid_after": true,
+      "area_change_percent": 0.0,
+      "parts_before": 7,
+      "parts_after": 7,
+      "bounds_unchanged": true,
+      "method": "clockwise D3 winding only"
+    },
+    {
+      "state": "Perlis",
+      "valid_before": true,
+      "reason_before": "Valid Geometry",
+      "valid_after": true,
+      "area_change_percent": 0.0,
+      "parts_before": 1,
+      "parts_after": 1,
+      "bounds_unchanged": true,
+      "method": "clockwise D3 winding only"
+    },
+    {
+      "state": "Johor",
+      "valid_before": true,
+      "reason_before": "Valid Geometry",
+      "valid_after": true,
+      "area_change_percent": 0.0,
+      "parts_before": 37,
+      "parts_after": 37,
+      "bounds_unchanged": true,
+      "method": "clockwise D3 winding only"
+    },
+    {
+      "state": "Melaka",
+      "valid_before": true,
+      "reason_before": "Valid Geometry",
+      "valid_after": true,
+      "area_change_percent": 0.0,
+      "parts_before": 12,
+      "parts_after": 12,
+      "bounds_unchanged": true,
+      "method": "clockwise D3 winding only"
+    },
+    {
+      "state": "Terengganu",
+      "valid_before": true,
+      "reason_before": "Valid Geometry",
+      "valid_after": true,
+      "area_change_percent": 0.0,
+      "parts_before": 27,
+      "parts_after": 27,
+      "bounds_unchanged": true,
+      "method": "clockwise D3 winding only"
+    },
+    {
+      "state": "W.P. Putrajaya",
+      "valid_before": true,
+      "reason_before": "Valid Geometry",
+      "valid_after": true,
+      "area_change_percent": 0.0,
+      "parts_before": 1,
+      "parts_after": 1,
+      "bounds_unchanged": true,
+      "method": "clockwise D3 winding only"
+    }
+  ],
+  "interstate_overlaps": [
+    {
+      "states": [
+        "Selangor",
+        "Pahang"
+      ],
+      "overlap_square_degrees": 2.3570834064749063e-05
+    },
+    {
+      "states": [
+        "Selangor",
+        "Perak"
+      ],
+      "overlap_square_degrees": 0.00013857015056160994
+    },
+    {
+      "states": [
+        "Selangor",
+        "Negeri Sembilan"
+      ],
+      "overlap_square_degrees": 1.1367464363260905e-05
+    },
+    {
+      "states": [
+        "Selangor",
+        "W.P. Kuala Lumpur"
+      ],
+      "overlap_square_degrees": 5.699814111819888e-06
+    },
+    {
+      "states": [
+        "Selangor",
+        "W.P. Putrajaya"
+      ],
+      "overlap_square_degrees": 4.961249815569466e-06
+    },
+    {
+      "states": [
+        "Pahang",
+        "Perak"
+      ],
+      "overlap_square_degrees": 7.739224607320413e-06
+    },
+    {
+      "states": [
+        "Pahang",
+        "Kelantan"
+      ],
+      "overlap_square_degrees": 2.1337071882960693e-05
+    },
+    {
+      "states": [
+        "Pahang",
+        "Negeri Sembilan"
+      ],
+      "overlap_square_degrees": 5.689695686751336e-06
+    },
+    {
+      "states": [
+        "Pahang",
+        "Johor"
+      ],
+      "overlap_square_degrees": 5.001314182871134e-05
+    },
+    {
+      "states": [
+        "Pahang",
+        "Terengganu"
+      ],
+      "overlap_square_degrees": 1.6133387204706706e-05
+    },
+    {
+      "states": [
+        "Pulau Pinang",
+        "Kedah"
+      ],
+      "overlap_square_degrees": 3.0134907649141984e-06
+    },
+    {
+      "states": [
+        "Sarawak",
+        "Sabah"
+      ],
+      "overlap_square_degrees": 2.172532560574524e-05
+    },
+    {
+      "states": [
+        "Kedah",
+        "Perak"
+      ],
+      "overlap_square_degrees": 1.8358789932559708e-05
+    },
+    {
+      "states": [
+        "Perak",
+        "Kelantan"
+      ],
+      "overlap_square_degrees": 6.440281806192117e-06
+    },
+    {
+      "states": [
+        "Kelantan",
+        "Terengganu"
+      ],
+      "overlap_square_degrees": 1.5669842739046089e-07
+    },
+    {
+      "states": [
+        "Negeri Sembilan",
+        "Johor"
+      ],
+      "overlap_square_degrees": 3.924365709363671e-06
+    },
+    {
+      "states": [
+        "Negeri Sembilan",
+        "Melaka"
+      ],
+      "overlap_square_degrees": 5.914099712901285e-06
+    },
+    {
+      "states": [
+        "Johor",
+        "Melaka"
+      ],
+      "overlap_square_degrees": 3.641528756345143e-06
+    }
+  ],
+  "population_rounding_difference_thousands": {
+    "2015": 3.637978807091713e-12,
+    "2016": -0.10000000000218279,
+    "2017": -0.09999999999854481,
+    "2018": 0.0,
+    "2019": -0.2000000000007276,
+    "2020": -0.10000000000218279,
+    "2021": 0.10000000000218279,
+    "2022": 0.2000000000007276,
+    "2023": 0.0,
+    "2024": 0.20000000000436557
+  },
+  "summary": {
+    "bed_growth": 15.439040078071287,
+    "population_growth": 9.189991695017973,
+    "private_beds": 19920,
+    "private_share": 27.67896843041352,
+    "official_moh": 46855,
+    "operational_moh": 44570,
+    "operational_gap": 2285,
+    "national_occupancy": 72.61,
+    "age_increase": 1.8210456954938117,
+    "declining_states": 7
+  },
+  "limitations": [
+    "2024private licensed beds vs official public capacity; not operational availability",
+    "MOH submission97.94%, private response82.33%; no response-rate adjustment",
+    "Boundary effective vintage and reuse terms unresolved; local V1 only",
+    "Reported annual MOH occupancy, not present-day pressure",
+    "No invented/interpolated observations; all chart measures complete"
+  ]
+}
