@@ -105,15 +105,19 @@ npm run build
 npm test
 ```
 
-Tests start production preview on port 5174 at the repository subpath and verify seven rendered charts, exact values, tooltips, map views, sorting, shared highlighting, downloads, no HTTP errors and layout at 1440, 390 and 320 px. Results/screenshots are in ignored `test-results/`.
+Tests start production preview on port 5174 at the repository subpath and verify seven rendered charts, exact values, tooltips, map views, sorting, shared highlighting, downloads, no HTTP errors and layout at 1440, 390 and 320 px. Results/screenshots are in ignored `test-results/`. To repeat the same tests against the published website:
+
+```sh
+PLAYWRIGHT_BASE_URL=https://35100621.github.io/35100621-FIT3179-DV2/ npm test
+```
 
 ## GitHub Pages deployment
 
-Destination: [35100621/35100621-FIT3179-DV2](https://github.com/35100621/35100621-FIT3179-DV2). GitHub reports default branch `main`; the remote was empty when inspected. The expected Pages address is `https://35100621.github.io/35100621-FIT3179-DV2/`; **this is not a verified published URL**.
+Destination: [35100621/35100621-FIT3179-DV2](https://github.com/35100621/35100621-FIT3179-DV2). GitHub reports default branch `main`; the remote was empty when inspected. **Published and verified:** [Malaysia’s Hospital Divide](https://35100621.github.io/35100621-FIT3179-DV2/). The deployment workflow succeeded and all three browser suites passed against this public URL.
 
 The workflow builds using `npm ci` and `npm run build`, uploads only `dist/`, and deploys using the official GitHub Pages actions on pushes to `main` or manual dispatch. In repository **Settings → Pages → Build and deployment → Source**, select **GitHub Actions**. See [GitHub's custom Pages workflow documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
 
-Authentication and live-deployment status, exact remaining commands and verification evidence are recorded in [Task04 results](reports/task04/RESULTS.md). Never treat a successful local build as a completed deployment.
+Pages is enabled, the project is pushed to `main`, and no deployment setup steps remain. Deployment details and verification evidence are recorded in [Task04 results](reports/task04/RESULTS.md). Never treat a successful local build as a completed deployment.
 
 ## Known limits
 
