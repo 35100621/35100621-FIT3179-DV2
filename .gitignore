@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.DS_Store
+.venv/
+__pycache__/
+test-results/
+playwright-report/
+/*.csv
+/*.pdf
+/*.geojson
+/data/additional/raw/
+/data/additional/validation/pdf_previews/
+/data/additional/validation/health_indicators_*_pages.json
