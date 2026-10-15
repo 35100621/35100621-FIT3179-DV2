@@ -1,3 +1,4 @@
+import privateLocations from '../../data/processed/private_bed_locations.json'
 import type { TopLevelSpec, Config } from 'vega-lite'
 import { growth, rates, capacity, occupancy, admissions, ageing, summary } from '../data'
 export const palette = { navy: '#172B42', terracotta: '#D77750', teal: '#527F78', slate: '#7D90AE', cream: '#F8F7F3' }
@@ -32,4 +33,18 @@ export function admissionsBars(width:number):TopLevelSpec {
 }
 export function ageingChart(width:number):TopLevelSpec {
  return {...base(width),height:210,config:{...config,axis:{...config.axis,labelColor:'#d3dde4',titleColor:'#d3dde4',gridColor:'#435568'}},data:{values:ageing},encoding:{x:{field:'share',type:'quantitative',scale:{domain:[0,10]},axis:{title:'Share of resident population aged 65+ (%)',tickCount:6}},y:{field:'year',type:'ordinal',axis:{title:null,labelFontSize:16,ticks:false}},tooltip:[{field:'year',type:'ordinal',title:'Year'},{field:'share',format:'.2f',title:'Population aged 65+ (%)'},{field:'older_residents',format:',',title:'Residents aged 65+'},{field:'residents',format:',',title:'Total residents'}]},layer:[{mark:{type:'bar',height:34,cornerRadiusEnd:2},encoding:{color:{field:'year',type:'nominal',scale:{domain:[2015,2024],range:[slate,terracotta]},legend:null}}},{mark:{type:'text',align:'left',dx:12,color:'#ffffff',fontSize:18,fontWeight:600},encoding:{text:{field:'share',format:'.2f'}}}]}
+}
+
+export function bumpChart(width:number):TopLevelSpec {
+ const rows=capacity.flatMap(d=>[0,1].map(side=>({...d,side,rank:side?d.combined_rank:d.public_rank,gain:d.public_rank-d.combined_rank,movement:d.state==='Pulau Pinang'?'Pulau Pinang':d.public_rank>d.combined_rank?'Gain':d.public_rank<d.combined_rank?'Loss':'Unchanged',label:d.state.replace('W.P. ','')+` (${d.public_rank-d.combined_rank>0?'+':''}${d.public_rank-d.combined_rank})`})))
+ return {...base(width),height:510,data:{values:rows},encoding:{x:{field:'side',type:'quantitative',scale:{domain:[-0.05,width<500?2.7:1.7]},axis:{title:null,values:[0,1],labelExpr:"datum.value === 0 ? 'Public' : 'Combined'",grid:false,labelFontWeight:700}},y:{field:'rank',type:'quantitative',scale:{domain:[16.5,0.5],zero:false},axis:{title:'Rank · 1 = highest rate',values:Array.from({length:16},(_,i)=>i+1),format:'d'}},color:{field:'movement',type:'nominal',scale:{domain:['Gain','Loss','Unchanged','Pulau Pinang'],range:[teal,slate,'#a8a49b',terracotta]},legend:{orient:'bottom',columns:2}},detail:{field:'state'},tooltip:[{field:'state',title:'State / territory'},{field:'public_rank',title:'Public rank'},{field:'combined_rank',title:'Combined rank'},{field:'gain',title:'Places gained (negative = lost)'}]},layer:[{mark:{type:'line',strokeWidth:2.5},encoding:{order:{field:'side'}}},{mark:{type:'point',filled:true,size:55}},{transform:[{filter:'datum.side === 1'}],mark:{type:'text',align:'left',dx:10,fontSize:width<500?10:12},encoding:{text:{field:'label'},color:{value:navy}}}]}
+}
+export function privateSymbols(width:number,region:string):TopLevelSpec {
+ const east=['Sabah','Sarawak','W.P. Labuan']
+ const visible=(state:string)=>region==='All Malaysia'||(region==='East Malaysia'?east.includes(state):!east.includes(state))
+ const filter=region==='All Malaysia'?[]:[{filter:`indexof(${JSON.stringify(east)}, datum.properties.state) ${region==='East Malaysia'?'>=':'<'} 0`}]
+ return {...base(width),height:width<500?330:430,projection:{type:'mercator'},layer:[
+  {data:{url:`${import.meta.env.BASE_URL}data/states.geojson`,format:{type:'json',property:'features'}},transform:filter,mark:{type:'geoshape',fill:'#e2e8e2',stroke:'#80938e',strokeWidth:0.8}},
+  {data:{values:privateLocations.filter(d=>visible(d.state)).sort((a,b)=>b.private_beds-a.private_beds)},mark:{type:'circle',color:terracotta,fillOpacity:0.55,stroke:navy,strokeWidth:1},encoding:{longitude:{field:'longitude',type:'quantitative'},latitude:{field:'latitude',type:'quantitative'},size:{field:'private_beds',type:'quantitative',scale:{type:'linear',domain:[0,7000],range:[0,width<500?1500:3500]},legend:{orient:'bottom',title:'Licensed private hospital beds',values:[1000,3000,6000],symbolOpacity:0.6,titleLimit:280}},tooltip:[{field:'state',title:'State / territory'},{field:'private_beds',format:',',title:'Licensed private hospital beds (2024)'},{field:'private_hospitals',format:',',title:'Licensed private hospitals'}]}}
+ ]}
 }

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { fixed, number, summary, source } from './data'
-import { StateContext, IndexedChart, Choropleth, Heatmap, ConnectedDots, OccupancyPlot, AdmissionsBars, AgeVisual } from './components/StoryCharts'
+import { StateContext, IndexedChart, Choropleth, Heatmap, PrivateSymbolMap, BumpChart, ConnectedDots, OccupancyPlot, AdmissionsBars, AgeVisual } from './components/StoryCharts'
 function Eyebrow({
   children,
   light = false,
@@ -126,7 +126,9 @@ function App() {
               <strong>{number(summary.private_beds)}</strong>
               <span>LICENSED PRIVATE HOSPITAL BEDS · 2024</span>
             </div>
+            <PrivateSymbolMap />
             <ConnectedDots />
+            <BumpChart />
             <div className="pinang-callout">
               <div>
                 <span>15th</span>

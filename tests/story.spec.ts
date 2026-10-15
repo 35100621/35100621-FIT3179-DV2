@@ -1,11 +1,11 @@
 import { test, expect } from '@playwright/test'
-test('seven charts, exact values, interactions and responsive production page',async({page},testInfo)=>{
+test('nine charts, exact values, interactions and responsive production page',async({page},testInfo)=>{
  const errors:string[]=[]
  page.on('pageerror',e=>errors.push(String(e)))
  page.on('console',m=>{if(['error','warning'].includes(m.type()))errors.push(m.text())})
  page.on('response',r=>{if(r.status()>=400)errors.push(`${r.status()} ${r.url()}`)})
  await page.goto('./')
- await expect(page.locator('[data-ready=true]')).toHaveCount(7)
+ await expect(page.locator('[data-ready=true]')).toHaveCount(9)
  await page.evaluate(()=>document.fonts.ready)
  await page.keyboard.press('Tab')
  await expect(page.locator('.skip-link')).toBeFocused()
@@ -13,6 +13,10 @@ test('seven charts, exact values, interactions and responsive production page',a
  await page.keyboard.press('Enter')
  await expect(page.locator('main .section-title')).toHaveCount(6)
  await expect(page.locator('.chart-error')).toHaveCount(0)
+ await expect(page.locator('[data-chart=bump] .mark-line path')).toHaveCount(16)
+ await expect(page.locator('[data-chart=bump] .mark-symbol path[aria-label*="Public rank:"]')).toHaveCount(32)
+ await expect(page.locator('[data-chart=private-symbols] .mark-shape path')).toHaveCount(16)
+ await expect(page.locator('[data-chart=private-symbols] .mark-symbol path[aria-label*="Licensed private hospital beds"]')).toHaveCount(16)
  await expect(page.locator('[data-chart=indexed] .mark-symbol path')).toHaveCount(20)
  await expect(page.locator('[data-chart=heatmap] .mark-rect path[aria-label*="State / federal territory:"]')).toHaveCount(160)
  await expect(page.locator('[data-chart=choropleth] .mark-shape path')).toHaveCount(16)
@@ -43,7 +47,7 @@ test('seven charts, exact values, interactions and responsive production page',a
  await page.locator('#map-region').selectOption('All Malaysia')
  await page.locator('#map-state').selectOption('')
  await page.locator('#capacity-sort').selectOption('Combined capacity')
- await expect(page.locator('[data-ready=true]')).toHaveCount(7)
+ await expect(page.locator('[data-ready=true]')).toHaveCount(9)
  await page.locator('.admissions-chart summary').click()
  await expect(page.locator('.admissions-chart tbody')).toContainText('2,579,373')
  await expect(page.locator('.admissions-chart tbody')).toContainText('1,359,910')
@@ -53,5 +57,6 @@ test('seven charts, exact values, interactions and responsive production page',a
  expect(layout.scroll).toBeLessThanOrEqual(layout.width)
  for(const svg of layout.svgs)expect(svg.w).toBeLessThanOrEqual(svg.parent+1)
  await page.evaluate(()=>scrollTo(0,0));await page.screenshot({path:`test-results/${testInfo.project.name}-verified.png`,fullPage:true})
+ for(const id of ['bump','private-symbols'])await page.locator(`[data-chart=${id}]`).screenshot({path:`test-results/${testInfo.project.name}-${id}.png`})
  expect(errors).toEqual([])
 })

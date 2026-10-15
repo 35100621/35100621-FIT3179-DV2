@@ -1,8 +1,8 @@
 # Malaysia's Hospital Divide
 
-**Why Public Beds Tell Only Half the Story** — a six-chapter editorial data story using React, TypeScript, Vite, Vega-Lite and Vega-Embed. The approved Figma layout, locally bundled Fraunces/DM Sans typography, navy/cream/terracotta palette and seven interactive charts are preserved.
+**Why Public Beds Tell Only Half the Story** — a six-chapter editorial data story using React, TypeScript, Vite, Vega-Lite and Vega-Embed. The approved Figma layout, locally bundled Fraunces/DM Sans typography, navy/cream/terracotta palette and seven original interactive charts are preserved, with two focused additions.
 
-## Visualisations
+## Original V1 visualisations
 
 1. Indexed public hospital beds and population, 2015–2024.
 2. Public beds per 10,000 residents: 16-state choropleth, 2024.
@@ -12,7 +12,9 @@
 6. Reported admissions across four provider groups, 2024.
 7. National population aged 65+, 2015 versus 2024.
 
-Tooltips, regional map views, shared state highlighting, sorting, accessible tables and CSV downloads support the story. All seven charts are implemented. Desktop and mobile layouts are supported; V2 has not begun.
+The focused extension adds a **private-bed proportional symbol map** before the connected dots and a **public-versus-combined rank bump chart** after them. See [implementation and checks](reports/task03/TWO_ADDITIONAL_CHARTS.md).
+
+Tooltips, regional map views, shared state highlighting, sorting, accessible tables and CSV downloads support the story. All nine charts are implemented. Desktop and mobile layouts are supported; no other V2 features were added.
 
 ## Repository structure
 
