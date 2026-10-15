@@ -2,7 +2,7 @@
 
 Reviewed 15 October 2026 · Task 02 · Author: Codex (technical audit). No visualisations implemented.
 
-All findings refer to observed source periods, not October 2026 conditions. Original Task 01 growth/ageing findings remain valid. Files named below are under `data/additional/` unless identified as original root files. Derived CSVs retain source edition, table and physical page. Reproduce with `validation/extract_indicators.py` and the other audit scripts.
+All findings refer to observed source periods, not October 2026 conditions. Original Task 01 growth/ageing findings remain valid. Files named below are under `data/additional/` unless identified as original files in `data/original/`. Derived CSVs retain source edition, table and physical page. Reproduce with `scripts/validation/extract_indicators.py` and the other audit scripts.
 
 ### 1. Private capacity changes the regional comparison
 

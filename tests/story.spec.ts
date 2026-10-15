@@ -4,7 +4,7 @@ test('seven charts, exact values, interactions and responsive production page',a
  page.on('pageerror',e=>errors.push(String(e)))
  page.on('console',m=>{if(['error','warning'].includes(m.type()))errors.push(m.text())})
  page.on('response',r=>{if(r.status()>=400)errors.push(`${r.status()} ${r.url()}`)})
- await page.goto('/')
+ await page.goto('./')
  await expect(page.locator('[data-ready=true]')).toHaveCount(7)
  await page.evaluate(()=>document.fonts.ready)
  await page.keyboard.press('Tab')

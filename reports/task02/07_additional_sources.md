@@ -4,7 +4,7 @@ Reviewed 15 October 2026 · Task 02 · Author: Codex (technical audit). No visua
 
 **18 source investigations** (logical publications, products or datasets; individual download URLs are not separately counted). **16 data-bearing files downloaded**, including **9 substantively new sources** and **7 duplicate/near-duplicate provenance copies**, plus **10 supporting files**: 26 raw files total. Two COVID files count separately because their units and denominators differ. Each Health Indicators edition counts once despite containing many tables. Five extracted analytical CSVs are derivatives, not additional acquisitions.
 
-All sources were accessed on 15 October 2026. Exact successful download URLs, bytes, hashes, periods, reuse conditions and decisions are in [source_manifest.csv](../data/additional/source_manifest.csv); failed URLs and mirror retries are preserved in [acquisition_log.json](../data/additional/validation/acquisition_log.json). Public accessibility does not establish an open licence.
+All sources were accessed on 15 October 2026. Exact successful download URLs, bytes, hashes, periods, reuse conditions and decisions are in [source_manifest.csv](../../data/additional/source_manifest.csv); failed URLs and mirror retries are preserved in [acquisition_log.json](../../data/additional/validation/acquisition_log.json). Public accessibility does not establish an open licence.
 
 ### S 01 — Healthcare Staff by State and Staff Type
 

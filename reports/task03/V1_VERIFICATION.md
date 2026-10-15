@@ -6,7 +6,7 @@ Verified 15 October 2026. V1 implemented; no V2 work or public deployment starte
 
 All seven requested charts render from real processed data: indexed lines, state choropleth, 160-cell heatmap, all-16-state connected dots, ranked annual MOH occupancy, four-provider admissions, and national 65+ comparison. No chart is incomplete or a placeholder.
 
-The six chapters and approved `design_reference/` composition are retained: navy hero, Fraunces/DM Sans typography, cream chart cards, terracotta-accented private reveal, statistical callouts, navy conclusion and methodology footer. Fonts are bundled locally. Figma's incorrect statements about missing annual observations and absent state tables were replaced with actual coverage/definitions.
+The six chapters and approved `design-reference/` composition are retained: navy hero, Fraunces/DM Sans typography, cream chart cards, terracotta-accented private reveal, statistical callouts, navy conclusion and methodology footer. Fonts are bundled locally. Figma's incorrect statements about missing annual observations and absent state tables were replaced with actual coverage/definitions.
 
 ## Checks and results
 

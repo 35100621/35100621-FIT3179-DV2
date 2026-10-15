@@ -13,3 +13,6 @@ playwright-report/
 /data/additional/validation/health_indicators_*_pages.json
 
 *.tsbuildinfo
+
+/data/original/
+/data/geographic/original/

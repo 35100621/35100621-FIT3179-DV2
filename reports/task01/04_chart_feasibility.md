@@ -8,7 +8,7 @@ Audit date: 15 October 2026. Author: Codex, for FIT3179 Task 01 review. No chart
 
 These classifications are planning estimates, not a verified marking decision: the complete rubric was not supplied. The user's clarification establishes that maps count as advanced. “Confirmed” means a meaningful chart can be calculated from verified data; it does not certify its design or rubric classification. “Conditional” identifies a prerequisite unresolved by this audit. Connected dots and slope charts are alternatives in the proposed story and should not both be added just to increase the count. Counting nine feasible idioms does not imply nine recommended charts.
 
-Dataset abbreviations: **B** = hospital_beds.csv; **PN/PS/PD** = population_malaysia.csv / population_state.csv / population_district.csv; **GS/GD** = administrative_1_state.geojson / administrative_2_district.geojson; **F** = facilities_master.csv; **US/UF** = bedutil_state.csv / bedutil_facility.csv; **PDF** = HEALTH_FACTS_2025.pdf. All paths are relative to the repository root. Exact filters and formulas are in report 03.
+Dataset abbreviations: **B** = hospital_beds.csv; **PN/PS/PD** = population_malaysia.csv / population_state.csv / population_district.csv; **GS/GD** = administrative_1_state.geojson / administrative_2_district.geojson; **F** = facilities_master.csv; **US/UF** = bedutil_state.csv / bedutil_facility.csv; **PDF** = HEALTH_FACTS_2025.pdf. CSV/PDF basenames resolve under `data/original/`; geographic basenames under `data/geographic/original/`. Exact filters and formulas are in report 03.
 
 ## Candidate matrix
 

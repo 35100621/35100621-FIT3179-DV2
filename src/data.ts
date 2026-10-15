@@ -1,11 +1,11 @@
-import growth from '../public/data/indexed_growth.json'
-import rates from '../public/data/state_rates.json'
-import current from '../public/data/public_rates_2024.json'
-import capacity from '../public/data/combined_capacity.json'
-import occupancy from '../public/data/occupancy.json'
-import admissions from '../public/data/admissions.json'
-import ageing from '../public/data/ageing.json'
-import summary from '../public/data/summary.json'
+import growth from '../data/processed/indexed_growth.json'
+import rates from '../data/processed/state_rates.json'
+import current from '../data/processed/public_rates_2024.json'
+import capacity from '../data/processed/combined_capacity.json'
+import occupancy from '../data/processed/occupancy.json'
+import admissions from '../data/processed/admissions.json'
+import ageing from '../data/processed/ageing.json'
+import summary from '../data/processed/summary.json'
 export { growth, rates, current, capacity, occupancy, admissions, ageing, summary }
 export const states = current.map(d => d.state).sort()
 export const number = (v: number) => new Intl.NumberFormat('en-MY').format(v)

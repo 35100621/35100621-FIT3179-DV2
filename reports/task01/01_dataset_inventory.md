@@ -4,23 +4,23 @@ Audit date: 15 October 2026. Author: Codex, for FIT3179 Task 01 review. Scope: r
 
 ## Discovery and method
 
-Recursively scanned every file under the project root, including hidden paths, for CSV, JSON, GeoJSON, TopoJSON, XLSX and PDF extensions. Found **11 source files: 7 CSV, 3 GeoJSON and 1 PDF**. No separate JSON, TopoJSON or XLSX source exists. The instruction file is `agents.md`; `agent.md` is absent. The complete `agents.md` instructions were followed. No standalone admissions/cause CSV exists, but both subjects are present in the PDF.
+Recursively scanned every file under the project root, including hidden paths, for CSV, JSON, GeoJSON, TopoJSON, XLSX and PDF extensions. Found **11 source files: 7 CSV, 3 GeoJSON and 1 PDF**. No separate JSON, TopoJSON or XLSX source exists. At the time of the audit, the instruction file was `agents.md` (now `AGENTS.md`); its complete instructions were followed. No standalone admissions/cause CSV exists, but both subjects are present in the PDF.
 
 CSV records were parsed with pandas; blank cells and parser-recognised NA tokens were counted as missing. Numeric ranges, complete-row duplicates and relevant logical-key duplicates were checked. ISO date strings were checked as year labels. GeoJSON was parsed and every geometry tested with Shapely/GEOS. PDF text was extracted and relevant panels visually checked. External documentation was consulted on the audit date to interpret units, without replacing local datasets. File hashes below provide preservation evidence.
 
 | Relative path | Bytes | Dimensions | Observed coverage |
 | --- | --- | --- | --- |
-| bedutil_facility.csv | 9210 | 149 × 8 | Undated |
-| bedutil_state.csv | 1317 | 17 × 7 | Undated |
-| facilities_master.csv | 955489 | 5,160 × 20 | Undated |
-| hospital_beds.csv | 325576 | 6,828 × 5 | 2015-01-01 to 2024-01-01 |
-| population_district.csv | 24637855 | 451,668 × 7 | 2020-01-01 to 2026-01-01 |
-| population_malaysia.csv | 677857 | 17,814 × 5 | 1970-01-01 to 2026-01-01 |
-| population_state.csv | 12568035 | 270,063 × 6 | 1970-01-01 to 2026-01-01 |
-| administrative_0_malaysia.geojson | 306327 | 1 features | Boundary vintage undocumented |
-| administrative_1_state.geojson | 391520 | 16 features | Boundary vintage undocumented |
-| administrative_2_district.geojson | 947754 | 160 features | Boundary vintage undocumented |
-| HEALTH_FACTS_2025.pdf | 1799782 | 2 physical sheets; 17 numbered panels + cover | 2021–2025 across topics; hospital data 2024, some 2023 |
+| data/original/bedutil_facility.csv | 9210 | 149 × 8 | Undated |
+| data/original/bedutil_state.csv | 1317 | 17 × 7 | Undated |
+| data/original/facilities_master.csv | 955489 | 5,160 × 20 | Undated |
+| data/original/hospital_beds.csv | 325576 | 6,828 × 5 | 2015-01-01 to 2024-01-01 |
+| data/original/population_district.csv | 24637855 | 451,668 × 7 | 2020-01-01 to 2026-01-01 |
+| data/original/population_malaysia.csv | 677857 | 17,814 × 5 | 1970-01-01 to 2026-01-01 |
+| data/original/population_state.csv | 12568035 | 270,063 × 6 | 1970-01-01 to 2026-01-01 |
+| data/geographic/original/administrative_0_malaysia.geojson | 306327 | 1 features | Boundary vintage undocumented |
+| data/geographic/original/administrative_1_state.geojson | 391520 | 16 features | Boundary vintage undocumented |
+| data/geographic/original/administrative_2_district.geojson | 947754 | 160 features | Boundary vintage undocumented |
+| data/original/HEALTH_FACTS_2025.pdf | 1799782 | 2 physical sheets; 17 numbered panels + cover | 2021–2025 across topics; hospital data 2024, some 2023 |
 
 ## hospital_beds.csv
 
@@ -476,14 +476,14 @@ SHA-256 was recorded before analysis and rechecked after report creation; all 11
 
 | Relative source path | SHA-256 |
 | --- | --- |
-| HEALTH_FACTS_2025.pdf | e7dff2de1f622bc324cb204e161c6f3b20064393d63ec467872a843684d78dcd |
-| administrative_0_malaysia.geojson | d36b8819e1fbb714aa694e532dc7c3abf6b4842769be521fffd34f56b28c8205 |
-| administrative_1_state.geojson | c808df58765eac095d8538fe74000934b97401b4c8816d28d5e8929624df8239 |
-| administrative_2_district.geojson | aa3995872ea117e19732cae13e86c6f5eda3b15659743b5282a8c19d6ff636b0 |
-| bedutil_facility.csv | ca880540768b535448d39434f626eda2adffd7111d45eec4ed925a399d25dbbb |
-| bedutil_state.csv | 2dedd2485d8bdef3b3883c216d8165da5b428b39838d382dc3a8d29b2716db64 |
-| facilities_master.csv | 63b3ca7fef29c65ba4e306d3761e1126e6af0f85a65be903e4ca3aa34b1346e1 |
-| hospital_beds.csv | 97cb4cd999b525728c134324732cfc39bfd401b13fa991cde8b6b57d3b784862 |
-| population_district.csv | 2c7caf2fc4bda1f58f12db6cc2d6d5f39148fbeaaa0516017eb59fb8e23784e0 |
-| population_malaysia.csv | ed287ef3277e96e74d27fd65f2dc4ab88b37817780e265e11b0d478e6bc9fe04 |
-| population_state.csv | a3ac1a8831a4e66dbc0bc0d018b699b3810eaead3775fbee4c95e9eb2cc44945 |
+| data/original/HEALTH_FACTS_2025.pdf | e7dff2de1f622bc324cb204e161c6f3b20064393d63ec467872a843684d78dcd |
+| data/geographic/original/administrative_0_malaysia.geojson | d36b8819e1fbb714aa694e532dc7c3abf6b4842769be521fffd34f56b28c8205 |
+| data/geographic/original/administrative_1_state.geojson | c808df58765eac095d8538fe74000934b97401b4c8816d28d5e8929624df8239 |
+| data/geographic/original/administrative_2_district.geojson | aa3995872ea117e19732cae13e86c6f5eda3b15659743b5282a8c19d6ff636b0 |
+| data/original/bedutil_facility.csv | ca880540768b535448d39434f626eda2adffd7111d45eec4ed925a399d25dbbb |
+| data/original/bedutil_state.csv | 2dedd2485d8bdef3b3883c216d8165da5b428b39838d382dc3a8d29b2716db64 |
+| data/original/facilities_master.csv | 63b3ca7fef29c65ba4e306d3761e1126e6af0f85a65be903e4ca3aa34b1346e1 |
+| data/original/hospital_beds.csv | 97cb4cd999b525728c134324732cfc39bfd401b13fa991cde8b6b57d3b784862 |
+| data/original/population_district.csv | 2c7caf2fc4bda1f58f12db6cc2d6d5f39148fbeaaa0516017eb59fb8e23784e0 |
+| data/original/population_malaysia.csv | ed287ef3277e96e74d27fd65f2dc4ab88b37817780e265e11b0d478e6bc9fe04 |
+| data/original/population_state.csv | a3ac1a8831a4e66dbc0bc0d018b699b3810eaead3775fbee4c95e9eb2cc44945 |

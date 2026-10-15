@@ -171,17 +171,17 @@
   ],
   "staff_component_sum_mismatches": 0,
   "originals_preserved": {
-    "facilities_master.csv": true,
-    "population_malaysia.csv": true,
-    "bedutil_state.csv": true,
-    "HEALTH_FACTS_2025.pdf": true,
-    "bedutil_facility.csv": true,
-    "population_state.csv": true,
-    "hospital_beds.csv": true,
-    "administrative_1_state.geojson": true,
-    "administrative_2_district.geojson": true,
-    "administrative_0_malaysia.geojson": true,
-    "population_district.csv": true
+    "data/original/facilities_master.csv": true,
+    "data/original/population_malaysia.csv": true,
+    "data/original/bedutil_state.csv": true,
+    "data/original/HEALTH_FACTS_2025.pdf": true,
+    "data/original/bedutil_facility.csv": true,
+    "data/original/population_state.csv": true,
+    "data/original/hospital_beds.csv": true,
+    "data/geographic/original/administrative_1_state.geojson": true,
+    "data/geographic/original/administrative_2_district.geojson": true,
+    "data/geographic/original/administrative_0_malaysia.geojson": true,
+    "data/original/population_district.csv": true
   },
   "parquet_snapshot_matches_original_facility": true,
   "parquet_snapshot_matches_original_state": true

@@ -1,6 +1,6 @@
 # V1 implementation record
 
-Approved design: `design_reference/` (actual folder name). React/TypeScript/Vite + Vega-Lite/Vega-Embed; production code remains separate. Preserve the six chapters, editorial palette, type and spacing. Replace sample charts and stale incomplete-data copy. Build locally; do not deploy or redistribute full source PDFs.
+Approved design: `design-reference/` (actual folder name). React/TypeScript/Vite + Vega-Lite/Vega-Embed; production code remains separate. Preserve the six chapters, editorial palette, type and spacing. Replace sample charts and stale incomplete-data copy. Build locally; do not deploy or redistribute full source PDFs.
 
 Implementation sequence: (1) reproducible chart data and geometry QA, (2) seven Vega-Lite views in the approved composition, (3) build, data and desktop/mobile browser verification, (4) document results and stop at V1.
 

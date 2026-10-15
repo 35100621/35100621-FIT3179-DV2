@@ -1,6 +1,6 @@
 from pathlib import Path
 import pandas as pd,numpy as np,json,hashlib
-b=Path(__file__).resolve().parents[1];root=b.parents[1];r=b/'raw';a={}
+b=Path(__file__).resolve().parents[2]/'data/additional';root=b.parents[1];r=b/'raw';a={}
 # Restore complete acquisition metadata for files fetched concurrently with the long PDF extraction.
 p=b/'validation/acquisition_log.json';log=json.loads(p.read_text())
 for name,remote in [('covid_hospital.csv','hospital.csv'),('covid_icu.csv','icu.csv'),('covid_epidemic_README.md','README.md')]:
@@ -13,7 +13,7 @@ for n in ['covid_hospital.csv','covid_icu.csv']:
  if n=='covid_icu.csv':
   a[n]['icu_capacity_identity_mismatches']=int((d.beds_icu+d.beds_icu_rep!=d.beds_icu_total).sum());occ=d[['icu_covid','icu_pui','icu_noncovid']].sum(axis=1);a[n]['occupancy_exceeds_total_beds']=int((occ>d.beds_icu_total).sum());a[n]['zero_total_beds']=int((d.beds_icu_total==0).sum())
  else:a[n]['stock_exceeds_beds']=int((d[['hosp_covid','hosp_pui','hosp_noncovid']].sum(axis=1)>d.beds).sum())
- pop=pd.read_csv(root/'population_state.csv');a[n]['unmatched_state_names']=sorted(set(d.state)-set(pop.state))
+ pop=pd.read_csv(root/'data/original/population_state.csv');a[n]['unmatched_state_names']=sorted(set(d.state)-set(pop.state))
 d=pd.read_csv(r/'ckaps_private_hospitals.csv');a['ckaps']={'rows':len(d),'sum_beds':int(d.JUMLAH_KATIL.sum()),'duplicate_serial':int(d.BIL.duplicated().sum()),'duplicate_state_name_address':int(d.duplicated(['NEGERI','NAMA_PENUH_FASILITI','ALAMAT']).sum()),'by_state':d.groupby('NEGERI').agg(hospitals=('BIL','size'),beds=('JUMLAH_KATIL','sum')).reset_index().to_dict('records')}
 d=pd.read_parquet(r/'bedutil_02_timeseries_facility.parquet');a['daily_extreme']=d.loc[d.util_nonicu.idxmax()].to_dict();a['negative_by_hospital']=d[d.beds_nonicu<0].groupby('hospital').size().to_dict()
 s=pd.read_parquet(r/'bedutil_02_timeseries_state.parquet');idx=pd.MultiIndex.from_product([s.date.unique(),s.state.unique()],names=['date','state']);a['missing_state_date_rows']=[str(x) for x in idx.difference(s.set_index(['date','state']).index)]
@@ -24,6 +24,6 @@ h=pd.read_csv(r/'covid_hospital.csv')
 a['covid_hospital.csv']['admission_component_identity_mismatches']=int((h.admitted_total!=h.admitted_covid+h.admitted_pui).sum())
 a['covid_hospital.csv']['discharge_component_identity_mismatches']=int((h.discharged_total!=h.discharged_covid+h.discharged_pui).sum())
 for level in ['facility','state']:
- v=pd.read_parquet(r/f'bedutil_01_table_{level}.parquet');o=pd.read_csv(root/f'bedutil_{level}.csv');keys=['state','hospital'] if level=='facility' else ['state'];cols=['beds_nonicu','util_nonicu','beds_icu','util_icu','vent','util_vent']
+ v=pd.read_parquet(r/f'bedutil_01_table_{level}.parquet');o=pd.read_csv(root/f'data/original/bedutil_{level}.csv');keys=['state','hospital'] if level=='facility' else ['state'];cols=['beds_nonicu','util_nonicu','beds_icu','util_icu','vent','util_vent']
  a['parquet_snapshot_matches_original_'+level]=bool(np.isclose(v.set_index(keys).sort_index()[cols],o.set_index(keys).sort_index()[cols],equal_nan=True).all())
 (b/'validation/extra_checks.json').write_text(json.dumps(a,indent=2,default=str))

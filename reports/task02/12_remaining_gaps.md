@@ -33,8 +33,8 @@ Recommended: retain long-run public growth, add 2024 private capacity and carefu
 - Ten data-feasible advanced non-map candidates, three conditional maps and unsupported alternatives: [10](10_updated_chart_feasibility.md).
 - Revised narrative and review handoff: [11](11_updated_story.md).
 - This gap/decision log: [12](12_remaining_gaps.md).
-- [Source manifest](../data/additional/source_manifest.csv):26 rows, one per acquired raw file, exact URL/access date/publisher/licence/period/SHA-256/status.
-- `data/additional/validation/`: reproducible validators, original hashes, acquisition attempt log, full PDF page-text extraction, selected page previews and machine-readable results.
+- [Source manifest](../../data/additional/source_manifest.csv):26 rows, one per acquired raw file, exact URL/access date/publisher/licence/period/SHA-256/status.
+- `scripts/validation/`: reproducible validators. `data/additional/validation/`: original hashes, acquisition attempt log, full PDF page-text extraction, selected page previews and machine-readable results.
 - `data/additional/derived/`: five reviewed analysis CSVs; raw files kept separately. Nulls and anomalous source values preserved. Derived 2023 Labuan combined capacity remains missing.
 
 **Stop after Task 02.** No final visualisation, website or Vega-Lite specification has been implemented.

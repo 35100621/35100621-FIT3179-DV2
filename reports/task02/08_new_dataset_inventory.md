@@ -2,7 +2,7 @@
 
 Reviewed 15 October 2026 · Task 02 · Author: Codex (technical audit). No visualisations implemented.
 
-**16 downloaded data-bearing files; 26 raw files including provenance.** Original datasets were not replaced. Full hashes and URLs: [manifest](../data/additional/source_manifest.csv). Machine audit: [validation_results.json](../data/additional/validation/validation_results.json), [extra_checks.json](../data/additional/validation/extra_checks.json), [indicator_checks.json](../data/additional/validation/indicator_checks.json), [UPI audit](../data/additional/validation/upi_validation.json).
+**16 downloaded data-bearing files; 26 raw files including provenance.** Original datasets were not replaced. Full hashes and URLs: [manifest](../../data/additional/source_manifest.csv). Machine audit: [validation_results.json](../../data/additional/validation/validation_results.json), [extra_checks.json](../../data/additional/validation/extra_checks.json), [indicator_checks.json](../../data/additional/validation/indicator_checks.json), [UPI audit](../../data/additional/validation/upi_validation.json).
 
 ### Kod UPI_1303024.xlsx
 
@@ -296,7 +296,7 @@ State joins are safe structurally with exact labels in reviewed PDF extracts. CK
 
 ### Reproduction and preservation
 
-Run `validate_sources.py`, `extract_indicators.py`, `extra_checks.py` and `validate_upi.py` from `data/additional/validation/` with Python, pandas, pyarrow, shapely, pdfplumber and openpyxl installed. The extraction script reads the cached full PDF page text; it does not alter source files. All 11 original SHA-256 hashes match `original_hashes.json`. Exact schemas and column-specific null percentages/ranges are provided above and in JSON. Support files (10) are read-only READMEs, licence, source configuration, repository tree and commit JSON; they are individually hashed in the manifest, not counted as new observational data.
+Run `validate_sources.py`, `extract_indicators.py`, `extra_checks.py` and `validate_upi.py` from `scripts/validation/` with Python, pandas, pyarrow, shapely, pdfplumber and openpyxl installed. The extraction script reads the cached full PDF page text; it does not alter source files. All 11 original SHA-256 hashes match `original_hashes.json`. Exact schemas and column-specific null percentages/ranges are provided above and in JSON. Support files (10) are read-only READMEs, licence, source configuration, repository tree and commit JSON; they are individually hashed in the manifest, not counted as new observational data.
 
 ### Derived-table completeness and ranges
 

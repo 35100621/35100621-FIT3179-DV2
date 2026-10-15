@@ -2,15 +2,15 @@
 Run: python3 scripts/prepare_data.py (requirements.txt). No imputation or source writes.
 """
 from pathlib import Path
-import hashlib,json,math,sys
+import hashlib,json,math,sys,shutil
 import pandas as pd
 import pdfplumber
 from shapely import make_valid
 from shapely.geometry import shape,mapping,MultiPolygon
 from shapely.geometry.polygon import orient
 from shapely.validation import explain_validity
-ROOT=Path(__file__).resolve().parents[1]; OUT=ROOT/'public/data'; OUT.mkdir(parents=True,exist_ok=True)
-DOC=ROOT/'docs';DOC.mkdir(exist_ok=True)
+ROOT=Path(__file__).resolve().parents[1]; OUT=ROOT/'data/processed'; OUT.mkdir(parents=True,exist_ok=True)
+DOC=ROOT/'reports/task03';DOC.mkdir(parents=True,exist_ok=True)
 STATES=['Johor','Kedah','Kelantan','Melaka','Negeri Sembilan','Pahang','Perak','Perlis','Pulau Pinang','Sabah','Sarawak','Selangor','Terengganu','W.P. Kuala Lumpur','W.P. Labuan','W.P. Putrajaya']
 YEARS=list(range(2015,2025)); checks=[]; outputs={}
 def check(name,ok):
@@ -32,8 +32,8 @@ originals=json.loads((ROOT/'data/additional/validation/original_hashes.json').re
 for p,h in originals.items():check('Original unchanged: '+p,sha(ROOT/p)==h)
 manifest=pd.read_csv(ROOT/'data/additional/source_manifest.csv')
 for x in manifest.itertuples():check('Acquired source unchanged: '+x.source_file,sha(ROOT/x.source_file)==x.sha256)
-beds=pd.read_csv(ROOT/'hospital_beds.csv');beds['year']=beds.date.str[:4].astype(int)
-pn=totals('population_malaysia.csv');ps=totals('population_state.csv')
+beds=pd.read_csv(ROOT/'data/original/hospital_beds.csv');beds['year']=beds.date.str[:4].astype(int)
+pn=totals('data/original/population_malaysia.csv');ps=totals('data/original/population_state.csv')
 nb=beds.query("state=='Malaysia' and district=='All' and type=='all'")
 nt=pn.query("age=='overall' and year in @YEARS")
 n=nb[['year','beds']].merge(nt[['year','population']],on='year',validate='one_to_one').sort_values('year')
@@ -103,7 +103,7 @@ for year in [2015,2024]:
  v=pn[(pn.year==year)&pn.age.isin(older)];check('Five65+age bins '+str(year),len(v)==5 and set(v.age)==set(older));total=pn[(pn.year==year)&(pn.age=='overall')].population.item();old=v.population.sum();age.append({'year':year,'older_residents':round(old*1000),'residents':round(total*1000),'share':old/total*100})
 table('ageing',pd.DataFrame(age))
 # Derived topology repair only. No simplification; explicit D3 clockwise winding.
-g=json.loads((ROOT/'administrative_1_state.geojson').read_text());geolog=[];features=[]
+g=json.loads((ROOT/'data/geographic/original/administrative_1_state.geojson').read_text());geolog=[];features=[]
 def polygons(geom):
  if geom.geom_type=='Polygon':return [geom]
  return [p for part in geom.geoms for p in polygons(part)] if hasattr(geom,'geoms') else []
@@ -123,11 +123,14 @@ for i,f in enumerate(features):
   area=shape(f['geometry']).intersection(shape(other['geometry'])).area
   if area>1e-10:overlaps.append({'states':[f['properties']['state'],other['properties']['state']],'overlap_square_degrees':area})
 check('No material interstate area overlaps',all(x['overlap_square_degrees']<0.001 for x in overlaps))
-write('states.geojson',{'type':'FeatureCollection','features':features})
+GEO=ROOT/'data/geographic/validated';GEO.mkdir(parents=True,exist_ok=True)
+(GEO/'states.geojson').write_text(json.dumps({'type':'FeatureCollection','features':features},ensure_ascii=False,allow_nan=False,indent=2)+'\n')
 summary={'bed_growth':(n.beds.iloc[-1]/n.beds.iloc[0]-1)*100,'population_growth':(n.population.iloc[-1]/n.population.iloc[0]-1)*100,'private_beds':int(c.private_beds.sum()),'private_share':c.private_beds.sum()/c.combined_beds.sum()*100,'official_moh':int(un.official_beds),'operational_moh':int(un.operational_beds),'operational_gap':int(un.official_beds-un.operational_beds),'national_occupancy':float(un.occupancy),'age_increase':age[1]['share']-age[0]['share'],'declining_states':int((s.pivot(index='state',columns='year',values='rate')[2024]<s.pivot(index='state',columns='year',values='rate')[2015]).sum())}
 write('summary.json',summary)
-inputs={p:sha(ROOT/p) for p in ['hospital_beds.csv','population_malaysia.csv','population_state.csv','administrative_1_state.geojson','data/additional/raw/PETUNJUK_KESIHATAN_2025.pdf']}
+inputs={p:sha(ROOT/p) for p in ['data/original/hospital_beds.csv','data/original/population_malaysia.csv','data/original/population_state.csv','data/geographic/original/administrative_1_state.geojson','data/additional/raw/PETUNJUK_KESIHATAN_2025.pdf']}
 for p,h in originals.items():check('After processing unchanged: '+p,sha(ROOT/p)==h)
+RUNTIME=ROOT/'public/data';RUNTIME.mkdir(parents=True,exist_ok=True)
+for asset in [*OUT.glob('*.csv'),GEO/'states.geojson']:shutil.copyfile(asset,RUNTIME/asset.name)
 output_hashes={str(p.relative_to(ROOT)):sha(p) for p in sorted(OUT.iterdir()) if p.is_file()}
 validation={'output_sha256':output_hashes,'status':'PASS','checks':checks,'chart_tables':outputs,'input_sha256':inputs,'geometry':geolog,'interstate_overlaps':overlaps,'population_rounding_difference_thousands':pop_diffs,'summary':summary,'limitations':['2024private licensed beds vs official public capacity; not operational availability','MOH submission97.94%, private response82.33%; no response-rate adjustment','Boundary effective vintage and reuse terms unresolved; local V1 only','Reported annual MOH occupancy, not present-day pressure','No invented/interpolated observations; all chart measures complete']}
 (DOC/'data-validation.json').write_text(json.dumps(validation,indent=2,allow_nan=False)+'\n')

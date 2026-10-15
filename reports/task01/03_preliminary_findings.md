@@ -6,7 +6,7 @@ Audit date: 15 October 2026. Author: Codex, for FIT3179 Task 01 review. Scope: r
 
 From 2015 to 2024, public beds increased **45,087 → 52,048 (+6,961; +15.44%)**, compared with population **31.1861 → 34.0521 million (+9.19%)**. Public beds per 10,000 residents increased **14.46 → 15.28 (+5.72%)**. This is a capacity-to-resident comparison, not a measure of access, clinical adequacy or all-sector supply.
 
-Source: `hospital_beds.csv`, date/state/district/type/beds; filter Malaysia, All, all. Denominator: `population_malaysia.csv`, same year, both/overall/overall. Formula: `beds / (population * 1000) * 10000`; percent change = `(end/start - 1)*100`. Annual year-end beds and mid-year population are conventional but different reference instants. Private beds are excluded.
+Source: `data/original/hospital_beds.csv`, date/state/district/type/beds; filter Malaysia, All, all. Denominator: `data/original/population_malaysia.csv`, same year, both/overall/overall. Formula: `beds / (population * 1000) * 10000`; percent change = `(end/start - 1)*100`. Annual year-end beds and mid-year population are conventional but different reference instants. Private beds are excluded.
 
 | date | beds | population | per_10000 |
 | --- | --- | --- | --- |
@@ -25,7 +25,7 @@ Source: `hospital_beds.csv`, date/state/district/type/beds; filter Malaysia, All
 
 2024 state public-bed rates range from **11.32 in Selangor to 70.16 in Putrajaya**. Excluding federal territories, the range is **11.32 to 23.43 (Perak)**. Putrajaya’s small resident denominator and possible cross-border referral activity make its rate unsuitable as an automatic benchmark. Referral flows are not present in these datasets.
 
-Sources: `hospital_beds.csv`, district=All Districts, type=all, date=2024-01-01; `population_state.csv`, same date and total filters. Exact 1:1 state-year join.
+Sources: `data/original/hospital_beds.csv`, district=All Districts, type=all, date=2024-01-01; `data/original/population_state.csv`, same date and total filters. Exact 1:1 state-year join.
 
 | state | beds | population | per10k |
 | --- | --- | --- | --- |
@@ -75,7 +75,7 @@ Seven of sixteen state/territory rates declined between 2015 and 2024. Selangor�
 
 There are **153 district-level total records in 2024; 26 report zero beds**. Kuala Lumpur has 5,498; Kinta (Ipoh) 3,354; Gombak (Rawang) 3,103; Johor Bahru 3,042. These are source-labelled areas, not a validated common set of present-day districts. A zero reports no public beds assigned to that source area; it does not establish no hospital access, no private beds, or unmet need.
 
-Source: `hospital_beds.csv`, 2024, type=all, district neither All nor All Districts; sort/count beds. Only 138 of 153 names match population districts directly. After the unverified 15-name crosswalk, seven population districts still have no record. District per-capita leaderboards are therefore withheld.
+Source: `data/original/hospital_beds.csv`, 2024, type=all, district neither All nor All Districts; sort/count beds. Only 138 of 153 names match population districts directly. After the unverified 15-name crosswalk, seven population districts still have no record. District per-capita leaderboards are therefore withheld.
 
 ## 5. Population ageing is measurable
 
@@ -104,7 +104,7 @@ Sources: national/state population CSVs, sex=both, ethnicity=overall; sum popula
 
 ## 6. Facility locations are usable only after quality review
 
-`facilities_master.csv` contains **166 HOSPITAL-category records**, all public, with complete coordinates: **151 KKM, 10 KPT and 5 ATM**. Sabah has 26, Sarawak 23 and Selangor 17. They are undated registry counts, not confirmed 2024 hospital totals. Three fail the state containment check; Hospital Tuanku Fauziah is clearly inconsistent with its Perlis label. Point maps must disclose the snapshot’s unknown date and reviewed/excluded records. Clinics and offices must be filtered out.
+`data/original/facilities_master.csv` contains **166 HOSPITAL-category records**, all public, with complete coordinates: **151 KKM, 10 KPT and 5 ATM**. Sabah has 26, Sarawak 23 and Selangor 17. They are undated registry counts, not confirmed 2024 hospital totals. Three fail the state containment check; Hospital Tuanku Fauziah is clearly inconsistent with its Perlis label. Point maps must disclose the snapshot’s unknown date and reviewed/excluded records. Clinics and offices must be filtered out.
 
 Reproduce: filter KATEGORI_FASILITI=HOSPITAL, group NEGERI/SUBSEKTOR; normalise territory names as in report 02; create points (LONGITUD,LATITUD), test state geometry covers(point). Original invalid geometries were not repaired, so borderline failures are diagnostic only.
 
@@ -118,7 +118,7 @@ Within the facility file, filtering only beds_nonicu>0 and nonmissing util_nonic
 
 ## 8. The PDF supplies national activity context and a private-sector caveat
 
-`HEALTH_FACTS_2025.pdf`, printed panels 4–7 (physical sheet 2), reports 2024 public capacity of **41,209 MOH hospital beds + 5,646 special-institution beds + 508 army + 4,685 university = 52,048**, exactly agreeing with the bed CSV. It separately reports **214 private hospitals and 19,920 official beds**. The latter excludes separately listed private maternity/nursing/hospice categories; do not call 52,048+19,920 an exhaustive all-facility bed universe.
+`data/original/HEALTH_FACTS_2025.pdf`, printed panels 4–7 (physical sheet 2), reports 2024 public capacity of **41,209 MOH hospital beds + 5,646 special-institution beds + 508 army + 4,685 university = 52,048**, exactly agreeing with the bed CSV. It separately reports **214 private hospitals and 19,920 official beds**. The latter excludes separately listed private maternity/nursing/hospice categories; do not call 52,048+19,920 an exhaustive all-facility bed universe.
 
 Printed panels 10–11 (physical sheet 1): MOH hospital admissions **2,579,373**, special medical institution admissions **133,543**, non-MOH hospital admissions **197,530**, private admissions **1,359,910**, all 2024. MOH 2024 is preliminary (97.94% submission); private includes multiple facility types and 82.33% response. These counts are not a complete, like-for-like public/private comparison.
 
@@ -130,9 +130,9 @@ Run read-only from the repository root; pandas is required. No source is rewritt
 
 ```python
 import pandas as pd
-b = pd.read_csv("hospital_beds.csv")
-pn = pd.read_csv("population_malaysia.csv")
-ps = pd.read_csv("population_state.csv")
+b = pd.read_csv("data/original/hospital_beds.csv")
+pn = pd.read_csv("data/original/population_malaysia.csv")
+ps = pd.read_csv("data/original/population_state.csv")
 def totals(p):
     return p.query("sex == 'both' and age == 'overall' and ethnicity == 'overall'")
 n = b.query("state == 'Malaysia' and district == 'All' and type == 'all'")
@@ -146,7 +146,7 @@ older = older[older.age.isin(["65-69","70-74","75-79","80-84","85+"])]
 older = older.groupby(["state","date"]).population.sum().reset_index(name="older")
 older = older.merge(totals(ps), on=["state","date"], validate="one_to_one")
 older["share65"] = 100 * older.older / older.population
-u = pd.read_csv("bedutil_facility.csv")
+u = pd.read_csv("data/original/bedutil_facility.csv")
 q = u[u.beds_nonicu.gt(0) & u.util_nonicu.notna()]
 print(n, s, older)
 print(len(q), q.beds_nonicu.corr(q.util_nonicu))
