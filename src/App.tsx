@@ -252,7 +252,7 @@ function App() {
         </div>
         <p className="release-note">Local V1 · observed data through 2024, prepared 15 October 2026. The full source publications are not bundled. Source reuse conditions and final author attribution remain to be resolved before public release.</p>
         <div className="footer-bottom">
-          <span>AUTHOR: TO BE CONFIRMED</span>
+          <span>AUTHOR: TAN HONG GUAN [35100621]</span>
           <span>FIT3179 · MONASH UNIVERSITY</span>
           <span>V1 DRAFT: 15 OCTOBER 2026 · NOT YET PUBLISHED</span>
         </div>
