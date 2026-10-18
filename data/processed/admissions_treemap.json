@@ -1,0 +1,54 @@
+[
+  {
+    "provider": "MOH hospitals",
+    "admissions": 2579373,
+    "year": 2024,
+    "coverage": "97.94% MOH submission",
+    "share": 60.40182598359481,
+    "x0": 0,
+    "y0": 0,
+    "x1": 0.6040182598359481,
+    "y1": 1,
+    "cx": 0.3020091299179741,
+    "cy": 0.5
+  },
+  {
+    "provider": "Private-sector providers",
+    "admissions": 1359910,
+    "year": 2024,
+    "coverage": "82.33% private response",
+    "share": 31.845354345164665,
+    "x0": 0.6040182598359481,
+    "y0": 0,
+    "x1": 1,
+    "y1": 0.8042126975847776,
+    "cx": 0.8020091299179741,
+    "cy": 0.4021063487923888
+  },
+  {
+    "provider": "Other government hospitals",
+    "admissions": 197530,
+    "year": 2024,
+    "coverage": "Separate non-MOH returns",
+    "share": 4.62560966814008,
+    "x0": 0.6040182598359481,
+    "y0": 0.8042126975847776,
+    "x1": 0.8402751371246584,
+    "y1": 1,
+    "cx": 0.7221466984803033,
+    "cy": 0.9021063487923888
+  },
+  {
+    "provider": "MOH special institutions",
+    "admissions": 133543,
+    "year": 2024,
+    "coverage": "97.94% MOH submission",
+    "share": 3.1272100031004437,
+    "x0": 0.8402751371246584,
+    "y0": 0.8042126975847776,
+    "x1": 1,
+    "y1": 1,
+    "cx": 0.9201375685623292,
+    "cy": 0.9021063487923888
+  }
+]

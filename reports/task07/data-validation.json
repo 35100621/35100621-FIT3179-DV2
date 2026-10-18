@@ -1,0 +1,15 @@
+{
+  "source_sha256": {
+    "data/geographic/validated/states.geojson": "d5cff149df8788fdcad03d3693c78d19e589e01480bdb08894549b74c4cabc46",
+    "data/processed/combined_capacity.json": "a7f4591e09b63ebcd1f4371833980e0505b29cdbd400e55baf0d5846167ac807",
+    "data/processed/admissions.json": "0f734d451ef86f5e7735781ca39084c34479f7947f611d8773a1d8a0174c11f8"
+  },
+  "states": 16,
+  "combined_beds": 71968,
+  "cartogram_area_proportionality": true,
+  "cartogram_overlap_pairs": 0,
+  "separation_iterations": 67,
+  "admissions": 4270356,
+  "treemap_area_proportionality": true,
+  "providers": 4
+}

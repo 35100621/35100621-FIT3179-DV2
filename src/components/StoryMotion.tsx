@@ -11,7 +11,7 @@ export function useStoryReveals() {
         observer.unobserve(entry.target)
       })
     }, { threshold: 0.12 })
-    document.querySelectorAll('.section-title, .editorial-aside, .pinang-callout, .age-visual, .capacity-pair').forEach(el => observer.observe(el))
+    document.querySelectorAll('.section-head, .symbol-copy, .age-visual, .closing-grid').forEach(el => observer.observe(el))
     return () => observer.disconnect()
   }, [])
 }

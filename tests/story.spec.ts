@@ -11,7 +11,7 @@ test('twelve charts, exact values, interactions and responsive production page',
  await expect(page.locator('.skip-link')).toBeFocused()
  await expect(page.locator('.skip-link')).toHaveCSS('opacity','1')
  await page.keyboard.press('Enter')
- await expect(page.locator('main .section-title')).toHaveCount(6)
+ await expect(page.locator('main .section-head')).toHaveCount(6)
  await expect(page.locator('.chart-error')).toHaveCount(0)
  await expect(page.locator('[data-chart=bump] .mark-line path')).toHaveCount(16)
  await expect(page.locator('[data-chart=bump] .mark-symbol path[aria-label*="Public rank:"]')).toHaveCount(32)

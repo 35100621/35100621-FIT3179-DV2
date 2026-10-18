@@ -1,20 +1,25 @@
 # Malaysia's Hospital Divide
 
-**Why Public Beds Tell Only Half the Story** — a six-chapter editorial data story using React, TypeScript, Vite, Vega-Lite and Vega-Embed. The approved Figma layout, locally bundled Fraunces/DM Sans typography, navy/cream/terracotta palette and seven original interactive charts are preserved, with five focused additions (twelve charts in total).
+Six-act React + TypeScript + Vite data story, reproducing the latest **Malaysia Healthcare Data Storybook.zip** supplied 18 October 2026. All **12 charts use Vega-Lite and Vega-Embed**, with validated observed data.
 
-## Original V1 visualisations
+The latest reference overrides earlier designs. Source copies are in `design-reference/latest/`; production code remains in `src/`. See [implementation, methods and remaining work](reports/task07/IMPLEMENTATION.md), [chart feasibility and mapping](reports/task07/PLAN.md), and [verification](reports/task07/VERIFICATION.md).
 
-1. Indexed public hospital beds and population, 2015–2024.
-2. Public beds per 10,000 residents: 16-state choropleth, 2024.
+## Charts in story order
+
+1. Indexed public beds and population, 2015–2024.
+2. Public bed-rate choropleth, 2024.
 3. State-year public bed-rate heatmap, 2015–2024.
-4. Public versus combined public/private bed rates: connected dots across all 16 states/territories, 2024.
-5. Ranked MOH annual bed occupancy with 72.61% national reference, 2024.
-6. Reported admissions across four provider groups, 2024.
-7. National population aged 65+, 2015 versus 2024.
+4. Private-bed proportional symbol map, 2024.
+5. Public versus combined bed-rate connected dots.
+6. Public versus combined capacity rank bump chart.
+7. Annual MOH occupancy dots with the published national reference.
+8. Reported admissions by provider, count/share bars.
+12. Admissions-composition treemap (the same reported total).
+9. Population aged 65+, 2015 and 2024.
+11. Population pyramid with observed-year switch.
+10. Combined-capacity non-contiguous cartogram with geography toggle, placed in Act VI as in the latest ZIP.
 
-The focused extension adds a **private-bed proportional symbol map** before the connected dots and a **public-versus-combined rank bump chart** after them. See [implementation and checks](reports/task03/TWO_ADDITIONAL_CHARTS.md).
-
-Tooltips, regional map views, shared state highlighting, sorting, accessible tables and CSV downloads support the story. All twelve charts are implemented. Desktop and mobile layouts are supported. The approved additions include a national provider-composition treemap, paired population pyramids and an ageing non-contiguous cartogram. See [advanced visualisation methods and validation](reports/task06/IMPLEMENTATION.md). Reproduce their data with `python scripts/prepare_advanced.py` using Shapely 2.2.0.
+Reproduce new cartogram and treemap inputs with `python scripts/prepare_storybook.py` using Shapely 2.2.0. Original and earlier derived research datasets remain unchanged. Run `npm run dev` locally, `npm run build` for production, and `npx playwright test` for responsive and data checks.
 
 ## Repository structure
 
@@ -22,7 +27,7 @@ Tooltips, regional map views, shared state highlighting, sorting, accessible tab
 AGENTS.md                       Task instructions retained from V1
 src/                            React application and data imports
   components/                   Chart embedding, controls and tables
-  charts/                       Vega-Lite and native Vega specifications
+  charts/                       Vega-Lite specifications
   styles/                       Shared editorial CSS
 design-reference/               Unmodified approved Figma source
 data/
