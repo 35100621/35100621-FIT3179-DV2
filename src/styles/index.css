@@ -442,3 +442,10 @@ h1 { font-size: clamp(64px, 8.6vw, 130px); }
  .story-entered, .pinang-callout.story-entered strong { animation: none; }
  *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
 }
+/* Clip decoration without creating a scroll container that disables sticky notes. */
+.site { overflow: clip; }
+@media(min-width:761px) and (max-width:1000px) {
+ .editorial-grid { grid-template-columns: minmax(0, 1fr); }
+ .editorial-grid .editorial-aside { max-width: 650px; margin-top: 0; }
+ .heatmap-chart { margin-left: 0; }
+}

@@ -36,3 +36,14 @@ Motion never initially hides content, runs once per mount and does not modify Ve
 ## Local use
 
 `npm install`, then `npm run dev`. Open the printed URL with `/35100621-FIT3179-DV2/`. Production: `npm run build`, then `npm run preview`. `npm test` runs the existing production browser checks. If port 5174 is already serving this build, use `PLAYWRIGHT_BASE_URL=http://127.0.0.1:5174/35100621-FIT3179-DV2/ npm test`.
+
+## Verification and remaining limitations
+
+- `npm run build`: passed (TypeScript plus Vite production build). Existing large Vega bundle warning remains; no dependencies or bundling changes were introduced.
+- Existing Playwright regression suite: desktop 1440px, mobile 390px and narrow mobile 320px. Checks nine ready charts; exact mark counts (including 160 heatmap cells and all 16 states); Pulau Pinang rates/ranks; tooltip; linked state selections; capacity sorting; regional map filtering; admissions values; CSV download; keyboard skip link; SVG/container bounds; and absence of browser errors.
+- `scripts/verify-redesign.mjs`: production checks at 1440, 768, 390 and 320px with reduced motion; verifies all nine charts fit, final hero statistics remain +15.44%, +9.19%, 27.68%, and the private map regional control works. Metrics saved in `browser-validation.json`; screenshots in ignored `test-results/redesign/`.
+- Inspected actual browser screenshots of the desktop hero/ranking and mobile map/ageing views. Tablet screenshot inspection prompted stacking map context below the map at widths up to 1000px. Desktop ranking note sticky behavior uses overflow clipping rather than an ancestor scroll container.
+- Git diff against the pre-redesign commit confirms zero changes in `data/`, `public/`, `src/charts/`, `src/data.ts`, dependencies or Vite configuration. All nine chart idioms, calculations, source references and caveats remain in place. No regenerated or invented observations.
+- Tests initially could not bind the sandboxed port, then found an unrelated service on 5174. Final tests use this build's separately started production preview on 5187.
+
+Remaining: no live deployment was performed; GitHub Pages compatibility was checked locally at the unchanged base path. Browser coverage is Chromium, not a Safari/Firefox matrix or a full assistive-technology audit. Existing source-reuse/boundary-vintage limitations remain documented in the site. Optional future work: bundle splitting and cross-browser/accessibility review. Chart transitions were deliberately limited to surrounding editorial content so Vega's existing analytical encodings and interactions remain intact.
