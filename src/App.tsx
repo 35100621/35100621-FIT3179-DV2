@@ -1,3 +1,4 @@
+import {StateExplorer} from './components/StateInsights'
 import { useEffect, useState } from 'react'
 import { CapacityCartogram, PopulationPyramid, ProviderTreemap } from './components/AdvancedCharts'
 import { StateContext, IndexedChart, Choropleth, Heatmap, PrivateSymbolMap, ConnectedDots, BumpChart, OccupancyPlot, AdmissionsBars, AgeVisual } from './components/StoryCharts'
@@ -41,20 +42,20 @@ function App() {
     </header>
 
     <section id="act-1" className="act act-one">
-      <SectionHead act="Act I · The national divide" title="From a distance, the system appears to grow." copy="Public hospital beds grew 15.44% between 2015 and 2024, while population grew 9.19%. The national gain is real—but it does not describe every state."/>
+      <SectionHead act="Act I · The national divide" title="From a distance, the system appears to grow." copy="Public hospital beds grew 15.44% between 2015 and 2024, while population grew 9.19%. The national gain is real, yet seven of sixteen states and territories saw their public-bed rate fall. Growth alone establishes neither equal distribution nor adequate access."/>
       <div className="line-wrap"><IndexedChart/></div>
       <div className="margin-note"><span>Read carefully</span><p>Observed annual data. Population is context, not a direct measure of hospital demand.</p></div>
     </section>
 
     <section id="act-2" className="act act-two">
       <SectionHead act="Act II · Geography changes everything" title="A national average has no address." copy="Capacity is experienced locally. Select a state to carry it across the map, timeline, and later comparisons."/>
-      <div className="map-spread"><div className="map-main"><Choropleth/></div><div className="heatmap-panel"><Heatmap/></div></div>
+      <StateExplorer/><div className="map-spread"><div className="map-main"><Choropleth/></div><div className="heatmap-panel"><Heatmap/></div></div>
     </section>
 
     <section id="act-3" className="act act-three">
       <SectionHead act="Act III · The hidden private sector" title="Now reveal the beds the first map left out." copy="Private capacity does not simply add more of the same. It clusters, stretches the distance between states, and can reorder the national picture."/>
       <div className="symbol-stage"><div className="symbol-copy"><Eyebrow chart="Chart 04">The private sector</Eyebrow><h3>Private beds are concentrated.</h3><p>19,920 licensed private hospital beds change the picture. Nearly 60% sit in Selangor, Kuala Lumpur and Pulau Pinang.</p><p>These circles represent state totals, not individual hospital locations or affordable access.</p></div><PrivateSymbolMap/></div>
-      <div className="comparison-spread"><div className="dot-panel"><ConnectedDots/></div><div className="bump-panel"><BumpChart/></div></div>
+      <p className="comparison-bridge">First compare how much capacity is added. Then follow the same state to see how its position changes. Both views describe 2024, under two definitions of capacity.</p><div className="comparison-spread"><div className="dot-panel"><ConnectedDots/></div><div className="bump-panel"><BumpChart/></div></div>
     </section>
 
     <section id="act-4" className="act act-four">

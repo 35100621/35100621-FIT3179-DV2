@@ -29,15 +29,35 @@ for iteration in range(3000):
  collision=False
  for i in range(16):
   for j in range(i):
-   if polygons[i].distance(polygons[j]) >= .00045: continue
+   if polygons[i].distance(polygons[j]) >= .00012: continue
    collision=True
    a,b=polygons[i].centroid,polygons[j].centroid
    dx,dy=a.x-b.x,a.y-b.y; length=math.hypot(dx,dy)
    if length<1e-12: dx,dy,length=1,0,1
-   step=.00015
+   step=.00004
    polygons[i]=translate(polygons[i],xoff=dx/length*step,yoff=dy/length*step)
    polygons[j]=translate(polygons[j],xoff=-dx/length*step,yoff=-dy/length*step)
  if not collision: break
+# Reduce displacement with conservative line searches back toward each original centroid.
+# A move is accepted only if it maintains the same intentional gap to every other shape.
+before_relax=sum(g.centroid.distance(o.centroid) for g,o in zip(polygons,original))
+for _ in range(160):
+ improved=False
+ for i,(g,o) in enumerate(zip(polygons,original)):
+  dx,dy=o.centroid.x-g.centroid.x,o.centroid.y-g.centroid.y
+  for fraction in [.2,.05,.01]:
+   candidate=translate(g,xoff=dx*fraction,yoff=dy*fraction)
+   if all(i==j or candidate.distance(other)>=.00012-1e-12 for j,other in enumerate(polygons)):
+    if math.hypot(dx,dy)*fraction>1e-10:improved=True
+    polygons[i]=candidate;break
+ if not improved:break
+after_relax=sum(g.centroid.distance(o.centroid) for g,o in zip(polygons,original))
+assert after_relax <= before_relax+1e-12
+# Broad geography is retained; close neighbouring territories are allowed to separate.
+order_pairs=[(i,j) for i in range(16) for j in range(i) if abs(original[i].centroid.y-original[j].centroid.y)>.025]
+assert all((original[i].centroid.y-original[j].centroid.y)*(polygons[i].centroid.y-polygons[j].centroid.y)>0 for i,j in order_pairs)
+sabah=next(i for i,r in enumerate(rows) if r['state']=='Sabah');sarawak=next(i for i,r in enumerate(rows) if r['state']=='Sarawak')
+assert polygons[sabah].centroid.x>polygons[sarawak].centroid.x and polygons[sabah].centroid.y>polygons[sarawak].centroid.y
 assert not collision,'Cartogram separation did not converge'
 assert all(polygons[i].intersection(polygons[j]).area<1e-15 for i in range(16) for j in range(i))
 assert all(abs(g.area/(r['combined_beds']*k)-1)<1e-8 for g,r in zip(polygons,rows))
@@ -79,6 +99,6 @@ partition(activity,0,0,1,1)
 assert all(abs((r['x1']-r['x0'])*(r['y1']-r['y0'])-r['admissions']/total)<1e-12 for r in rects)
 (OUT/'admissions_treemap.json').write_text(json.dumps(rects,indent=2)+'\n')
 assert all(hashlib.sha256((ROOT/p).read_bytes()).hexdigest()==h for p,h in hashes.items())
-report=dict(source_sha256=hashes,states=len(rows),combined_beds=71968,cartogram_area_proportionality=True,cartogram_overlap_pairs=0,separation_iterations=iteration,admissions=total,treemap_area_proportionality=True,providers=len(rects))
-(ROOT/'reports/task07/data-validation.json').write_text(json.dumps(report,indent=2)+'\n')
+report=dict(minimum_gap_projected=.00012,displacement_before_relaxation=before_relax,displacement_after_relaxation=after_relax,broad_north_south_order_preserved=True,sabah_northeast_of_sarawak=True,max_relative_area_error=max(abs(g.area/(r['combined_beds']*k)-1) for g,r in zip(polygons,rows)),source_sha256=hashes,states=len(rows),combined_beds=71968,cartogram_area_proportionality=True,cartogram_overlap_pairs=0,separation_iterations=iteration,admissions=total,treemap_area_proportionality=True,providers=len(rects))
+(ROOT/'reports/task08/data-validation.json').write_text(json.dumps(report,indent=2)+'\n')
 print(json.dumps(report,indent=2))

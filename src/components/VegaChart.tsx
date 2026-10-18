@@ -29,11 +29,16 @@ export function VegaChart({id,label,spec}:Props) {
    if(value==='#e7e4de'||value==='#d6d3cb')return '#3b5155'
    return value
   })) as TopLevelSpec
+  themed.params=[...(themed.params??[]),{name:'hoveredState',value:''}]
   embed(el,themed,{actions:false,renderer:'svg',tooltip:{theme:'light'},defaultStyle:false}).then(r=>{
    if(cancelled){r.finalize();return}result=r;r.view.addEventListener('click',(_event,item)=>{
-    const datum=item?.datum;const state=datum?.state??datum?.properties?.state
+    const datum=item?.datum;const state=datum?.state??datum?.properties?.state??datum?.items?.[0]?.datum?.state
     if(typeof state==='string')window.dispatchEvent(new CustomEvent('chart-state',{detail:state}))
-   });setReady(true)
+   });
+   const stateOf=(item:unknown):string=>{const d=(item as {datum?:{state?:string;properties?:{state?:string};items?:{datum?:{state?:string}}[]}})?.datum;return d?.state??d?.properties?.state??d?.items?.[0]?.datum?.state??''}
+   r.view.addEventListener('pointerover',(_e,item)=>{r.view.signal('hoveredState',stateOf(item)).runAsync()})
+   r.view.addEventListener('pointerout',()=>{r.view.signal('hoveredState','').runAsync()})
+   setReady(true)
   }).catch(e=>{if(!cancelled)setError(String(e))})
   return()=>{cancelled=true;result?.finalize()}
  },[width,spec])
