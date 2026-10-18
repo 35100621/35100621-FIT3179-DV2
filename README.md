@@ -1,6 +1,6 @@
 # Malaysia's Hospital Divide
 
-**Why Public Beds Tell Only Half the Story** — a six-chapter editorial data story using React, TypeScript, Vite, Vega-Lite and Vega-Embed. The approved Figma layout, locally bundled Fraunces/DM Sans typography, navy/cream/terracotta palette and seven original interactive charts are preserved, with two focused additions.
+**Why Public Beds Tell Only Half the Story** — a six-chapter editorial data story using React, TypeScript, Vite, Vega-Lite and Vega-Embed. The approved Figma layout, locally bundled Fraunces/DM Sans typography, navy/cream/terracotta palette and seven original interactive charts are preserved, with five focused additions (twelve charts in total).
 
 ## Original V1 visualisations
 
@@ -14,7 +14,7 @@
 
 The focused extension adds a **private-bed proportional symbol map** before the connected dots and a **public-versus-combined rank bump chart** after them. See [implementation and checks](reports/task03/TWO_ADDITIONAL_CHARTS.md).
 
-Tooltips, regional map views, shared state highlighting, sorting, accessible tables and CSV downloads support the story. All nine charts are implemented. Desktop and mobile layouts are supported; no other V2 features were added.
+Tooltips, regional map views, shared state highlighting, sorting, accessible tables and CSV downloads support the story. All twelve charts are implemented. Desktop and mobile layouts are supported. The approved additions include a national provider-composition treemap, paired population pyramids and an ageing non-contiguous cartogram. See [advanced visualisation methods and validation](reports/task06/IMPLEMENTATION.md). Reproduce their data with `python scripts/prepare_advanced.py` using Shapely 2.2.0.
 
 ## Repository structure
 
@@ -22,7 +22,7 @@ Tooltips, regional map views, shared state highlighting, sorting, accessible tab
 AGENTS.md                       Task instructions retained from V1
 src/                            React application and data imports
   components/                   Chart embedding, controls and tables
-  charts/                       Seven Vega-Lite specifications
+  charts/                       Vega-Lite and native Vega specifications
   styles/                       Shared editorial CSS
 design-reference/               Unmodified approved Figma source
 data/
@@ -33,7 +33,7 @@ data/
   processed/                    Canonical chart-ready CSV/JSON
   geographic/original/          Unmodified original boundaries (local, ignored)
   geographic/validated/         Derived, validated state geometry
-public/data/                    Seven download CSVs and runtime state GeoJSON
+public/data/                    Download CSVs and runtime state GeoJSON
 reports/task01/                 Reports 01–06
 reports/task02/                 Reports 07–12
 reports/task03/                 V1 implementation and validation

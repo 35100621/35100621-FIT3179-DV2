@@ -1,11 +1,11 @@
 import { test, expect } from '@playwright/test'
-test('nine charts, exact values, interactions and responsive production page',async({page},testInfo)=>{
+test('twelve charts, exact values, interactions and responsive production page',async({page},testInfo)=>{
  const errors:string[]=[]
  page.on('pageerror',e=>errors.push(String(e)))
  page.on('console',m=>{if(['error','warning'].includes(m.type()))errors.push(m.text())})
  page.on('response',r=>{if(r.status()>=400)errors.push(`${r.status()} ${r.url()}`)})
  await page.goto('./')
- await expect(page.locator('[data-ready=true]')).toHaveCount(9)
+ await expect(page.locator('[data-ready=true]')).toHaveCount(12)
  await page.evaluate(()=>document.fonts.ready)
  await page.keyboard.press('Tab')
  await expect(page.locator('.skip-link')).toBeFocused()
@@ -43,11 +43,11 @@ test('nine charts, exact values, interactions and responsive production page',as
  await page.locator('#map-region').selectOption('East Malaysia')
  await expect(page.locator('[data-chart=choropleth] .mark-shape path')).toHaveCount(3)
  await page.locator('#map-state').selectOption('W.P. Labuan')
- await expect(page.locator('.state-readout')).toContainText('12.10')
+ await expect(page.locator('.map-chart .state-readout')).toContainText('12.10')
  await page.locator('#map-region').selectOption('All Malaysia')
  await page.locator('#map-state').selectOption('')
  await page.locator('#capacity-sort').selectOption('Combined capacity')
- await expect(page.locator('[data-ready=true]')).toHaveCount(9)
+ await expect(page.locator('[data-ready=true]')).toHaveCount(12)
  await page.locator('.admissions-chart summary').click()
  await expect(page.locator('.admissions-chart tbody')).toContainText('2,579,373')
  await expect(page.locator('.admissions-chart tbody')).toContainText('1,359,910')

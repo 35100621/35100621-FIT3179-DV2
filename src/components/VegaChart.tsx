@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import embed, { type Result } from 'vega-embed'
 import type { TopLevelSpec } from 'vega-lite'
+import type { Spec } from 'vega'
 
-type Props={id:string;label:string;spec:(width:number)=>TopLevelSpec}
+type Props={id:string;label:string;spec:(width:number)=>TopLevelSpec | Spec}
 export function VegaChart({id,label,spec}:Props) {
  const container=useRef<HTMLDivElement>(null)
  const target=useRef<HTMLDivElement>(null)

@@ -1,0 +1,22 @@
+{
+  "base_path": "/35100621-FIT3179-DV2/",
+  "browser": "Chromium",
+  "widths": [
+    1440,
+    768,
+    390,
+    320
+  ],
+  "stats": {
+    "startTime": "2026-10-18T10:44:56.748Z",
+    "duration": 20775.831,
+    "expected": 8,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "existing_chart_definitions_unchanged": true,
+  "existing_data_files_unchanged": true,
+  "build": "passed",
+  "screenshots": "test-results/{project}-{ageing-cartogram,population-pyramid,provider-treemap}.png (ignored)"
+}

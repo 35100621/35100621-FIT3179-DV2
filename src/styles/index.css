@@ -449,3 +449,21 @@ h1 { font-size: clamp(64px, 8.6vw, 130px); }
  .editorial-grid .editorial-aside { max-width: 650px; margin-top: 0; }
  .heatmap-chart { margin-left: 0; }
 }
+/* Approved advanced views: composition and demographic structure. */
+.provider-treemap { margin-top: 60px; }
+.provider-key { display: grid; grid-template-columns: 1fr 1fr; padding: 0; list-style: none; gap: 16px 32px; font-size: 13px; }
+.provider-key li { display: grid; grid-template-columns: 12px 1fr; gap: 6px 10px; }
+.provider-key i { width: 10px; height: 10px; margin-top: 4px; }
+.provider-key b { grid-column: 2; font-weight: 500; }
+.pyramid-section { margin: 55px 0 80px; }
+.pyramid-section .chart-meta h3 { color: white; font-size: 32px; }
+.pyramid-section .chart-meta p, .pyramid-section .chart-hint, .pyramid-section .chart-note { color: #c2ced7; }
+.pyramid-section .chart-note strong { color: #eca789; }
+.pyramid-section .vega-frame { margin-top: 25px; }
+.demographic-map { color: var(--navy); margin: 60px 0 80px; }
+.future-section .demographic-map .source, .future-section .demographic-map .source a, .future-section .demographic-map .data-table { color: #59656e; border-color: #d8ddd9; }
+.future-section .demographic-map .data-table td, .future-section .demographic-map .data-table th { border-color: #d8ddd9; }
+.cartogram-legend { width: 220px; max-width: 100%; margin: 16px 0; font-size: 12px; }
+.cartogram-legend i { display: block; height: 12px; margin-top: 8px; background: linear-gradient(to right,#e2eeeb,#527f78,#172b42); }
+.cartogram-legend > div { display: flex; justify-content: space-between; margin-top: 4px; }
+@media(max-width:760px) { .provider-key { grid-template-columns: 1fr; } .demographic-map { margin-block: 45px; } }

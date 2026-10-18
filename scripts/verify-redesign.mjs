@@ -6,7 +6,7 @@ const results = []
 for (const width of [1440, 768, 390, 320]) {
  const page = await browser.newPage({viewport:{width,height:1000}, reducedMotion:'reduce'})
  await page.goto(process.env.PLAYWRIGHT_BASE_URL ?? 'http://127.0.0.1:5187/35100621-FIT3179-DV2/')
- await page.waitForFunction(()=>document.querySelectorAll('[data-ready=true]').length===9)
+ await page.waitForFunction(()=>document.querySelectorAll('[data-ready=true]').length===12)
  await page.evaluate(()=>document.fonts.ready)
  const metrics = await page.evaluate(()=>({
   width:innerWidth, scroll:document.documentElement.scrollWidth,
@@ -27,4 +27,4 @@ for (const width of [1440, 768, 390, 320]) {
 }
 await writeFile('reports/task05/browser-validation.json',JSON.stringify(results,null,2)+'\n')
 await browser.close()
-console.log('All nine charts fit at desktop, tablet and mobile widths; reduced-motion statistics and private-map controls pass.')
+console.log('All twelve charts fit at desktop, tablet and mobile widths; reduced-motion statistics and private-map controls pass.')

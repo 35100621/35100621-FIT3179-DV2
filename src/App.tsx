@@ -1,3 +1,4 @@
+import { AgeingCartogram, PopulationPyramid, ProviderTreemap } from './components/AdvancedCharts'
 import { useState } from 'react'
 import { CountUp, HospitalMotif, useStoryReveals } from './components/StoryMotion'
 import { fixed, number, summary, source } from './data'
@@ -149,6 +150,7 @@ function App() {
               </p>
             </div>
             </div>
+            <ProviderTreemap />
             <MethodNote>
               Combined capacity is a count of public hospital and
               special-institution beds plus licensed private hospital beds. It
@@ -212,6 +214,8 @@ function App() {
               intro={`The population is changing alongside capacity. Between 2015 and 2024, the share of residents aged 65 and above increased by ${fixed(summary.age_increase)} percentage points.`}
             />
             <AgeVisual />
+            <PopulationPyramid />
+            <AgeingCartogram />
             <div className="conclusion-label"><Eyebrow light>THE DIVIDE BEHIND THE TOTAL</Eyebrow></div>
             <p className="conclusion-copy">
               Malaysia&apos;s hospital capacity has expanded, but national
@@ -230,7 +234,7 @@ function App() {
             <Eyebrow>SOURCES &amp; METHODOLOGY</Eyebrow>
             <h2>About this story</h2>
             <p>
-              Nine data-driven views follow Malaysia’s hospital capacity, reported activity and ageing population. This V1 draft uses observed data, not sample values.
+              Twelve data-driven views follow Malaysia’s hospital capacity, reported activity and ageing population. This V1 draft uses observed data, not sample values.
             </p>
           </div>
           <div>
