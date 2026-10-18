@@ -1,0 +1,114 @@
+[
+  {
+    "state": "Selangor",
+    "year": 2024,
+    "older_residents": 592800,
+    "residents": 7362700,
+    "older_share": 8.051394189631521
+  },
+  {
+    "state": "Pahang",
+    "year": 2024,
+    "older_residents": 113000,
+    "residents": 1667700,
+    "older_share": 6.775799004617138
+  },
+  {
+    "state": "Pulau Pinang",
+    "year": 2024,
+    "older_residents": 144300,
+    "residents": 1800500,
+    "older_share": 8.014440433212997
+  },
+  {
+    "state": "Sarawak",
+    "year": 2024,
+    "older_residents": 217500,
+    "residents": 2517500,
+    "older_share": 8.639523336643496
+  },
+  {
+    "state": "Kedah",
+    "year": 2024,
+    "older_residents": 201500,
+    "residents": 2217100,
+    "older_share": 9.088448874656082
+  },
+  {
+    "state": "Perak",
+    "year": 2024,
+    "older_residents": 254600,
+    "residents": 2569400,
+    "older_share": 9.908928154432942
+  },
+  {
+    "state": "Sabah",
+    "year": 2024,
+    "older_residents": 231100,
+    "residents": 3742000,
+    "older_share": 6.175841795831107
+  },
+  {
+    "state": "Kelantan",
+    "year": 2024,
+    "older_residents": 132900,
+    "residents": 1887900,
+    "older_share": 7.039567773716829
+  },
+  {
+    "state": "Negeri Sembilan",
+    "year": 2024,
+    "older_residents": 94700,
+    "residents": 1239500,
+    "older_share": 7.640177490923759
+  },
+  {
+    "state": "W.P. Kuala Lumpur",
+    "year": 2024,
+    "older_residents": 140000,
+    "residents": 2067500,
+    "older_share": 6.771463119709795
+  },
+  {
+    "state": "W.P. Labuan",
+    "year": 2024,
+    "older_residents": 5200,
+    "residents": 100800,
+    "older_share": 5.158730158730158
+  },
+  {
+    "state": "Perlis",
+    "year": 2024,
+    "older_residents": 24500,
+    "residents": 296800,
+    "older_share": 8.254716981132075
+  },
+  {
+    "state": "Johor",
+    "year": 2024,
+    "older_residents": 309200,
+    "residents": 4184400,
+    "older_share": 7.389350922473952
+  },
+  {
+    "state": "Melaka",
+    "year": 2024,
+    "older_residents": 70800,
+    "residents": 1046700,
+    "older_share": 6.764115792490685
+  },
+  {
+    "state": "Terengganu",
+    "year": 2024,
+    "older_residents": 74800,
+    "residents": 1231500,
+    "older_share": 6.073893625659765
+  },
+  {
+    "state": "W.P. Putrajaya",
+    "year": 2024,
+    "older_residents": 2300,
+    "residents": 120300,
+    "older_share": 1.9118869492934332
+  }
+]

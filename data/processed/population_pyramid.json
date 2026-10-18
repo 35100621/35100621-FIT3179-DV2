@@ -1,0 +1,578 @@
+[
+  {
+    "year": 2015,
+    "sex": "male",
+    "age": "0-4",
+    "residents": 1344400,
+    "share": 4.31089491792818,
+    "signed_share": -4.31089491792818
+  },
+  {
+    "year": 2015,
+    "sex": "male",
+    "age": "5-9",
+    "residents": 1294300,
+    "share": 4.150246423887565,
+    "signed_share": -4.150246423887565
+  },
+  {
+    "year": 2015,
+    "sex": "male",
+    "age": "10-14",
+    "residents": 1363500,
+    "share": 4.372140152183184,
+    "signed_share": -4.372140152183184
+  },
+  {
+    "year": 2015,
+    "sex": "male",
+    "age": "15-19",
+    "residents": 1472600,
+    "share": 4.721975495493185,
+    "signed_share": -4.721975495493185
+  },
+  {
+    "year": 2015,
+    "sex": "male",
+    "age": "20-24",
+    "residents": 1692600,
+    "share": 5.4274179842942845,
+    "signed_share": -5.4274179842942845
+  },
+  {
+    "year": 2015,
+    "sex": "male",
+    "age": "25-29",
+    "residents": 1668800,
+    "share": 5.351101933233076,
+    "signed_share": -5.351101933233076
+  },
+  {
+    "year": 2015,
+    "sex": "male",
+    "age": "30-34",
+    "residents": 1441400,
+    "share": 4.621930924354119,
+    "signed_share": -4.621930924354119
+  },
+  {
+    "year": 2015,
+    "sex": "male",
+    "age": "35-39",
+    "residents": 1138900,
+    "share": 3.651947502252606,
+    "signed_share": -3.651947502252606
+  },
+  {
+    "year": 2015,
+    "sex": "male",
+    "age": "40-44",
+    "residents": 973600,
+    "share": 3.1219036686215973,
+    "signed_share": -3.1219036686215973
+  },
+  {
+    "year": 2015,
+    "sex": "male",
+    "age": "45-49",
+    "residents": 868800,
+    "share": 2.7858565194108915,
+    "signed_share": -2.7858565194108915
+  },
+  {
+    "year": 2015,
+    "sex": "male",
+    "age": "50-54",
+    "residents": 804700,
+    "share": 2.5803162306283887,
+    "signed_share": -2.5803162306283887
+  },
+  {
+    "year": 2015,
+    "sex": "male",
+    "age": "55-59",
+    "residents": 662700,
+    "share": 2.124985169674951,
+    "signed_share": -2.124985169674951
+  },
+  {
+    "year": 2015,
+    "sex": "male",
+    "age": "60-64",
+    "residents": 504100,
+    "share": 1.6164252663847034,
+    "signed_share": -1.6164252663847034
+  },
+  {
+    "year": 2015,
+    "sex": "male",
+    "age": "65-69",
+    "residents": 370200,
+    "share": 1.1870673152462154,
+    "signed_share": -1.1870673152462154
+  },
+  {
+    "year": 2015,
+    "sex": "male",
+    "age": "70-74",
+    "residents": 225000,
+    "share": 0.7214752726374891,
+    "signed_share": -0.7214752726374891
+  },
+  {
+    "year": 2015,
+    "sex": "male",
+    "age": "75-79",
+    "residents": 151200,
+    "share": 0.4848313832123927,
+    "signed_share": -0.4848313832123927
+  },
+  {
+    "year": 2015,
+    "sex": "male",
+    "age": "80-84",
+    "residents": 73500,
+    "share": 0.23568192239491315,
+    "signed_share": -0.23568192239491315
+  },
+  {
+    "year": 2015,
+    "sex": "male",
+    "age": "85+",
+    "residents": 61900,
+    "share": 0.19848586389449147,
+    "signed_share": -0.19848586389449147
+  },
+  {
+    "year": 2015,
+    "sex": "female",
+    "age": "0-4",
+    "residents": 1257300,
+    "share": 4.03160382349829,
+    "signed_share": 4.03160382349829
+  },
+  {
+    "year": 2015,
+    "sex": "female",
+    "age": "5-9",
+    "residents": 1224100,
+    "share": 3.9251461388246685,
+    "signed_share": 3.9251461388246685
+  },
+  {
+    "year": 2015,
+    "sex": "female",
+    "age": "10-14",
+    "residents": 1292300,
+    "share": 4.14383331035301,
+    "signed_share": 4.14383331035301
+  },
+  {
+    "year": 2015,
+    "sex": "female",
+    "age": "15-19",
+    "residents": 1374100,
+    "share": 4.406129653916328,
+    "signed_share": 4.406129653916328
+  },
+  {
+    "year": 2015,
+    "sex": "female",
+    "age": "20-24",
+    "residents": 1532900,
+    "share": 4.915330868560031,
+    "signed_share": 4.915330868560031
+  },
+  {
+    "year": 2015,
+    "sex": "female",
+    "age": "25-29",
+    "residents": 1467100,
+    "share": 4.704339433273157,
+    "signed_share": 4.704339433273157
+  },
+  {
+    "year": 2015,
+    "sex": "female",
+    "age": "30-34",
+    "residents": 1289800,
+    "share": 4.1358169184348155,
+    "signed_share": 4.1358169184348155
+  },
+  {
+    "year": 2015,
+    "sex": "female",
+    "age": "35-39",
+    "residents": 1019300,
+    "share": 3.26844331288619,
+    "signed_share": 3.26844331288619
+  },
+  {
+    "year": 2015,
+    "sex": "female",
+    "age": "40-44",
+    "residents": 925200,
+    "share": 2.9667063210853555,
+    "signed_share": 2.9667063210853555
+  },
+  {
+    "year": 2015,
+    "sex": "female",
+    "age": "45-49",
+    "residents": 859100,
+    "share": 2.7547529187682973,
+    "signed_share": 2.7547529187682973
+  },
+  {
+    "year": 2015,
+    "sex": "female",
+    "age": "50-54",
+    "residents": 755600,
+    "share": 2.4228742933550524,
+    "signed_share": 2.4228742933550524
+  },
+  {
+    "year": 2015,
+    "sex": "female",
+    "age": "55-59",
+    "residents": 641500,
+    "share": 2.0570061662086636,
+    "signed_share": 2.0570061662086636
+  },
+  {
+    "year": 2015,
+    "sex": "female",
+    "age": "60-64",
+    "residents": 496300,
+    "share": 1.5914141235999373,
+    "signed_share": 1.5914141235999373
+  },
+  {
+    "year": 2015,
+    "sex": "female",
+    "age": "65-69",
+    "residents": 378400,
+    "share": 1.213361080737893,
+    "signed_share": 1.213361080737893
+  },
+  {
+    "year": 2015,
+    "sex": "female",
+    "age": "70-74",
+    "residents": 235900,
+    "share": 0.7564267414008164,
+    "signed_share": 0.7564267414008164
+  },
+  {
+    "year": 2015,
+    "sex": "female",
+    "age": "75-79",
+    "residents": 168400,
+    "share": 0.5399841596095696,
+    "signed_share": 0.5399841596095696
+  },
+  {
+    "year": 2015,
+    "sex": "female",
+    "age": "80-84",
+    "residents": 84800,
+    "share": 0.27191601386515146,
+    "signed_share": 0.27191601386515146
+  },
+  {
+    "year": 2015,
+    "sex": "female",
+    "age": "85+",
+    "residents": 72200,
+    "share": 0.23151339859745207,
+    "signed_share": 0.23151339859745207
+  },
+  {
+    "year": 2024,
+    "sex": "male",
+    "age": "0-4",
+    "residents": 1214800,
+    "share": 3.5674745463569058,
+    "signed_share": -3.5674745463569058
+  },
+  {
+    "year": 2024,
+    "sex": "male",
+    "age": "5-9",
+    "residents": 1315800,
+    "share": 3.864078867382628,
+    "signed_share": -3.864078867382628
+  },
+  {
+    "year": 2024,
+    "sex": "male",
+    "age": "10-14",
+    "residents": 1359500,
+    "share": 3.9924116280640547,
+    "signed_share": -3.9924116280640547
+  },
+  {
+    "year": 2024,
+    "sex": "male",
+    "age": "15-19",
+    "residents": 1427900,
+    "share": 4.193280296956722,
+    "signed_share": -4.193280296956722
+  },
+  {
+    "year": 2024,
+    "sex": "male",
+    "age": "20-24",
+    "residents": 1727600,
+    "share": 5.0734022277627515,
+    "signed_share": -5.0734022277627515
+  },
+  {
+    "year": 2024,
+    "sex": "male",
+    "age": "25-29",
+    "residents": 1704100,
+    "share": 5.00439033128647,
+    "signed_share": -5.00439033128647
+  },
+  {
+    "year": 2024,
+    "sex": "male",
+    "age": "30-34",
+    "residents": 1626000,
+    "share": 4.77503590086955,
+    "signed_share": -4.77503590086955
+  },
+  {
+    "year": 2024,
+    "sex": "male",
+    "age": "35-39",
+    "residents": 1521500,
+    "share": 4.46815321228353,
+    "signed_share": -4.46815321228353
+  },
+  {
+    "year": 2024,
+    "sex": "male",
+    "age": "40-44",
+    "residents": 1384600,
+    "share": 4.066122206853615,
+    "signed_share": -4.066122206853615
+  },
+  {
+    "year": 2024,
+    "sex": "male",
+    "age": "45-49",
+    "residents": 1051000,
+    "share": 3.086446944534992,
+    "signed_share": -3.086446944534992
+  },
+  {
+    "year": 2024,
+    "sex": "male",
+    "age": "50-54",
+    "residents": 877400,
+    "share": 2.5766399135442453,
+    "signed_share": -2.5766399135442453
+  },
+  {
+    "year": 2024,
+    "sex": "male",
+    "age": "55-59",
+    "residents": 735500,
+    "share": 2.1599255258853347,
+    "signed_share": -2.1599255258853347
+  },
+  {
+    "year": 2024,
+    "sex": "male",
+    "age": "60-64",
+    "residents": 672200,
+    "share": 1.9740339068662434,
+    "signed_share": -1.9740339068662434
+  },
+  {
+    "year": 2024,
+    "sex": "male",
+    "age": "65-69",
+    "residents": 515100,
+    "share": 1.512682037231184,
+    "signed_share": -1.512682037231184
+  },
+  {
+    "year": 2024,
+    "sex": "male",
+    "age": "70-74",
+    "residents": 364100,
+    "share": 1.0692438939155,
+    "signed_share": -1.0692438939155
+  },
+  {
+    "year": 2024,
+    "sex": "male",
+    "age": "75-79",
+    "residents": 207800,
+    "share": 0.6102413654370803,
+    "signed_share": -0.6102413654370803
+  },
+  {
+    "year": 2024,
+    "sex": "male",
+    "age": "80-84",
+    "residents": 98200,
+    "share": 0.2883816269774845,
+    "signed_share": -0.2883816269774845
+  },
+  {
+    "year": 2024,
+    "sex": "male",
+    "age": "85+",
+    "residents": 75800,
+    "share": 0.2226000745915817,
+    "signed_share": -0.2226000745915817
+  },
+  {
+    "year": 2024,
+    "sex": "female",
+    "age": "0-4",
+    "residents": 1140600,
+    "share": 3.3495731540786027,
+    "signed_share": 3.3495731540786027
+  },
+  {
+    "year": 2024,
+    "sex": "female",
+    "age": "5-9",
+    "residents": 1258900,
+    "share": 3.696981977616652,
+    "signed_share": 3.696981977616652
+  },
+  {
+    "year": 2024,
+    "sex": "female",
+    "age": "10-14",
+    "residents": 1261200,
+    "share": 3.7037363334419906,
+    "signed_share": 3.7037363334419906
+  },
+  {
+    "year": 2024,
+    "sex": "female",
+    "age": "15-19",
+    "residents": 1296700,
+    "share": 3.807988347267863,
+    "signed_share": 3.807988347267863
+  },
+  {
+    "year": 2024,
+    "sex": "female",
+    "age": "20-24",
+    "residents": 1428900,
+    "share": 4.196216973402522,
+    "signed_share": 4.196216973402522
+  },
+  {
+    "year": 2024,
+    "sex": "female",
+    "age": "25-29",
+    "residents": 1332200,
+    "share": 3.9122403610937355,
+    "signed_share": 3.9122403610937355
+  },
+  {
+    "year": 2024,
+    "sex": "female",
+    "age": "30-34",
+    "residents": 1330100,
+    "share": 3.9060733405575574,
+    "signed_share": 3.9060733405575574
+  },
+  {
+    "year": 2024,
+    "sex": "female",
+    "age": "35-39",
+    "residents": 1335200,
+    "share": 3.9210503904311333,
+    "signed_share": 3.9210503904311333
+  },
+  {
+    "year": 2024,
+    "sex": "female",
+    "age": "40-44",
+    "residents": 1223400,
+    "share": 3.592729963790779,
+    "signed_share": 3.592729963790779
+  },
+  {
+    "year": 2024,
+    "sex": "female",
+    "age": "45-49",
+    "residents": 967400,
+    "share": 2.840940793666176,
+    "signed_share": 2.840940793666176
+  },
+  {
+    "year": 2024,
+    "sex": "female",
+    "age": "50-54",
+    "residents": 845700,
+    "share": 2.48354727021241,
+    "signed_share": 2.48354727021241
+  },
+  {
+    "year": 2024,
+    "sex": "female",
+    "age": "55-59",
+    "residents": 737300,
+    "share": 2.1652115434877732,
+    "signed_share": 2.1652115434877732
+  },
+  {
+    "year": 2024,
+    "sex": "female",
+    "age": "60-64",
+    "residents": 667400,
+    "share": 1.959937859926407,
+    "signed_share": 1.959937859926407
+  },
+  {
+    "year": 2024,
+    "sex": "female",
+    "age": "65-69",
+    "residents": 536400,
+    "share": 1.5752332455267075,
+    "signed_share": 1.5752332455267075
+  },
+  {
+    "year": 2024,
+    "sex": "female",
+    "age": "70-74",
+    "residents": 386400,
+    "share": 1.134731778656823,
+    "signed_share": 1.134731778656823
+  },
+  {
+    "year": 2024,
+    "sex": "female",
+    "age": "75-79",
+    "residents": 238600,
+    "share": 0.7006909999676966,
+    "signed_share": 0.7006909999676966
+  },
+  {
+    "year": 2024,
+    "sex": "female",
+    "age": "80-84",
+    "residents": 117100,
+    "share": 0.34388481180309,
+    "signed_share": 0.34388481180309
+  },
+  {
+    "year": 2024,
+    "sex": "female",
+    "age": "85+",
+    "residents": 69700,
+    "share": 0.20468634827220641,
+    "signed_share": 0.20468634827220641
+  }
+]

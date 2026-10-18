@@ -1,0 +1,26 @@
+[
+  {
+    "category": "MOH hospitals",
+    "sector": "Public",
+    "beds": 41209,
+    "share": 57.26017118719431
+  },
+  {
+    "category": "MOH special institutions",
+    "sector": "Public",
+    "beds": 5646,
+    "share": 7.845153401511783
+  },
+  {
+    "category": "Other government hospitals",
+    "sector": "Public",
+    "beds": 5193,
+    "share": 7.215706980880392
+  },
+  {
+    "category": "Licensed private hospitals",
+    "sector": "Private",
+    "beds": 19920,
+    "share": 27.67896843041352
+  }
+]
