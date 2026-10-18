@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { CountUp, HospitalMotif, useStoryReveals } from './components/StoryMotion'
 import { fixed, number, summary, source } from './data'
 import { StateContext, IndexedChart, Choropleth, Heatmap, PrivateSymbolMap, BumpChart, ConnectedDots, OccupancyPlot, AdmissionsBars, AgeVisual } from './components/StoryCharts'
 function Eyebrow({
@@ -42,6 +43,7 @@ function SectionTitle({
 
 function App() {
   const [selected, setSelected] = useState('')
+  useStoryReveals()
   return (
     <StateContext.Provider value={{selected,setSelected}}>
     <div className="site">
@@ -68,19 +70,20 @@ function App() {
               including private hospitals changes the picture dramatically.
             </p>
           </div>
+          <HospitalMotif />
           <div className="hero-stats">
             <article>
-              <strong>+{fixed(summary.bed_growth)}%</strong>
+              <strong><CountUp value={summary.bed_growth} prefix="+" suffix="%" /></strong>
               <p>Public hospital bed growth</p>
               <span>2015–2024</span>
             </article>
             <article>
-              <strong>+{fixed(summary.population_growth)}%</strong>
+              <strong><CountUp value={summary.population_growth} prefix="+" suffix="%" /></strong>
               <p>Population growth</p>
               <span>2015–2024</span>
             </article>
             <article>
-              <strong>{fixed(summary.private_share)}%</strong>
+              <strong><CountUp value={summary.private_share} suffix="%" /></strong>
               <p>Private beds as share of defined combined capacity</p>
               <span>2024</span>
             </article>
@@ -111,7 +114,10 @@ function App() {
             title="One country. Very different hospital capacity."
             intro="A bed in a national total still exists somewhere. Rates per resident begin to show how unevenly public capacity is recorded across Malaysia."
           />
-          <Choropleth />
+          <div className="editorial-grid map-editorial">
+            <Choropleth />
+            <aside className="editorial-aside"><Eyebrow>GEOGRAPHY MATTERS</Eyebrow><h3>A national total has a local address.</h3><p>Compare public beds per resident across states, then use the regional views to look closer.</p><p>Small territories have small resident denominators. A high rate does not tell us who travels there for care.</p><a href="#regional-history">Explore the decade ↓</a></aside>
+          </div><div id="regional-history" className="supporting-heading"><Eyebrow>THE LONGER VIEW</Eyebrow><p>Is the divide narrowing over time?</p></div>
           <Heatmap />
         </section>
 
@@ -123,11 +129,13 @@ function App() {
               intro="In 2024, Malaysia recorded 19,920 licensed private hospital beds. Including these beds changes the apparent distribution of hospital capacity across states."
             />
             <div className="reveal-stat">
-              <strong>{number(summary.private_beds)}</strong>
+              <strong><CountUp value={summary.private_beds} decimals={0} /></strong>
               <span>LICENSED PRIVATE HOSPITAL BEDS · 2024</span>
             </div>
-            <PrivateSymbolMap />
+            <div className="editorial-grid private-editorial"><PrivateSymbolMap /><aside className="editorial-aside"><Eyebrow>THE OTHER PART OF THE PICTURE</Eyebrow><h3>Private beds are concentrated.</h3><p>Circle area shows the number of licensed private hospital beds. The comparison below puts public and combined capacity on the same population denominator.</p><p>More recorded beds do not necessarily mean more affordable care.</p></aside></div>
+            <div className="chapter-bridge"><Eyebrow>FROM COUNTS TO CAPACITY</Eyebrow><h3>Same population. A different picture.</h3><p>Follow each line from public beds to combined capacity.</p></div>
             <ConnectedDots />
+            <div className="ranking-editorial">
             <BumpChart />
             <div className="pinang-callout">
               <div>
@@ -139,6 +147,7 @@ function App() {
                 <b>Pulau Pinang&apos;s ranking changes dramatically</b> when
                 private hospital beds are included.
               </p>
+            </div>
             </div>
             <MethodNote>
               Combined capacity is a count of public hospital and
@@ -185,7 +194,7 @@ function App() {
             title="Where does reported hospital activity take place?"
             intro="Admissions show recorded episodes across provider groups. They are useful for scale, but not directly interchangeable measures of population demand."
           />
-          <AdmissionsBars />
+          <div className="activity-editorial"><aside className="editorial-aside"><Eyebrow>REPORTED ACTIVITY</Eyebrow><h3>MOH records the most admissions.</h3><p>The largest provider category leads these reported totals. Coverage and institution types differ, so read the comparison alongside its caveats.</p></aside><AdmissionsBars /></div>
           <MethodNote>
             Admissions are reported episodes, not unique patients.
             Private-sector reporting includes additional institution types and
@@ -203,6 +212,7 @@ function App() {
               intro={`The population is changing alongside capacity. Between 2015 and 2024, the share of residents aged 65 and above increased by ${fixed(summary.age_increase)} percentage points.`}
             />
             <AgeVisual />
+            <div className="conclusion-label"><Eyebrow light>THE DIVIDE BEHIND THE TOTAL</Eyebrow></div>
             <p className="conclusion-copy">
               Malaysia&apos;s hospital capacity has expanded, but national
               totals alone conceal important differences between regions and
@@ -220,7 +230,7 @@ function App() {
             <Eyebrow>SOURCES &amp; METHODOLOGY</Eyebrow>
             <h2>About this story</h2>
             <p>
-              Seven data-driven views follow Malaysia’s hospital capacity, reported activity and ageing population. This V1 draft uses observed data, not sample values.
+              Nine data-driven views follow Malaysia’s hospital capacity, reported activity and ageing population. This V1 draft uses observed data, not sample values.
             </p>
           </div>
           <div>
