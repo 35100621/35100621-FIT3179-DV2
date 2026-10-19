@@ -31,10 +31,10 @@ export function capacityCartogram(width:number,selected:string,mode:string,regio
  ]}
 }
 export function providerTreemap(width:number):TopLevelSpec {
- const rows=admissions.map(d=>({...d,labelY:d.cy,labelOffset:((d.x1-d.x0)*width<145||((d.y1-d.y0)*420)<50)?0:10,percentage: `${d.share.toFixed(1)}%`,short:((d.x1-d.x0)*width<145||((d.y1-d.y0)*420)<50)?'':d.provider==='Private-sector providers'?'Private providers':d.provider==='Other government hospitals'?'Other government':d.provider==='MOH special institutions'?'MOH special inst.':d.provider}))
+ const rows=admissions.map(d=>({...d,percent_y:d.cy+(((d.x1-d.x0)*width<145||((d.y1-d.y0)*420)<50)?0:10/420),percentage: `${d.share.toFixed(1)}%`,short:((d.x1-d.x0)*width<145||((d.y1-d.y0)*420)<50)?'':d.provider==='Private-sector providers'?'Private providers':d.provider==='Other government hospitals'?'Other government':d.provider==='MOH special institutions'?'MOH special inst.':d.provider}))
  return {...base(width),height:420,data:{values:rows},encoding:{tooltip:[{field:'provider',title:'Provider'},{field:'admissions',format:',',title:'Reported admissions'},{field:'share',format:'.2f',title:'Share (%)'},{field:'coverage',title:'Coverage'}]},layer:[
  {mark:{type:'rect',stroke:'#07171d',strokeWidth:3},encoding:{x:{field:'x0',type:'quantitative',scale:{domain:[0,1]},axis:null},x2:{field:'x1'},y:{field:'y0',type:'quantitative',scale:{domain:[1,0]},axis:null},y2:{field:'y1'},color:{field:'provider',type:'nominal',scale:{domain:admissions.map(d=>d.provider),range:colors},legend:null}}},
  {mark:{type:'text',align:'center',baseline:'middle',fontSize:width<400?10:12,dy:-13,color:'#07171d',fontWeight:600},encoding:{x:{field:'cx',type:'quantitative'},y:{field:'cy',type:'quantitative'},text:{field:'short'}}},
- {mark:{type:'text',align:'center',baseline:'middle',fontSize:width<400?15:22,fontWeight:600,color:'#07171d'},encoding:{x:{field:'cx',type:'quantitative'},y:{field:'cy',type:'quantitative'},text:{field:'percentage'},yOffset:{field:'labelOffset',type:'quantitative',scale:null}}}
+ {mark:{type:'text',align:'center',baseline:'middle',fontSize:width<400?15:22,fontWeight:600,color:'#07171d'},encoding:{x:{field:'cx',type:'quantitative'},y:{field:'percent_y',type:'quantitative'},text:{field:'percentage'}}}
  ]}
 }

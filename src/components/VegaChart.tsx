@@ -19,6 +19,7 @@ export function VegaChart({id,label,spec}:Props) {
   if(!target.current||width<100)return
   let cancelled=false;let result:Result|undefined
   const el=target.current;setError('');setReady(false)
+  const mount=document.createElement('div');Object.assign(mount.style,{position:'absolute',visibility:'hidden',width:'100%'});el.appendChild(mount)
   const dark=['indexed','private-symbols','connected','bump','ageing'].includes(id)
   const themed=JSON.parse(JSON.stringify(spec(width),(_key,value)=>{
    if(!dark)return value
@@ -30,8 +31,8 @@ export function VegaChart({id,label,spec}:Props) {
    return value
   })) as TopLevelSpec
   themed.params=[...(themed.params??[]),{name:'hoveredState',value:''}]
-  embed(el,themed,{actions:false,renderer:'svg',tooltip:{theme:'light'},defaultStyle:false}).then(r=>{
-   if(cancelled){r.finalize();return}result=r;r.view.addEventListener('click',(_event,item)=>{
+  embed(mount,themed,{actions:false,renderer:'svg',tooltip:{theme:'light'},defaultStyle:false}).then(r=>{
+   if(cancelled){r.finalize();mount.remove();return}Object.assign(mount.style,{position:'relative',visibility:'visible'});el.replaceChildren(mount);result=r;r.view.addEventListener('click',(_event,item)=>{
     const datum=item?.datum;const state=datum?.state??datum?.properties?.state??datum?.items?.[0]?.datum?.state
     if(typeof state==='string')window.dispatchEvent(new CustomEvent('chart-state',{detail:state}))
    });
@@ -40,10 +41,10 @@ export function VegaChart({id,label,spec}:Props) {
    r.view.addEventListener('pointerout',()=>{r.view.signal('hoveredState','').runAsync()})
    setReady(true)
   }).catch(e=>{if(!cancelled)setError(String(e))})
-  return()=>{cancelled=true;result?.finalize()}
+  return()=>{cancelled=true;result?.finalize();if(!result)mount.remove()}
  },[width,spec])
  return <div ref={container} className="vega-frame" role="img" aria-label={label} data-chart={id} data-ready={ready}>
-  <div ref={target} />
+  <div ref={target} style={{position:'relative'}} />
   {!ready&&!error&&<p className="chart-loading" role="status">Loading chart…</p>}
   {error&&<p className="chart-error" role="alert">This chart could not render. The validated data table below remains available. {error}</p>}
  </div>

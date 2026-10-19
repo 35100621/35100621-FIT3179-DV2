@@ -4,6 +4,8 @@ Six-act React + TypeScript + Vite data story, reproducing the latest **Malaysia 
 
 The latest reference overrides earlier designs. Source copies are in `design-reference/latest/`; production code remains in `src/`. See [implementation, methods and remaining work](reports/task07/IMPLEMENTATION.md), [chart feasibility and mapping](reports/task07/PLAN.md), and [verification](reports/task07/VERIFICATION.md).
 
+Latest refinement: [linked-state interactions, cartogram validation, responsive QA and limitations](reports/task08/RESULTS.md). One shared state search links seven views; cartogram capacity mode retains original outlines by default.
+
 ## Charts in story order
 
 1. Indexed public beds and population, 2015–2024.
