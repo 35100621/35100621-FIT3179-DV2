@@ -16,3 +16,7 @@ playwright-report/
 
 /data/original/
 /data/geographic/original/
+
+# Local exports and scratch files
+/output/
+/tmp/

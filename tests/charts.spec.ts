@@ -1,5 +1,5 @@
 import {test,expect} from '@playwright/test'
-test('latest reference: twelve charts, coordinated controls and responsive layout',async({page},info)=>{
+test('twelve charts, coordinated controls and responsive layout',async({page},info)=>{
  const errors:string[]=[];page.on('pageerror',e=>errors.push(String(e)))
  page.on('console',m=>{if(m.type()==='warn'||m.type()==='error')errors.push(m.text())})
  await page.emulateMedia({reducedMotion:'reduce'})

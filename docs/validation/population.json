@@ -1,0 +1,28 @@
+{
+  "source_sha256": {
+    "data/original/population_malaysia.csv": "ed287ef3277e96e74d27fd65f2dc4ab88b37817780e265e11b0d478e6bc9fe04"
+  },
+  "pyramid_rows": 72,
+  "rounding_residuals": [
+    {
+      "year": 2015,
+      "sex": "male",
+      "age_bin_sum_minus_published_total": 100
+    },
+    {
+      "year": 2015,
+      "sex": "female",
+      "age_bin_sum_minus_published_total": 300
+    },
+    {
+      "year": 2024,
+      "sex": "male",
+      "age_bin_sum_minus_published_total": -100
+    },
+    {
+      "year": 2024,
+      "sex": "female",
+      "age_bin_sum_minus_published_total": 100
+    }
+  ]
+}

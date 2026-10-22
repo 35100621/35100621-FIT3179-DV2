@@ -1,80 +1,17 @@
-# Malaysia's Hospital Divide
+# Malaysia’s Hospital Divide
 
-Six-act React + TypeScript + Vite data story, reproducing the latest **Malaysia Healthcare Data Storybook.zip** supplied 18 October 2026. All **12 charts use Vega-Lite and Vega-Embed**, with validated observed data.
+An interactive story about Malaysia’s hospital capacity, activity and population, using observed MOH and DOSM data through 2024. Built with React, TypeScript, Vite, Vega-Lite and Vega-Embed. All 12 charts render as SVG.
 
-The latest reference overrides earlier designs. Source copies are in `design-reference/latest/`; production code remains in `src/`. See [implementation, methods and remaining work](reports/task07/IMPLEMENTATION.md), [chart feasibility and mapping](reports/task07/PLAN.md), and [verification](reports/task07/VERIFICATION.md).
+## Run locally
 
-Latest refinement: [linked-state interactions, cartogram validation, responsive QA and limitations](reports/task08/RESULTS.md). One shared state search links seven views; cartogram capacity mode retains original outlines by default.
-
-## Charts in story order
-
-1. Indexed public beds and population, 2015–2024.
-2. Public bed-rate choropleth, 2024.
-3. State-year public bed-rate heatmap, 2015–2024.
-4. Private-bed proportional symbol map, 2024.
-5. Public versus combined bed-rate connected dots.
-6. Public versus combined capacity rank bump chart.
-7. Annual MOH occupancy dots with the published national reference.
-8. Reported admissions by provider, count/share bars.
-12. Admissions-composition treemap (the same reported total).
-9. Population aged 65+, 2015 and 2024.
-11. Population pyramid with observed-year switch.
-10. Combined-capacity non-contiguous cartogram with geography toggle, placed in Act VI as in the latest ZIP.
-
-Reproduce new cartogram and treemap inputs with `python scripts/prepare_storybook.py` using Shapely 2.2.0. Original and earlier derived research datasets remain unchanged. Run `npm run dev` locally, `npm run build` for production, and `npx playwright test` for responsive and data checks.
-
-## Repository structure
-
-```text
-AGENTS.md                       Task instructions retained from V1
-src/                            React application and data imports
-  components/                   Chart embedding, controls and tables
-  charts/                       Vega-Lite specifications
-  styles/                       Shared editorial CSS
-design-reference/               Unmodified approved Figma source
-data/
-  original/                     Original CSV/PDF sources (local, ignored)
-  additional/raw/               Task02 acquired sources/provenance (local, ignored)
-  additional/derived/           Five Task02 research tables
-  additional/validation/        Hashes, acquisition logs and validation evidence
-  processed/                    Canonical chart-ready CSV/JSON
-  geographic/original/          Unmodified original boundaries (local, ignored)
-  geographic/validated/         Derived, validated state geometry
-public/data/                    Download CSVs and runtime state GeoJSON
-reports/task01/                 Reports 01–06
-reports/task02/                 Reports 07–12
-reports/task03/                 V1 implementation and validation
-reports/task04/                 Reorganisation inventory, move map and checks
-scripts/                       V1 preparation/browser inspection
-  validation/                  Task02 research validators
-tests/                         Production browser tests
-.github/workflows/deploy.yml    GitHub Pages deployment
-```
-
-JSON is imported from `data/processed/` and bundled by Vite. Only downloadable CSVs and browser-loaded GeoJSON are copied into `public/data/`. No raw PDFs, facility contacts, cached research extracts or source inventories are deployed. Generated dependencies, builds, test screenshots and caches remain ignored.
-
-## Sources and provenance
-
-MOH public bed counts and DOSM population estimates come from the [public-bed catalogue](https://data.gov.my/data-catalogue/hospital_beds), [state population](https://data.gov.my/data-catalogue/population_state) and [national population](https://data.gov.my/data-catalogue/population_malaysia). Official *Health Indicators 2025* supplies 2024 private capacity, annual MOH utilisation and admissions. DOSM geographic files supply state outlines.
-
-- [Original dataset inventory](reports/task01/01_dataset_inventory.md): schemas, definitions and source hashes.
-- [Acquired source manifest](data/additional/source_manifest.csv): exact URLs, publisher, access date, periods, SHA-256 and reuse notes for all 26 raw files.
-- [Source research](reports/task02/07_additional_sources.md) and [new dataset audit](reports/task02/08_new_dataset_inventory.md).
-- [Original hash manifest](data/additional/validation/original_hashes.json): current paths with unchanged original hashes.
-- [V1 validation](reports/task03/DATA_VALIDATION.md): joins, denominators, coverage and geometry repair.
-
-The three original boundary files remain untouched under `data/geographic/original/`. `data/geographic/validated/states.geojson` repairs Sarawak's invalid geometry and applies D3 ring winding; the full transformation and small pre-existing overlaps are documented in the V1 validation. Boundary effective vintage and reuse licence remain unresolved. The 2025 publication has an all-rights-reserved notice; public availability is not an open licence. Source PDFs and raw geography are not redistributed in Git. The derived state geometry is included for the chart; its reuse terms have not thereby been cleared. No blanket licence is granted to third-party datasets.
-
-## Local setup
-
-Use Node.js 22.12+ (verified with 22.18.0).
+Use Node.js 22.12 or newer.
 
 ```sh
 npm ci
 npm run dev
 ```
 
-Open `http://127.0.0.1:5173/35100621-FIT3179-DV2/`. Committed processed assets are sufficient to run/build; Python and raw source files are unnecessary for website builds.
+Open http://127.0.0.1:5173/35100621-FIT3179-DV2/.
 
 ```sh
 npm run typecheck
@@ -82,31 +19,70 @@ npm run build
 npm run preview
 ```
 
-The production output is `dist/`. Vite uses `/35100621-FIT3179-DV2/`, matching the supplied repository. Map and download URLs use `import.meta.env.BASE_URL`. Dependencies/fonts are bundled locally.
+The production build is written to `dist/`. The GitHub Pages workflow in `.github/workflows/deploy.yml` builds and deploys pushes to `main`. The deployment base path is configured in `vite.config.ts`.
 
-## Reproduce data and validation
+## Repository layout
+
+```text
+src/
+  App.tsx                Six-act narrative and shared selection
+  charts/                Vega-Lite specification functions
+  components/            Chart embedding, controls and state insights
+  styles/                Website styles and transitions
+  data.ts                Processed-data imports and source links
+data/
+  processed/             Current chart-ready JSON and CSV
+  geographic/validated/  Validated state boundaries
+  geographic/original/   Original boundaries (local, ignored)
+  original/              Original source datasets (local, ignored)
+  additional/            Source manifest, acquisitions and provenance
+public/data/             Downloadable CSV and browser-loaded GeoJSON
+scripts/                 Reproducible chart-data processing
+tests/                   Data, chart, interaction and responsive tests
+docs/                    Data methods and validation records
+.github/workflows/       GitHub Pages deployment
+```
+
+Processed JSON is imported and bundled by Vite. `public/data/` contains the CSV downloads and GeoJSON fetched at runtime; those copies are intentional. Raw publications and source datasets are not deployed. Committed processed data is sufficient to build the website.
+
+## Charts
+
+1. Indexed public beds and population, 2015–2024.
+2. Public-bed-rate choropleth, 2024.
+3. State-year public-bed-rate heatmap, 2015–2024.
+4. Private-bed proportional-symbol map.
+5. Public versus combined capacity connected dots.
+6. Public versus combined capacity rank comparison.
+7. Annual MOH occupancy ranked dots.
+8. Reported admissions by provider, count/share bars.
+9. Population aged 65+, 2015 and 2024.
+10. Combined-capacity cartogram with geographic outlines.
+11. Population pyramid with year selection.
+12. Reported-admissions treemap.
+
+The page groups the treemap with admissions, and the pyramid and cartogram in the final act. Shared state selection links seven views. Region controls, capacity/rank toggles and year switches are React controls; Vega-Lite defines the chart marks, encodings and tooltips.
+
+## Reproduce data
+
+Use Python 3.13 for the pinned processing dependencies. Restore source files at the paths recorded in `data/additional/source_manifest.csv` and `data/additional/validation/original_hashes.json`. Exact source hashes are checked; a fresh clone needs those local source files only to regenerate data.
 
 ```sh
-python3 -m venv .venv
+python3.13 -m venv .venv
 source .venv/bin/activate
 pip install -r scripts/requirements.txt
-python scripts/prepare_data.py
-python scripts/verify_reorganisation.py
+npm run prepare:data
 ```
 
-Restore originals at the paths in the hash manifest and acquisitions at the paths in the source manifest first. Large source files remain in this workspace and are intentionally excluded from Git. A fresh clone can build the website immediately, but requires these exact source files to reproduce data. Never substitute a newer download silently: hashes must match. The script re-extracts selected physical PDF pages, validates all 16 state identifiers and matching-year denominators, writes canonical processed files and validated geography, copies eight runtime assets, and updates Task03 validation records. All **195** V1 checks remain applicable and pass. No imputation or source writes occur.
+This runs, in order:
 
-Optional Task02 research revalidation:
+- `prepare_data.py`: core datasets, source checks, PDF extraction, geographic joins and downloadable copies.
+- `prepare_private_locations.py`: state-level private-bed symbol anchors.
+- `prepare_population.py`: age/sex population-pyramid data.
+- `prepare_layouts.py`: capacity cartogram and admissions treemap geometry.
 
-```sh
-pip install -r scripts/validation/requirements.txt
-python scripts/validation/validate_sources.py
-python scripts/validation/extract_indicators.py
-python scripts/validation/extra_checks.py
-python scripts/validation/validate_upi.py
-```
+Validation output is written to `docs/validation/`. Original datasets are never overwritten. See [data methods](docs/DATA.md) and [core validation](docs/validation/core.md).
 
-The historical extraction script uses preserved PDF page-text caches in `data/additional/validation/`; these ignored local caches must also be restored. The V1 preparation script reads the PDF directly and does not depend on those caches.
+## Test
 
 ```sh
 npx playwright install chromium
@@ -114,22 +90,8 @@ npm run build
 npm test
 ```
 
-Tests start production preview on port 5174 at the repository subpath and verify seven rendered charts, exact values, tooltips, map views, sorting, shared highlighting, downloads, no HTTP errors and layout at 1440, 390 and 320 px. Results/screenshots are in ignored `test-results/`. To repeat the same tests against the published website:
+Playwright starts the production preview and checks all 12 charts, quantities, selection, controls, tooltips, downloads and responsive layouts across six viewport sizes. Generated screenshots and reports go to ignored `test-results/`.
 
-```sh
-PLAYWRIGHT_BASE_URL=https://35100621.github.io/35100621-FIT3179-DV2/ npm test
-```
+## Interpretation
 
-## GitHub Pages deployment
-
-Destination: [35100621/35100621-FIT3179-DV2](https://github.com/35100621/35100621-FIT3179-DV2). GitHub reports default branch `main`; the remote was empty when inspected. **Published and verified:** [Malaysia’s Hospital Divide](https://35100621.github.io/35100621-FIT3179-DV2/). The deployment workflow succeeded and all three browser suites passed against this public URL.
-
-The workflow builds using `npm ci` and `npm run build`, uploads only `dist/`, and deploys using the official GitHub Pages actions on pushes to `main` or manual dispatch. In repository **Settings → Pages → Build and deployment → Source**, select **GitHub Actions**. See [GitHub's custom Pages workflow documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
-
-Pages is enabled, the project is pushed to `main`, and no deployment setup steps remain. Deployment details and verification evidence are recorded in [Task04 results](reports/task04/RESULTS.md). Never treat a successful local build as a completed deployment.
-
-## Known limits
-
-Counts describe historical reported capacity, not current staffing, affordability, accessibility or unmet demand. Combined beds mix licensed private beds with public capacity, not operational availability. Annual occupancy covers MOH only. Private admissions include a broader facility population and 82.33% response; MOH submission is 97.94%. No response-rate correction is applied. Final author attribution remains unconfirmed. Source/geography reuse questions remain outstanding. The existing large Vega bundle produces a size advisory; this task does not redesign or optimise V2.
-
-[Implementation record](reports/task03/IMPLEMENTATION.md) · [V1 browser verification and backlog](reports/task03/V1_VERIFICATION.md) · [Task04 audit](reports/task04/AUDIT.md)
+Beds describe reported capacity, not affordability, staffing or access. Combined capacity adds public hospital/special-institution beds and licensed private hospital beds. Occupancy is annual and MOH-only. Admissions are episodes with incomplete reporting and broader private-provider coverage. Age structure provides context, not a demand forecast. Detailed source notes accompany the charts.

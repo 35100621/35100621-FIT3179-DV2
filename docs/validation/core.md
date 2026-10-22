@@ -1,6 +1,6 @@
 # V1 data validation
 
-**PASS — 195 assertions.** Reproduce with `python3 scripts/prepare_data.py`. Full assertions, source/output hashes and geometry diagnostics: [data-validation.json](data-validation.json).
+**PASS — 195 assertions.** Reproduce with `python3 scripts/prepare_data.py`. Full assertions, source/output hashes and geometry diagnostics: [core.json](core.json).
 
 | Chart table | Rows | Check |
 |---|---:|---|

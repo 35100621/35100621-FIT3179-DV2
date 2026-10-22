@@ -100,5 +100,6 @@ assert all(abs((r['x1']-r['x0'])*(r['y1']-r['y0'])-r['admissions']/total)<1e-12 
 (OUT/'admissions_treemap.json').write_text(json.dumps(rects,indent=2)+'\n')
 assert all(hashlib.sha256((ROOT/p).read_bytes()).hexdigest()==h for p,h in hashes.items())
 report=dict(minimum_gap_projected=.00012,displacement_before_relaxation=before_relax,displacement_after_relaxation=after_relax,broad_north_south_order_preserved=True,sabah_northeast_of_sarawak=True,max_relative_area_error=max(abs(g.area/(r['combined_beds']*k)-1) for g,r in zip(polygons,rows)),source_sha256=hashes,states=len(rows),combined_beds=71968,cartogram_area_proportionality=True,cartogram_overlap_pairs=0,separation_iterations=iteration,admissions=total,treemap_area_proportionality=True,providers=len(rects))
-(ROOT/'reports/task08/data-validation.json').write_text(json.dumps(report,indent=2)+'\n')
+(ROOT/'docs/validation').mkdir(parents=True,exist_ok=True)
+(ROOT/'docs/validation/layouts.json').write_text(json.dumps(report,indent=2)+'\n')
 print(json.dumps(report,indent=2))
