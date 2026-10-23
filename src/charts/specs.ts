@@ -1,50 +1,771 @@
 import privateLocations from '../../data/processed/private_bed_locations.json'
 import type { TopLevelSpec, Config } from 'vega-lite'
-import { growth, rates, capacity, occupancy, admissions, ageing, summary } from '../data'
-export const palette = { navy: '#172B42', terracotta: '#D77750', teal: '#527F78', slate: '#7D90AE', cream: '#F8F7F3' }
-const {navy,terracotta,teal,slate}=palette
-const config: Config = {font:'DM Sans',view:{stroke:null},axis:{labelFontSize:12,titleFontSize:12,titleFontWeight:'normal',labelColor:'#56636d',titleColor:'#56636d',gridColor:'#e7e4de',domain:false,tickColor:'#d6d3cb',labelPadding:9,titlePadding:15},legend:{labelFontSize:12,titleFontSize:12,labelColor:'#56636d',titleColor:'#56636d',orient:'top',direction:'horizontal',title:null},text:{font:'DM Sans'}}
-const base = (width:number) => ({$schema:'https://vega.github.io/schema/vega-lite/v6.json',width,background:'transparent',autosize:{type:'fit-x' as const,contains:'padding' as const,resize:true},config})
-const stateAxis = {title:null, labelLimit:190,labelFontSize:12,ticks:false,labelExpr:"replace(datum.label, 'W.P. ', '')"}
-const emphasis = (selected:string,field='state') => ({condition:[{test:`datum[${JSON.stringify(field)}] === hoveredState || datum[${JSON.stringify(field)}] === ${JSON.stringify(selected)}`,value:1},{test:"hoveredState !== ''",value:0.65}],value:selected?0.6:1})
-export function indexed(width:number,year=2024):TopLevelSpec {
- return {...base(width),height:320,data:{values:growth},encoding:{x:{field:'year',type:'quantitative',scale:{domain:[2015,2024]},axis:{title:null,format:'d',values:width<500?[2015,2018,2021,2024]:[2015,2016,2017,2018,2019,2020,2021,2022,2023,2024],grid:false}},y:{field:'index',type:'quantitative',scale:{domain:[98,118],zero:false},axis:{title:'Index · 2015 = 100',values:[100,105,110,115]}},color:{field:'series',type:'nominal',scale:{domain:['Public hospital beds','Population'],range:[navy,teal]},legend:null},tooltip:[{field:'year',type:'ordinal',title:'Year'},{field:'series',title:'Series'},{field:'index',format:'.2f',title:'Index (2015 = 100)'},{field:'count',format:',',title:'Beds / residents'}]},layer:[{data:{values:[{year}]},mark:{type:'rule',color:'#e8b44e',strokeDash:[4,4]},encoding:{x:{field:'year',type:'quantitative'},y:{value:0},y2:{value:320},color:{value:'#e8b44e'}}},{mark:{type:'line',strokeWidth:3}},{mark:{type:'point',filled:true,size:52}},{transform:[{filter:'datum.year === 2024'}],mark:{type:'text',align:'right',dx:-7,dy:-15,fontWeight:700,fontSize:14},encoding:{text:{field:'index',format:'.2f'}}}]}
+import {
+  growth,
+  rates,
+  capacity,
+  occupancy,
+  admissions,
+  ageing,
+  summary,
+} from '../data'
+export const palette = {
+  navy: '#172B42',
+  terracotta: '#D77750',
+  teal: '#527F78',
+  slate: '#7D90AE',
+  cream: '#F8F7F3',
 }
-export function choropleth(width:number,selected:string,region:string):TopLevelSpec {
- // Explicit filter expression; the projection refits to the selected region without changing values.
- const regionFilter=region==='Peninsular'?"indexof(['Sabah','Sarawak','W.P. Labuan'], datum.properties.state) < 0":region==='East Malaysia'?"indexof(['Sabah','Sarawak','W.P. Labuan'], datum.properties.state) >= 0":null
- return {...base(width),height:width<500?300:360,data:{url:`${import.meta.env.BASE_URL}data/states.geojson`,format:{type:'json',property:'features'}},...(regionFilter?{transform:[{filter:regionFilter}]}:{}),projection:{type:'mercator'},mark:{type:'geoshape',stroke:'#fffefa',strokeWidth:0.8},encoding:{color:{field:'properties.rate',type:'quantitative',scale:{type:'threshold',domain:[12,15,20,30],range:['#e2eeeb','#b7d1cb','#7fa99f','#527f78','#172b42']},legend:{orient:'bottom',title:'Public beds per 10,000 residents',titleLimit:300,labelExpr:"datum.label",symbolType:'square'}},opacity:{condition:[{test:`datum.properties.state === hoveredState || datum.properties.state === ${JSON.stringify(selected)}`,value:1},{test:"hoveredState !== ''",value:.65}],value:selected ? 0.6 : 1},stroke:{condition:{test:`datum.properties.state === hoveredState || datum.properties.state === ${JSON.stringify(selected)}`,value:'#f36c4f'},value:'#fffefa'},strokeWidth:{condition:{test:`datum.properties.state === hoveredState || datum.properties.state === ${JSON.stringify(selected)}`,value:2.8},value:0.8},tooltip:[{field:'properties.state',title:'State / federal territory'},{field:'properties.rate',format:'.2f',title:'Public beds / 10,000'},{field:'properties.beds',format:',',title:'Public beds'},{field:'properties.residents',format:',',title:'Residents (2024)'}]}}
+const { navy, terracotta, teal, slate } = palette
+const config: Config = {
+  font: 'DM Sans',
+  view: { stroke: null },
+  axis: {
+    labelFontSize: 12,
+    titleFontSize: 12,
+    titleFontWeight: 'normal',
+    labelColor: '#56636d',
+    titleColor: '#56636d',
+    gridColor: '#e7e4de',
+    domain: false,
+    tickColor: '#d6d3cb',
+    labelPadding: 9,
+    titlePadding: 15,
+  },
+  legend: {
+    labelFontSize: 12,
+    titleFontSize: 12,
+    labelColor: '#56636d',
+    titleColor: '#56636d',
+    orient: 'top',
+    direction: 'horizontal',
+    title: null,
+  },
+  text: { font: 'DM Sans' },
 }
-export function heatmap(width:number,selected:string):TopLevelSpec {
- return {...base(width),height:448,data:{values:rates},mark:{type:'rect',stroke:'#fffefa',strokeWidth:2,cornerRadius:1},encoding:{x:{field:'year',type:'ordinal',axis:{title:null,labelAngle:width<500?-45:0}},y:{field:'state',type:'nominal',sort:capacity.slice().sort((a,b)=>b.public_rate-a.public_rate).map(d=>d.state),axis:stateAxis},color:{field:'rate',type:'quantitative',scale:{domain:[10,75],range:['#e2eeeb',teal,navy]},legend:{orient:'bottom',title:'Public beds per 10,000 residents',gradientLength:width<500?160:280,titleLimit:300}},opacity:emphasis(selected),tooltip:[{field:'state',title:'State / federal territory'},{field:'year',type:'ordinal',title:'Year'},{field:'rate',format:'.2f',title:'Public beds / 10,000'},{field:'beds',format:',',title:'Public beds'},{field:'residents',format:',',title:'Residents'}]}}
+const base = (width: number) => ({
+  $schema: 'https://vega.github.io/schema/vega-lite/v6.json',
+  width,
+  background: 'transparent',
+  autosize: {
+    type: 'fit-x' as const,
+    contains: 'padding' as const,
+    resize: true,
+  },
+  config,
+})
+const stateAxis = {
+  title: null,
+  labelLimit: 190,
+  labelFontSize: 12,
+  ticks: false,
+  labelExpr: "replace(datum.label, 'W.P. ', '')",
 }
-export function connected(width:number,selected:string,sort:string,combined=true):TopLevelSpec {
- const field: 'public_rate' | 'private_share' | 'combined_rate' = sort==='Public capacity'?'public_rate':sort==='Private contribution'?'private_share':'combined_rate'
- const order=capacity.slice().sort((a,b)=>b[field]-a[field]).map(d=>d.state)
- // Sorted explicitly so rank comparison is stable across layers and selection never removes states.
- const rows=capacity.map(d=>({...d,display_combined:combined?d.combined_rate:d.public_rate,rank_label:`#${d.public_rank} → #${d.combined_rank}`}))
- return {...base(width),height:560,data:{values:rows},encoding:{y:{field:'state',type:'nominal',sort:order,axis:stateAxis},opacity:emphasis(selected),tooltip:[{field:'state',title:'State / federal territory'},{field:'public_rate',format:'.2f',title:'Public beds / 10,000'},{field:'combined_rate',format:'.2f',title:'Combined beds / 10,000'},{field:'rank_label',title:'Public → combined rank'},{field:'public_beds',format:',',title:'Public beds'},{field:'private_beds',format:',',title:'Private hospital beds'},{field:'residents',format:',',title:'Residents'}]},layer:[{mark:{type:'rule',strokeWidth:3,color:'#b5bfc9'},encoding:{x:{field:'public_rate',type:'quantitative',scale:{domain:[0,80]},axis:{title:'Beds per 10,000 residents',tickCount:width<500?5:9}},x2:{field:'display_combined'}}},{mark:{type:'point',filled:true,size:100,color:slate,stroke:'#fffefa',strokeWidth:1.5},encoding:{x:{field:'display_combined',type:'quantitative'}}},{mark:{type:'point',filled:true,size:46,color:navy,stroke:'#fffefa',strokeWidth:1},encoding:{x:{field:'public_rate',type:'quantitative'}}},...(width>700?[{mark:{type:'text' as const,align:'left' as const,dx:11,fontSize:11,color:navy},encoding:{x:{field:'display_combined',type:'quantitative' as const},text:{field:'display_combined',format:'.2f'}}}]:[])]}
+const emphasis = (selected: string, field = 'state') => ({
+  condition: [
+    {
+      test: `datum[${JSON.stringify(field)}] === hoveredState || datum[${JSON.stringify(field)}] === ${JSON.stringify(selected)}`,
+      value: 1,
+    },
+    { test: "hoveredState !== ''", value: 0.65 },
+  ],
+  value: selected ? 0.6 : 1,
+})
+export function indexed(width: number, year = 2024): TopLevelSpec {
+  return {
+    ...base(width),
+    height: 320,
+    data: { values: growth },
+    encoding: {
+      x: {
+        field: 'year',
+        type: 'quantitative',
+        scale: { domain: [2015, 2024] },
+        axis: {
+          title: null,
+          format: 'd',
+          values:
+            width < 500
+              ? [2015, 2018, 2021, 2024]
+              : [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024],
+          grid: false,
+        },
+      },
+      y: {
+        field: 'index',
+        type: 'quantitative',
+        scale: { domain: [98, 118], zero: false },
+        axis: { title: 'Index · 2015 = 100', values: [100, 105, 110, 115] },
+      },
+      color: {
+        field: 'series',
+        type: 'nominal',
+        scale: {
+          domain: ['Public hospital beds', 'Population'],
+          range: [navy, teal],
+        },
+        legend: null,
+      },
+      tooltip: [
+        { field: 'year', type: 'ordinal', title: 'Year' },
+        { field: 'series', title: 'Series' },
+        { field: 'index', format: '.2f', title: 'Index (2015 = 100)' },
+        { field: 'count', format: ',', title: 'Beds / residents' },
+      ],
+    },
+    layer: [
+      {
+        data: { values: [{ year }] },
+        mark: { type: 'rule', color: '#e8b44e', strokeDash: [4, 4] },
+        encoding: {
+          x: { field: 'year', type: 'quantitative' },
+          y: { value: 0 },
+          y2: { value: 320 },
+          color: { value: '#e8b44e' },
+        },
+      },
+      { mark: { type: 'line', strokeWidth: 3 } },
+      { mark: { type: 'point', filled: true, size: 52 } },
+      {
+        transform: [{ filter: 'datum.year === 2024' }],
+        mark: {
+          type: 'text',
+          align: 'right',
+          dx: -7,
+          dy: -15,
+          fontWeight: 700,
+          fontSize: 14,
+        },
+        encoding: { text: { field: 'index', format: '.2f' } },
+      },
+    ],
+  }
 }
-export function occupancyPlot(width:number,selected:string):TopLevelSpec {
- return {...base(width),height:470,layer:[{data:{values:[{national:summary.national_occupancy}]},mark:{type:'rule',strokeDash:[5,4],color:terracotta,strokeWidth:2},encoding:{x:{field:'national',type:'quantitative'}}},{data:{values:occupancy},mark:{type:'point',filled:true,color:navy,size:90},encoding:{y:{field:'state',type:'nominal',sort:occupancy.slice().sort((a,b)=>b.occupancy-a.occupancy).map(d=>d.state),axis:stateAxis},x:{field:'occupancy',type:'quantitative',scale:{domain:[0,100]},axis:{title:'Reported annual bed occupancy (%)',tickCount:width<500?5:11}},opacity:emphasis(selected),tooltip:[{field:'state',title:'State / federal territory'},{field:'occupancy',format:'.2f',title:'Annual MOH occupancy (%)'},{field:'operational_beds',format:',',title:'Operational MOH beds'},{field:'national_occupancy',format:'.2f',title:'National MOH occupancy (%)'}]}},{data:{values:occupancy},mark:{type:'text',align:'left',dx:10,fontSize:11,color:navy},encoding:{y:{field:'state',type:'nominal',sort:occupancy.slice().sort((a,b)=>b.occupancy-a.occupancy).map(d=>d.state),axis:stateAxis},x:{field:'occupancy',type:'quantitative'},text:{field:'occupancy',format:'.2f'},opacity:emphasis(selected)}}]}
+export function choropleth(
+  width: number,
+  selected: string,
+  region: string,
+): TopLevelSpec {
+  // Explicit filter expression; the projection refits to the selected region without changing values.
+  const regionFilter =
+    region === 'Peninsular'
+      ? "indexof(['Sabah','Sarawak','W.P. Labuan'], datum.properties.state) < 0"
+      : region === 'East Malaysia'
+        ? "indexof(['Sabah','Sarawak','W.P. Labuan'], datum.properties.state) >= 0"
+        : null
+  return {
+    ...base(width),
+    height: width < 500 ? 300 : 360,
+    data: {
+      url: `${import.meta.env.BASE_URL}data/states.geojson`,
+      format: { type: 'json', property: 'features' },
+    },
+    ...(regionFilter ? { transform: [{ filter: regionFilter }] } : {}),
+    projection: { type: 'mercator' },
+    mark: { type: 'geoshape', stroke: '#fffefa', strokeWidth: 0.8 },
+    encoding: {
+      color: {
+        field: 'properties.rate',
+        type: 'quantitative',
+        scale: {
+          type: 'threshold',
+          domain: [12, 15, 20, 30],
+          range: ['#e2eeeb', '#b7d1cb', '#7fa99f', '#527f78', '#172b42'],
+        },
+        legend: {
+          orient: 'bottom',
+          title: 'Public beds per 10,000 residents',
+          titleLimit: 300,
+          labelExpr: 'datum.label',
+          symbolType: 'square',
+        },
+      },
+      opacity: {
+        condition: [
+          {
+            test: `datum.properties.state === hoveredState || datum.properties.state === ${JSON.stringify(selected)}`,
+            value: 1,
+          },
+          { test: "hoveredState !== ''", value: 0.65 },
+        ],
+        value: selected ? 0.6 : 1,
+      },
+      stroke: {
+        condition: {
+          test: `datum.properties.state === hoveredState || datum.properties.state === ${JSON.stringify(selected)}`,
+          value: '#f36c4f',
+        },
+        value: '#fffefa',
+      },
+      strokeWidth: {
+        condition: {
+          test: `datum.properties.state === hoveredState || datum.properties.state === ${JSON.stringify(selected)}`,
+          value: 2.8,
+        },
+        value: 0.8,
+      },
+      tooltip: [
+        { field: 'properties.state', title: 'State / federal territory' },
+        {
+          field: 'properties.rate',
+          format: '.2f',
+          title: 'Public beds / 10,000',
+        },
+        { field: 'properties.beds', format: ',', title: 'Public beds' },
+        {
+          field: 'properties.residents',
+          format: ',',
+          title: 'Residents (2024)',
+        },
+      ],
+    },
+  }
 }
-export function admissionsBars(width:number,share=false):TopLevelSpec {
- return {...base(width),height:260,data:{values:admissions.map(d=>({...d,value:share?d.admissions/4270356*100:d.admissions}))},encoding:{y:{field:'provider',type:'nominal',sort:admissions.map(d=>d.provider),axis:{title:null,ticks:false,labelFontSize:width<500?11:12,labelLimit:width<500?105:200,labelExpr:"datum.label === 'Other government hospitals' ? 'Other govt.' : datum.label === 'Private-sector providers' ? 'Private providers' : datum.label === 'MOH special institutions' ? 'MOH special inst.' : datum.label"}},x:{field:'value',type:'quantitative',scale:{domain:share?[0,75]:[0,3200000]},axis:{title:share?'Share of reported admissions (%)':'Reported admission episodes',format:share?'.0f':'~s',tickCount:width<500?3:5}},tooltip:[{field:'provider',title:'Provider group'},{field:'admissions',format:',',title:'Reported admissions'},{field:'coverage',title:'Reporting coverage'}]},layer:[{mark:{type:'bar',height:26,cornerRadiusEnd:2},encoding:{color:{field:'provider',type:'nominal',legend:null,scale:{domain:admissions.map(d=>d.provider),range:['#f36c4f','#e8b44e','#4b8294','#9fc6ae']}}}},{mark:{type:'text',align:'left',dx:8,fontSize:width<500?10:13,color:navy},encoding:{text:{field:'value',format:share?'.1f':width<500?'.3s':','}}}]}
+export function heatmap(width: number, selected: string): TopLevelSpec {
+  return {
+    ...base(width),
+    height: 448,
+    data: { values: rates },
+    mark: { type: 'rect', stroke: '#fffefa', strokeWidth: 2, cornerRadius: 1 },
+    encoding: {
+      x: {
+        field: 'year',
+        type: 'ordinal',
+        axis: { title: null, labelAngle: width < 500 ? -45 : 0 },
+      },
+      y: {
+        field: 'state',
+        type: 'nominal',
+        sort: capacity
+          .slice()
+          .sort((a, b) => b.public_rate - a.public_rate)
+          .map((d) => d.state),
+        axis: stateAxis,
+      },
+      color: {
+        field: 'rate',
+        type: 'quantitative',
+        scale: { domain: [10, 75], range: ['#e2eeeb', teal, navy] },
+        legend: {
+          orient: 'bottom',
+          title: 'Public beds per 10,000 residents',
+          gradientLength: width < 500 ? 160 : 280,
+          titleLimit: 300,
+        },
+      },
+      opacity: emphasis(selected),
+      tooltip: [
+        { field: 'state', title: 'State / federal territory' },
+        { field: 'year', type: 'ordinal', title: 'Year' },
+        { field: 'rate', format: '.2f', title: 'Public beds / 10,000' },
+        { field: 'beds', format: ',', title: 'Public beds' },
+        { field: 'residents', format: ',', title: 'Residents' },
+      ],
+    },
+  }
 }
-export function ageingChart(width:number):TopLevelSpec {
- return {...base(width),height:210,config:{...config,axis:{...config.axis,labelColor:'#d3dde4',titleColor:'#d3dde4',gridColor:'#435568'}},data:{values:ageing},encoding:{x:{field:'share',type:'quantitative',scale:{domain:[0,10]},axis:{title:'Share of resident population aged 65+ (%)',tickCount:6}},y:{field:'year',type:'ordinal',axis:{title:null,labelFontSize:16,ticks:false}},tooltip:[{field:'year',type:'ordinal',title:'Year'},{field:'share',format:'.2f',title:'Population aged 65+ (%)'},{field:'older_residents',format:',',title:'Residents aged 65+'},{field:'residents',format:',',title:'Total residents'}]},layer:[{mark:{type:'bar',height:34,cornerRadiusEnd:2},encoding:{color:{field:'year',type:'nominal',scale:{domain:[2015,2024],range:[slate,terracotta]},legend:null}}},{mark:{type:'text',align:'left',dx:12,color:'#ffffff',fontSize:18,fontWeight:600},encoding:{text:{field:'share',format:'.2f'}}}]}
+export function connected(
+  width: number,
+  selected: string,
+  sort: string,
+  combined = true,
+): TopLevelSpec {
+  const field: 'public_rate' | 'private_share' | 'combined_rate' =
+    sort === 'Public capacity'
+      ? 'public_rate'
+      : sort === 'Private contribution'
+        ? 'private_share'
+        : 'combined_rate'
+  const order = capacity
+    .slice()
+    .sort((a, b) => b[field] - a[field])
+    .map((d) => d.state)
+  // Sorted explicitly so rank comparison is stable across layers and selection never removes states.
+  const rows = capacity.map((d) => ({
+    ...d,
+    display_combined: combined ? d.combined_rate : d.public_rate,
+    rank_label: `#${d.public_rank} → #${d.combined_rank}`,
+  }))
+  return {
+    ...base(width),
+    height: 560,
+    data: { values: rows },
+    encoding: {
+      y: { field: 'state', type: 'nominal', sort: order, axis: stateAxis },
+      opacity: emphasis(selected),
+      tooltip: [
+        { field: 'state', title: 'State / federal territory' },
+        { field: 'public_rate', format: '.2f', title: 'Public beds / 10,000' },
+        {
+          field: 'combined_rate',
+          format: '.2f',
+          title: 'Combined beds / 10,000',
+        },
+        { field: 'rank_label', title: 'Public → combined rank' },
+        { field: 'public_beds', format: ',', title: 'Public beds' },
+        { field: 'private_beds', format: ',', title: 'Private hospital beds' },
+        { field: 'residents', format: ',', title: 'Residents' },
+      ],
+    },
+    layer: [
+      {
+        mark: { type: 'rule', strokeWidth: 3, color: '#b5bfc9' },
+        encoding: {
+          x: {
+            field: 'public_rate',
+            type: 'quantitative',
+            scale: { domain: [0, 80] },
+            axis: {
+              title: 'Beds per 10,000 residents',
+              tickCount: width < 500 ? 5 : 9,
+            },
+          },
+          x2: { field: 'display_combined' },
+        },
+      },
+      {
+        mark: {
+          type: 'point',
+          filled: true,
+          size: 100,
+          color: slate,
+          stroke: '#fffefa',
+          strokeWidth: 1.5,
+        },
+        encoding: { x: { field: 'display_combined', type: 'quantitative' } },
+      },
+      {
+        mark: {
+          type: 'point',
+          filled: true,
+          size: 46,
+          color: navy,
+          stroke: '#fffefa',
+          strokeWidth: 1,
+        },
+        encoding: { x: { field: 'public_rate', type: 'quantitative' } },
+      },
+      ...(width > 700
+        ? [
+            {
+              mark: {
+                type: 'text' as const,
+                align: 'left' as const,
+                dx: 11,
+                fontSize: 11,
+                color: navy,
+              },
+              encoding: {
+                x: { field: 'display_combined', type: 'quantitative' as const },
+                text: { field: 'display_combined', format: '.2f' },
+              },
+            },
+          ]
+        : []),
+    ],
+  }
+}
+export function occupancyPlot(width: number, selected: string): TopLevelSpec {
+  return {
+    ...base(width),
+    height: 470,
+    layer: [
+      {
+        data: { values: [{ national: summary.national_occupancy }] },
+        mark: {
+          type: 'rule',
+          strokeDash: [5, 4],
+          color: terracotta,
+          strokeWidth: 2,
+        },
+        encoding: { x: { field: 'national', type: 'quantitative' } },
+      },
+      {
+        data: { values: occupancy },
+        mark: { type: 'point', filled: true, color: navy, size: 90 },
+        encoding: {
+          y: {
+            field: 'state',
+            type: 'nominal',
+            sort: occupancy
+              .slice()
+              .sort((a, b) => b.occupancy - a.occupancy)
+              .map((d) => d.state),
+            axis: stateAxis,
+          },
+          x: {
+            field: 'occupancy',
+            type: 'quantitative',
+            scale: { domain: [0, 100] },
+            axis: {
+              title: 'Reported annual bed occupancy (%)',
+              tickCount: width < 500 ? 5 : 11,
+            },
+          },
+          opacity: emphasis(selected),
+          tooltip: [
+            { field: 'state', title: 'State / federal territory' },
+            {
+              field: 'occupancy',
+              format: '.2f',
+              title: 'Annual MOH occupancy (%)',
+            },
+            {
+              field: 'operational_beds',
+              format: ',',
+              title: 'Operational MOH beds',
+            },
+            {
+              field: 'national_occupancy',
+              format: '.2f',
+              title: 'National MOH occupancy (%)',
+            },
+          ],
+        },
+      },
+      {
+        data: { values: occupancy },
+        mark: {
+          type: 'text',
+          align: 'left',
+          dx: 10,
+          fontSize: 11,
+          color: navy,
+        },
+        encoding: {
+          y: {
+            field: 'state',
+            type: 'nominal',
+            sort: occupancy
+              .slice()
+              .sort((a, b) => b.occupancy - a.occupancy)
+              .map((d) => d.state),
+            axis: stateAxis,
+          },
+          x: { field: 'occupancy', type: 'quantitative' },
+          text: { field: 'occupancy', format: '.2f' },
+          opacity: emphasis(selected),
+        },
+      },
+    ],
+  }
+}
+export function admissionsBars(width: number, share = false): TopLevelSpec {
+  return {
+    ...base(width),
+    height: 260,
+    data: {
+      values: admissions.map((d) => ({
+        ...d,
+        value: share ? (d.admissions / 4270356) * 100 : d.admissions,
+      })),
+    },
+    encoding: {
+      y: {
+        field: 'provider',
+        type: 'nominal',
+        sort: admissions.map((d) => d.provider),
+        axis: {
+          title: null,
+          ticks: false,
+          labelFontSize: width < 500 ? 11 : 12,
+          labelLimit: width < 500 ? 105 : 200,
+          labelExpr:
+            "datum.label === 'Other government hospitals' ? 'Other govt.' : datum.label === 'Private-sector providers' ? 'Private providers' : datum.label === 'MOH special institutions' ? 'MOH special inst.' : datum.label",
+        },
+      },
+      x: {
+        field: 'value',
+        type: 'quantitative',
+        scale: { domain: share ? [0, 75] : [0, 3200000] },
+        axis: {
+          title: share
+            ? 'Share of reported admissions (%)'
+            : 'Reported admission episodes',
+          format: share ? '.0f' : '~s',
+          tickCount: width < 500 ? 3 : 5,
+        },
+      },
+      tooltip: [
+        { field: 'provider', title: 'Provider group' },
+        { field: 'admissions', format: ',', title: 'Reported admissions' },
+        { field: 'coverage', title: 'Reporting coverage' },
+      ],
+    },
+    layer: [
+      {
+        mark: { type: 'bar', height: 26, cornerRadiusEnd: 2 },
+        encoding: {
+          color: {
+            field: 'provider',
+            type: 'nominal',
+            legend: null,
+            scale: {
+              domain: admissions.map((d) => d.provider),
+              range: ['#f36c4f', '#e8b44e', '#4b8294', '#9fc6ae'],
+            },
+          },
+        },
+      },
+      {
+        mark: {
+          type: 'text',
+          align: 'left',
+          dx: 8,
+          fontSize: width < 500 ? 10 : 13,
+          color: navy,
+        },
+        encoding: {
+          text: {
+            field: 'value',
+            format: share ? '.1f' : width < 500 ? '.3s' : ',',
+          },
+        },
+      },
+    ],
+  }
+}
+export function ageingChart(width: number): TopLevelSpec {
+  return {
+    ...base(width),
+    height: 210,
+    config: {
+      ...config,
+      axis: {
+        ...config.axis,
+        labelColor: '#d3dde4',
+        titleColor: '#d3dde4',
+        gridColor: '#435568',
+      },
+    },
+    data: { values: ageing },
+    encoding: {
+      x: {
+        field: 'share',
+        type: 'quantitative',
+        scale: { domain: [0, 10] },
+        axis: {
+          title: 'Share of resident population aged 65+ (%)',
+          tickCount: 6,
+        },
+      },
+      y: {
+        field: 'year',
+        type: 'ordinal',
+        axis: { title: null, labelFontSize: 16, ticks: false },
+      },
+      tooltip: [
+        { field: 'year', type: 'ordinal', title: 'Year' },
+        { field: 'share', format: '.2f', title: 'Population aged 65+ (%)' },
+        { field: 'older_residents', format: ',', title: 'Residents aged 65+' },
+        { field: 'residents', format: ',', title: 'Total residents' },
+      ],
+    },
+    layer: [
+      {
+        mark: { type: 'bar', height: 34, cornerRadiusEnd: 2 },
+        encoding: {
+          color: {
+            field: 'year',
+            type: 'nominal',
+            scale: { domain: [2015, 2024], range: [slate, terracotta] },
+            legend: null,
+          },
+        },
+      },
+      {
+        mark: {
+          type: 'text',
+          align: 'left',
+          dx: 12,
+          color: '#ffffff',
+          fontSize: 18,
+          fontWeight: 600,
+        },
+        encoding: { text: { field: 'share', format: '.2f' } },
+      },
+    ],
+  }
 }
 
-export function bumpChart(width:number,reveal=true,selected=''):TopLevelSpec {
- const rows=capacity.flatMap(d=>[0,1].map(side=>({...d,side,rank:side&&reveal?d.combined_rank:d.public_rank,gain:d.public_rank-d.combined_rank,movement:d.state==='Pulau Pinang'?'Pulau Pinang':d.public_rank>d.combined_rank?'Gain':d.public_rank<d.combined_rank?'Loss':'Unchanged',label:d.state.replace('W.P. ','')+` (${d.public_rank-d.combined_rank>0?'+':''}${d.public_rank-d.combined_rank})`})))
- return {...base(width),height:510,data:{values:rows},encoding:{opacity:emphasis(selected),x:{field:'side',type:'quantitative',scale:{domain:[-0.05,width<500?2.7:1.7]},axis:{title:null,values:[0,1],labelExpr:"datum.value === 0 ? 'Public' : 'Combined'",grid:false,labelFontWeight:700}},y:{field:'rank',type:'quantitative',scale:{domain:[16.5,0.5],zero:false},axis:{title:'Rank · 1 = highest rate',values:Array.from({length:16},(_,i)=>i+1),format:'d'}},color:{field:'movement',type:'nominal',scale:{domain:['Gain','Loss','Unchanged','Pulau Pinang'],range:[teal,slate,'#a8a49b',terracotta]},legend:{orient:'bottom',columns:2}},detail:{field:'state'},tooltip:[{field:'state',title:'State / territory'},{field:'public_rank',title:'Public rank'},{field:'combined_rank',title:'Combined rank'},{field:'gain',title:'Places gained (negative = lost)'}]},layer:[{mark:{type:'line',strokeWidth:2.5},encoding:{order:{field:'side'}}},{mark:{type:'point',filled:true,size:55}},{transform:[{filter:'datum.side === 1'}],mark:{type:'text',align:'left',dx:10,fontSize:width<500?10:12},encoding:{text:{field:'label'},color:{value:navy}}}]}
+export function bumpChart(
+  width: number,
+  reveal = true,
+  selected = '',
+): TopLevelSpec {
+  const rows = capacity.flatMap((d) =>
+    [0, 1].map((side) => ({
+      ...d,
+      side,
+      rank: side && reveal ? d.combined_rank : d.public_rank,
+      gain: d.public_rank - d.combined_rank,
+      movement:
+        d.state === 'Pulau Pinang'
+          ? 'Pulau Pinang'
+          : d.public_rank > d.combined_rank
+            ? 'Gain'
+            : d.public_rank < d.combined_rank
+              ? 'Loss'
+              : 'Unchanged',
+      label:
+        d.state.replace('W.P. ', '') +
+        ` (${d.public_rank - d.combined_rank > 0 ? '+' : ''}${d.public_rank - d.combined_rank})`,
+    })),
+  )
+  return {
+    ...base(width),
+    height: 510,
+    data: { values: rows },
+    encoding: {
+      opacity: emphasis(selected),
+      x: {
+        field: 'side',
+        type: 'quantitative',
+        scale: { domain: [-0.05, width < 500 ? 2.7 : 1.7] },
+        axis: {
+          title: null,
+          values: [0, 1],
+          labelExpr: "datum.value === 0 ? 'Public' : 'Combined'",
+          grid: false,
+          labelFontWeight: 700,
+        },
+      },
+      y: {
+        field: 'rank',
+        type: 'quantitative',
+        scale: { domain: [16.5, 0.5], zero: false },
+        axis: {
+          title: 'Rank · 1 = highest rate',
+          values: Array.from({ length: 16 }, (_, i) => i + 1),
+          format: 'd',
+        },
+      },
+      color: {
+        field: 'movement',
+        type: 'nominal',
+        scale: {
+          domain: ['Gain', 'Loss', 'Unchanged', 'Pulau Pinang'],
+          range: [teal, slate, '#a8a49b', terracotta],
+        },
+        legend: { orient: 'bottom', columns: 2 },
+      },
+      detail: { field: 'state' },
+      tooltip: [
+        { field: 'state', title: 'State / territory' },
+        { field: 'public_rank', title: 'Public rank' },
+        { field: 'combined_rank', title: 'Combined rank' },
+        { field: 'gain', title: 'Places gained (negative = lost)' },
+      ],
+    },
+    layer: [
+      {
+        mark: { type: 'line', strokeWidth: 2.5 },
+        encoding: { order: { field: 'side' } },
+      },
+      { mark: { type: 'point', filled: true, size: 55 } },
+      {
+        transform: [{ filter: 'datum.side === 1' }],
+        mark: {
+          type: 'text',
+          align: 'left',
+          dx: 10,
+          fontSize: width < 500 ? 10 : 12,
+        },
+        encoding: { text: { field: 'label' }, color: { value: navy } },
+      },
+    ],
+  }
 }
-export function privateSymbols(width:number,region:string,selected=''):TopLevelSpec {
- const east=['Sabah','Sarawak','W.P. Labuan']
- const visible=(state:string)=>region==='All Malaysia'||(region==='East Malaysia'?east.includes(state):!east.includes(state))
- const filter=region==='All Malaysia'?[]:[{filter:`indexof(${JSON.stringify(east)}, datum.properties.state) ${region==='East Malaysia'?'>=':'<'} 0`}]
- return {...base(width),height:width<500?330:430,projection:{type:'mercator'},layer:[
-  {data:{url:`${import.meta.env.BASE_URL}data/states.geojson`,format:{type:'json',property:'features'}},transform:filter,mark:{type:'geoshape',fill:'#e2e8e2',stroke:'#80938e',strokeWidth:0.8}},
-  {data:{values:privateLocations.filter(d=>visible(d.state)).sort((a,b)=>b.private_beds-a.private_beds)},mark:{type:'circle',color:terracotta,fillOpacity:0.55,stroke:navy,strokeWidth:1},encoding:{opacity:emphasis(selected),strokeWidth:{condition:{test:`datum.state === hoveredState || datum.state === ${JSON.stringify(selected)}`,value:3},value:1},longitude:{field:'longitude',type:'quantitative'},latitude:{field:'latitude',type:'quantitative'},size:{field:'private_beds',type:'quantitative',scale:{type:'linear',domain:[0,7000],range:[0,width<500?1500:3500]},legend:{orient:'bottom',title:'Licensed private hospital beds',values:[1000,3000,6000],symbolOpacity:0.6,titleLimit:280}},tooltip:[{field:'state',title:'State / territory'},{field:'private_beds',format:',',title:'Licensed private hospital beds (2024)'},{field:'private_hospitals',format:',',title:'Licensed private hospitals'}]}}
- ]}
+export function privateSymbols(
+  width: number,
+  region: string,
+  selected = '',
+): TopLevelSpec {
+  const east = ['Sabah', 'Sarawak', 'W.P. Labuan']
+  const visible = (state: string) =>
+    region === 'All Malaysia' ||
+    (region === 'East Malaysia' ? east.includes(state) : !east.includes(state))
+  const filter =
+    region === 'All Malaysia'
+      ? []
+      : [
+          {
+            filter: `indexof(${JSON.stringify(east)}, datum.properties.state) ${region === 'East Malaysia' ? '>=' : '<'} 0`,
+          },
+        ]
+  return {
+    ...base(width),
+    height: width < 500 ? 330 : 430,
+    projection: { type: 'mercator' },
+    layer: [
+      {
+        data: {
+          url: `${import.meta.env.BASE_URL}data/states.geojson`,
+          format: { type: 'json', property: 'features' },
+        },
+        transform: filter,
+        mark: {
+          type: 'geoshape',
+          fill: '#e2e8e2',
+          stroke: '#80938e',
+          strokeWidth: 0.8,
+        },
+      },
+      {
+        data: {
+          values: privateLocations
+            .filter((d) => visible(d.state))
+            .sort((a, b) => b.private_beds - a.private_beds),
+        },
+        mark: {
+          type: 'circle',
+          color: terracotta,
+          fillOpacity: 0.55,
+          stroke: navy,
+          strokeWidth: 1,
+        },
+        encoding: {
+          opacity: emphasis(selected),
+          strokeWidth: {
+            condition: {
+              test: `datum.state === hoveredState || datum.state === ${JSON.stringify(selected)}`,
+              value: 3,
+            },
+            value: 1,
+          },
+          longitude: { field: 'longitude', type: 'quantitative' },
+          latitude: { field: 'latitude', type: 'quantitative' },
+          size: {
+            field: 'private_beds',
+            type: 'quantitative',
+            scale: {
+              type: 'linear',
+              domain: [0, 7000],
+              range: [0, width < 500 ? 1500 : 3500],
+            },
+            legend: {
+              orient: 'bottom',
+              title: 'Licensed private hospital beds',
+              values: [1000, 3000, 6000],
+              symbolOpacity: 0.6,
+              titleLimit: 280,
+            },
+          },
+          tooltip: [
+            { field: 'state', title: 'State / territory' },
+            {
+              field: 'private_beds',
+              format: ',',
+              title: 'Licensed private hospital beds (2024)',
+            },
+            {
+              field: 'private_hospitals',
+              format: ',',
+              title: 'Licensed private hospitals',
+            },
+          ],
+        },
+      },
+    ],
+  }
 }

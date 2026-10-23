@@ -95,3 +95,21 @@ Playwright starts the production preview and checks all 12 charts, quantities, s
 ## Interpretation
 
 Beds describe reported capacity, not affordability, staffing or access. Combined capacity adds public hospital/special-institution beds and licensed private hospital beds. Occupancy is annual and MOH-only. Admissions are episodes with incomplete reporting and broader private-provider coverage. Age structure provides context, not a demand forecast. Detailed source notes accompany the charts.
+
+## Code formatting
+
+Application code, styles, tests and configuration use Prettier with two-space indentation and an 80-character target line width.
+
+```sh
+npm run format
+npm run format:check
+```
+
+Python processing scripts use Black:
+
+```sh
+python -m pip install black==26.10.1
+python -m black scripts
+```
+
+Generated datasets and validation records are excluded from source-code formatting.
