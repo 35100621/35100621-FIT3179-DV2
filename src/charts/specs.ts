@@ -71,7 +71,7 @@ const emphasis = (selected: string, field = 'state') => ({
   ],
   value: selected ? 0.6 : 1,
 })
-export function indexed(width: number, year = 2024): TopLevelSpec {
+export function indexedLineChartSpec(width: number, year = 2024): TopLevelSpec {
   return {
     ...base(width),
     height: 320,
@@ -141,7 +141,7 @@ export function indexed(width: number, year = 2024): TopLevelSpec {
     ],
   }
 }
-export function choropleth(
+export function choroplethMapSpec(
   width: number,
   selected: string,
   region: string,
@@ -221,7 +221,7 @@ export function choropleth(
     },
   }
 }
-export function heatmap(width: number, selected: string): TopLevelSpec {
+export function heatmapSpec(width: number, selected: string): TopLevelSpec {
   return {
     ...base(width),
     height: 448,
@@ -264,7 +264,7 @@ export function heatmap(width: number, selected: string): TopLevelSpec {
     },
   }
 }
-export function connected(
+export function connectedDotChartSpec(
   width: number,
   selected: string,
   sort: string,
@@ -365,7 +365,10 @@ export function connected(
     ],
   }
 }
-export function occupancyPlot(width: number, selected: string): TopLevelSpec {
+export function rankedDotPlotSpec(
+  width: number,
+  selected: string,
+): TopLevelSpec {
   return {
     ...base(width),
     height: 470,
@@ -450,7 +453,10 @@ export function occupancyPlot(width: number, selected: string): TopLevelSpec {
     ],
   }
 }
-export function admissionsBars(width: number, share = false): TopLevelSpec {
+export function admissionsBarChartSpec(
+  width: number,
+  share = false,
+): TopLevelSpec {
   return {
     ...base(width),
     height: 260,
@@ -525,7 +531,7 @@ export function admissionsBars(width: number, share = false): TopLevelSpec {
     ],
   }
 }
-export function ageingChart(width: number): TopLevelSpec {
+export function ageingBarChartSpec(width: number): TopLevelSpec {
   return {
     ...base(width),
     height: 210,
@@ -588,7 +594,7 @@ export function ageingChart(width: number): TopLevelSpec {
   }
 }
 
-export function bumpChart(
+export function bumpChartSpec(
   width: number,
   reveal = true,
   selected = '',
@@ -676,7 +682,7 @@ export function bumpChart(
     ],
   }
 }
-export function privateSymbols(
+export function proportionalSymbolMapSpec(
   width: number,
   region: string,
   selected = '',

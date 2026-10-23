@@ -21,7 +21,10 @@ const base = (width: number) => ({
     legend: { labelColor: '#c6d5d2', titleColor: '#c6d5d2' },
   },
 })
-export function populationPyramid(width: number, year = 2024): TopLevelSpec {
+export function populationPyramidSpec(
+  width: number,
+  year = 2024,
+): TopLevelSpec {
   return {
     ...base(width),
     height: 450,
@@ -79,7 +82,7 @@ export function populationPyramid(width: number, year = 2024): TopLevelSpec {
     },
   }
 }
-export function capacityCartogram(
+export function nonContiguousCartogramSpec(
   width: number,
   selected: string,
   mode: string,
@@ -190,7 +193,7 @@ export function capacityCartogram(
     ],
   }
 }
-export function providerTreemap(width: number): TopLevelSpec {
+export function admissionsTreemapSpec(width: number): TopLevelSpec {
   const rows = admissions.map((d) => ({
     ...d,
     percent_y:

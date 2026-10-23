@@ -1,9 +1,9 @@
 import { useCallback, useContext, useState } from 'react'
 import { VegaChart } from './VegaChart'
 import {
-  capacityCartogram,
-  populationPyramid,
-  providerTreemap,
+  nonContiguousCartogramSpec,
+  populationPyramidSpec,
+  admissionsTreemapSpec,
 } from '../charts/advanced'
 import { StateContext, StateInsight, RegionControl } from './StateInsights'
 import { source, number, fixed, admissions } from '../data'
@@ -14,13 +14,14 @@ function Download({ file }: { file: string }) {
     </a>
   )
 }
-export function CapacityCartogram() {
+export function NonContiguousCartogram() {
   const { selected } = useContext(StateContext)
   const [mode, setMode] = useState('Capacity')
   const [region, setRegion] = useState('All Malaysia')
   const [outlines, setOutlines] = useState(true)
   const spec = useCallback(
-    (w: number) => capacityCartogram(w, selected, mode, region, outlines),
+    (w: number) =>
+      nonContiguousCartogramSpec(w, selected, mode, region, outlines),
     [selected, mode, region, outlines],
   )
   return (
@@ -100,7 +101,10 @@ export function CapacityCartogram() {
 }
 export function PopulationPyramid() {
   const [year, setYear] = useState(2024)
-  const spec = useCallback((w: number) => populationPyramid(w, year), [year])
+  const spec = useCallback(
+    (w: number) => populationPyramidSpec(w, year),
+    [year],
+  )
   return (
     <article>
       <div className="eyebrow">Chart 11 — Population pyramid</div>
@@ -136,7 +140,7 @@ export function PopulationPyramid() {
     </article>
   )
 }
-export function ProviderTreemap() {
+export function AdmissionsTreemap() {
   return (
     <article className="provider-treemap">
       <div className="eyebrow">Chart 12 — Treemap</div>
@@ -145,7 +149,7 @@ export function ProviderTreemap() {
         Rectangle area = reported admissions. Labels show percentage of
         4,270,356 reported episodes, with no adjustment for missing reports.
       </p>
-      <Vga />
+      <AdmissionsTreemapView />
       <ul className="provider-key">
         {admissions.map((d, i) => (
           <li key={d.provider}>
@@ -173,12 +177,12 @@ export function ProviderTreemap() {
     </article>
   )
 }
-function Vga() {
+function AdmissionsTreemapView() {
   return (
     <VegaChart
       id="provider-treemap"
       label="Treemap of reported admissions by four provider groups in 2024"
-      spec={providerTreemap}
+      spec={admissionsTreemapSpec}
     />
   )
 }

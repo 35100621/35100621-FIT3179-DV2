@@ -113,3 +113,24 @@ python -m black scripts
 ```
 
 Generated datasets and validation records are excluded from source-code formatting.
+
+## Chart function names
+
+React components use PascalCase. Matching Vega-Lite specification functions use camelCase with a `Spec` suffix.
+
+| Visualisation | React component | Vega-Lite specification |
+|---|---|---|
+| Indexed line chart | `IndexedLineChart` | `indexedLineChartSpec` |
+| Choropleth map | `ChoroplethMap` | `choroplethMapSpec` |
+| Heatmap | `Heatmap` | `heatmapSpec` |
+| Proportional-symbol map | `ProportionalSymbolMap` | `proportionalSymbolMapSpec` |
+| Connected-dot chart | `ConnectedDotChart` | `connectedDotChartSpec` |
+| Bump chart | `BumpChart` | `bumpChartSpec` |
+| Ranked dot plot | `RankedDotPlot` | `rankedDotPlotSpec` |
+| Admissions horizontal bar chart | `AdmissionsBarChart` | `admissionsBarChartSpec` |
+| Ageing horizontal bar chart | `AgeingBarChart` | `ageingBarChartSpec` |
+| Non-contiguous cartogram | `NonContiguousCartogram` | `nonContiguousCartogramSpec` |
+| Population pyramid | `PopulationPyramid` | `populationPyramidSpec` |
+| Admissions treemap | `AdmissionsTreemap` | `admissionsTreemapSpec` |
+
+Components are in `src/components/StoryCharts.tsx` and `AdvancedCharts.tsx`; specifications are in `src/charts/specs.ts` and `advanced.ts`. The two bar charts retain subject prefixes to distinguish them.

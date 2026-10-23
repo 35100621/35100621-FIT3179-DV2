@@ -81,9 +81,12 @@ function DataTable({
     </details>
   )
 }
-export function IndexedChart() {
+export function IndexedLineChart() {
   const [year, setYear] = useState(2024)
-  const spec = useCallback((w: number) => specs.indexed(w, year), [year])
+  const spec = useCallback(
+    (w: number) => specs.indexedLineChartSpec(w, year),
+    [year],
+  )
   return (
     <div className="chart indexed-chart">
       <div className="chart-meta">
@@ -149,11 +152,11 @@ export function IndexedChart() {
     </div>
   )
 }
-export function Choropleth() {
+export function ChoroplethMap() {
   const { selected } = useContext(StateContext)
   const [region, setRegion] = useState('All Malaysia')
   const spec = useCallback(
-    (w: number) => specs.choropleth(w, selected, region),
+    (w: number) => specs.choroplethMapSpec(w, selected, region),
     [selected, region],
   )
   const row = current.find((d) => d.state === selected)
@@ -237,7 +240,7 @@ export function Choropleth() {
 export function Heatmap() {
   const { selected } = useContext(StateContext)
   const spec = useCallback(
-    (w: number) => specs.heatmap(w, selected),
+    (w: number) => specs.heatmapSpec(w, selected),
     [selected],
   )
   return (
@@ -278,12 +281,12 @@ export function Heatmap() {
     </div>
   )
 }
-export function ConnectedDots() {
+export function ConnectedDotChart() {
   const { selected } = useContext(StateContext)
   const [sort, setSort] = useState('Combined capacity')
   const [combined, setCombined] = useState(true)
   const spec = useCallback(
-    (w: number) => specs.connected(w, selected, sort, combined),
+    (w: number) => specs.connectedDotChartSpec(w, selected, sort, combined),
     [selected, sort, combined],
   )
   const row = capacity.find((d) => d.state === selected)
@@ -390,10 +393,10 @@ export function ConnectedDots() {
     </div>
   )
 }
-export function OccupancyPlot() {
+export function RankedDotPlot() {
   const { selected } = useContext(StateContext)
   const spec = useCallback(
-    (w: number) => specs.occupancyPlot(w, selected),
+    (w: number) => specs.rankedDotPlotSpec(w, selected),
     [selected],
   )
   return (
@@ -439,10 +442,10 @@ export function OccupancyPlot() {
     </div>
   )
 }
-export function AdmissionsBars() {
+export function AdmissionsBarChart() {
   const [share, setShare] = useState(false)
   const spec = useCallback(
-    (w: number) => specs.admissionsBars(w, share),
+    (w: number) => specs.admissionsBarChartSpec(w, share),
     [share],
   )
   return (
@@ -496,7 +499,7 @@ export function AdmissionsBars() {
     </div>
   )
 }
-export function AgeVisual() {
+export function AgeingBarChart() {
   return (
     <div className="age-visual">
       <div className="age-chart-copy">
@@ -522,7 +525,7 @@ export function AgeVisual() {
         <VegaChart
           id="ageing"
           label="Share of Malaysia's resident population aged 65 and over in 2015 and 2024"
-          spec={specs.ageingChart}
+          spec={specs.ageingBarChartSpec}
         />
         <Sources>
           Source:{' '}
@@ -550,7 +553,7 @@ export function BumpChart() {
   const { selected } = useContext(StateContext)
   const [reveal, setReveal] = useState(true)
   const spec = useCallback(
-    (w: number) => specs.bumpChart(w, reveal, selected),
+    (w: number) => specs.bumpChartSpec(w, reveal, selected),
     [reveal, selected],
   )
   return (
@@ -604,11 +607,11 @@ export function BumpChart() {
     </div>
   )
 }
-export function PrivateSymbolMap() {
+export function ProportionalSymbolMap() {
   const { selected } = useContext(StateContext)
   const [region, setRegion] = useState('All Malaysia')
   const spec = useCallback(
-    (w: number) => specs.privateSymbols(w, region, selected),
+    (w: number) => specs.proportionalSymbolMapSpec(w, region, selected),
     [region, selected],
   )
   const focus = capacity.filter((d) =>

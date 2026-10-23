@@ -1,21 +1,21 @@
 import { StateExplorer } from './components/StateInsights'
 import { useEffect, useState } from 'react'
 import {
-  CapacityCartogram,
+  NonContiguousCartogram,
   PopulationPyramid,
-  ProviderTreemap,
+  AdmissionsTreemap,
 } from './components/AdvancedCharts'
 import {
   StateContext,
-  IndexedChart,
-  Choropleth,
+  IndexedLineChart,
+  ChoroplethMap,
   Heatmap,
-  PrivateSymbolMap,
-  ConnectedDots,
+  ProportionalSymbolMap,
+  ConnectedDotChart,
   BumpChart,
-  OccupancyPlot,
-  AdmissionsBars,
-  AgeVisual,
+  RankedDotPlot,
+  AdmissionsBarChart,
+  AgeingBarChart,
 } from './components/StoryCharts'
 import { useStoryReveals } from './components/StoryMotion'
 import { source } from './data'
@@ -180,7 +180,7 @@ function App() {
             copy="Public hospital beds grew 15.44% between 2015 and 2024, while population grew 9.19%. The national gain is real, yet seven of sixteen states and territories saw their public-bed rate fall. Growth alone establishes neither equal distribution nor adequate access."
           />
           <div className="line-wrap">
-            <IndexedChart />
+            <IndexedLineChart />
           </div>
           <div className="margin-note">
             <span>Read carefully</span>
@@ -200,7 +200,7 @@ function App() {
           <StateExplorer />
           <div className="map-spread">
             <div className="map-main">
-              <Choropleth />
+              <ChoroplethMap />
             </div>
             <div className="heatmap-panel">
               <Heatmap />
@@ -227,7 +227,7 @@ function App() {
                 locations or affordable access.
               </p>
             </div>
-            <PrivateSymbolMap />
+            <ProportionalSymbolMap />
           </div>
           <p className="comparison-bridge">
             First compare how much capacity is added. Then follow the same state
@@ -236,7 +236,7 @@ function App() {
           </p>
           <div className="comparison-spread">
             <div className="dot-panel">
-              <ConnectedDots />
+              <ConnectedDotChart />
             </div>
             <div className="bump-panel">
               <BumpChart />
@@ -257,7 +257,7 @@ function App() {
               <div className="blanket" />
               <div className="bed-frame" />
             </div>
-            <OccupancyPlot />
+            <RankedDotPlot />
           </div>
         </section>
 
@@ -269,10 +269,10 @@ function App() {
           />
           <div className="activity-spread">
             <div className="bars-card">
-              <AdmissionsBars />
+              <AdmissionsBarChart />
             </div>
             <div className="treemap-card">
-              <ProviderTreemap />
+              <AdmissionsTreemap />
             </div>
           </div>
         </section>
@@ -285,14 +285,14 @@ function App() {
           />
           <div className="future-spread">
             <div className="age-bars">
-              <AgeVisual />
+              <AgeingBarChart />
             </div>
             <div className="pyramid-card">
               <PopulationPyramid />
             </div>
           </div>
           <div className="cartogram-wrap">
-            <CapacityCartogram />
+            <NonContiguousCartogram />
           </div>
         </section>
 
