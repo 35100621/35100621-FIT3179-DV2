@@ -594,7 +594,7 @@ export function ageingBarChartSpec(width: number): TopLevelSpec {
   }
 }
 
-export function bumpChartSpec(
+export function rankSlopeChartSpec(
   width: number,
   reveal = true,
   selected = '',

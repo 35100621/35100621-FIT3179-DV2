@@ -12,7 +12,7 @@ import {
   Heatmap,
   ProportionalSymbolMap,
   ConnectedDotChart,
-  BumpChart,
+  RankSlopeChart,
   RankedDotPlot,
   AdmissionsBarChart,
   AgeingBarChart,
@@ -238,8 +238,8 @@ function App() {
             <div className="dot-panel">
               <ConnectedDotChart />
             </div>
-            <div className="bump-panel">
-              <BumpChart />
+            <div className="rank-slope-panel">
+              <RankSlopeChart />
             </div>
           </div>
         </section>

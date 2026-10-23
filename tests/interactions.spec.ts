@@ -101,20 +101,20 @@ test('linked state investigation, geographic reference and responsive controls',
     ['choropleth', '.mark-shape', 'Sarawak'],
     ['private-symbols', '.mark-symbol', 'Sabah'],
     ['connected', '.mark-symbol', 'Pulau Pinang'],
-    ['bump', '.mark-line', 'Pulau Pinang'],
+    ['rank-slope', '.mark-line', 'Pulau Pinang'],
     ['heatmap', '.mark-rect', 'Perak'],
   ]) {
     const candidates = page.locator(`[data-chart=${chart}] ${mark} path`)
     const target =
-      chart === 'bump'
+      chart === 'rank-slope'
         ? candidates.nth(8)
         : page
             .locator(
               `[data-chart=${chart}] ${mark} path[aria-label*="${state}"]`,
             )
             .first()
-    if (chart === 'bump') {
-      // Bump line paths may not have aria labels; inspect their data-bound visible tooltip.
+    if (chart === 'rank-slope') {
+      // Rank slope line paths may not have aria labels; inspect their data-bound visible tooltip.
       await candidates.first().click({ force: true })
       await expect(page.locator('[data-insight=rank]')).toBeVisible()
     } else {

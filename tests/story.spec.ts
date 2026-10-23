@@ -19,12 +19,12 @@ test('twelve charts, exact values, interactions and responsive production page',
   await page.keyboard.press('Enter')
   await expect(page.locator('main .section-head')).toHaveCount(6)
   await expect(page.locator('.chart-error')).toHaveCount(0)
-  await expect(page.locator('[data-chart=bump] .mark-line path')).toHaveCount(
-    16,
-  )
+  await expect(
+    page.locator('[data-chart=rank-slope] .mark-line path'),
+  ).toHaveCount(16)
   await expect(
     page.locator(
-      '[data-chart=bump] .mark-symbol path[aria-label*="Public rank:"]',
+      '[data-chart=rank-slope] .mark-symbol path[aria-label*="Public rank:"]',
     ),
   ).toHaveCount(32)
   await expect(
@@ -143,7 +143,7 @@ test('twelve charts, exact values, interactions and responsive production page',
     path: `test-results/${testInfo.project.name}-verified.png`,
     fullPage: true,
   })
-  for (const id of ['bump', 'private-symbols'])
+  for (const id of ['rank-slope', 'private-symbols'])
     await page
       .locator(`[data-chart=${id}]`)
       .screenshot({ path: `test-results/${testInfo.project.name}-${id}.png` })

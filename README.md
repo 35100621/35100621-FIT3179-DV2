@@ -125,7 +125,7 @@ React components use PascalCase. Matching Vega-Lite specification functions use 
 | Heatmap | `Heatmap` | `heatmapSpec` |
 | Proportional-symbol map | `ProportionalSymbolMap` | `proportionalSymbolMapSpec` |
 | Connected-dot chart | `ConnectedDotChart` | `connectedDotChartSpec` |
-| Bump chart | `BumpChart` | `bumpChartSpec` |
+| Rank slope chart | `RankSlopeChart` | `rankSlopeChartSpec` |
 | Ranked dot plot | `RankedDotPlot` | `rankedDotPlotSpec` |
 | Admissions horizontal bar chart | `AdmissionsBarChart` | `admissionsBarChartSpec` |
 | Ageing horizontal bar chart | `AgeingBarChart` | `ageingBarChartSpec` |

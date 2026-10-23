@@ -549,11 +549,11 @@ export function AgeingBarChart() {
   )
 }
 
-export function BumpChart() {
+export function RankSlopeChart() {
   const { selected } = useContext(StateContext)
   const [reveal, setReveal] = useState(true)
   const spec = useCallback(
-    (w: number) => specs.bumpChartSpec(w, reveal, selected),
+    (w: number) => specs.rankSlopeChartSpec(w, reveal, selected),
     [reveal, selected],
   )
   return (
@@ -577,7 +577,7 @@ export function BumpChart() {
         </button>
       </div>
       <VegaChart
-        id="bump"
+        id="rank-slope"
         label="Public versus combined bed-rate rankings for all sixteen states; Pulau Pinang rises from fifteenth to fourth"
         spec={spec}
       />

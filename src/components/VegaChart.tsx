@@ -40,7 +40,7 @@ export function VegaChart({ id, label, spec }: Props) {
       'indexed',
       'private-symbols',
       'connected',
-      'bump',
+      'rank-slope',
       'ageing',
     ].includes(id)
     const themed = JSON.parse(

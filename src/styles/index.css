@@ -329,7 +329,7 @@ h3 {
   margin-top: 2rem;
 }
 .line-chart text,
-.bump text {
+.rank-slope text {
   fill: currentColor;
   font: 10px var(--mono);
 }
@@ -674,7 +674,7 @@ h3 {
   gap: 2rem;
 }
 .dot-panel,
-.bump-panel {
+.rank-slope-panel {
   border: 1px solid #ffffff27;
   padding: 2.5rem;
   position: relative;
@@ -792,34 +792,34 @@ h3 {
   text-transform: uppercase;
   cursor: pointer;
 }
-.bump {
+.rank-slope {
   width: 100%;
   height: 520px;
 }
-.bump path {
+.rank-slope path {
   fill: none;
   stroke: #74868b;
   stroke-width: 1.5;
   opacity: 0.34;
   transition: 0.8s;
 }
-.bump circle {
+.rank-slope circle {
   fill: #74868b;
   transition: 0.8s;
 }
-.bump g text {
+.rank-slope g text {
   opacity: 0.55;
   transition: 0.3s;
 }
-.bump g.focus path {
+.rank-slope g.focus path {
   stroke: var(--coral);
   stroke-width: 4;
   opacity: 1;
 }
-.bump g.focus circle {
+.rank-slope g.focus circle {
   fill: var(--coral);
 }
-.bump g.focus text {
+.rank-slope g.focus text {
   fill: var(--coral);
   opacity: 1;
 }
@@ -1353,7 +1353,7 @@ h3 {
   .map-main,
   .cartogram-wrap,
   .dot-panel,
-  .bump-panel,
+  .rank-slope-panel,
   .occupancy-chart,
   .bars-card,
   .treemap-card,
@@ -1573,7 +1573,7 @@ h3 {
   overflow: visible;
 }
 .line-chart text,
-.bump text {
+.rank-slope text {
   font-size: 12px;
 }
 .line-label {
@@ -1742,7 +1742,7 @@ h3 {
   gap: 24px;
 }
 .dot-panel,
-.bump-panel {
+.rank-slope-panel {
   padding: var(--chart-pad);
   display: flex;
   flex-direction: column;
@@ -1766,10 +1766,10 @@ h3 {
   top: 17px;
 }
 .dot-panel .chart-note,
-.bump-panel .chart-note {
+.rank-slope-panel .chart-note {
   margin-top: auto;
 }
-.bump {
+.rank-slope {
   height: 510px;
   overflow: visible;
 }
@@ -2257,7 +2257,7 @@ h3 {
     inset: auto;
     margin: -60px 0 20px auto;
   }
-  .bump {
+  .rank-slope {
     height: auto;
   }
   .bed-illustration {
@@ -2319,7 +2319,7 @@ main {
 .map-main,
 .heatmap-panel,
 .dot-panel,
-.bump-panel,
+.rank-slope-panel,
 .bars-card,
 .treemap-card,
 .pyramid-card,
@@ -2697,7 +2697,7 @@ td {
   }
   .map-main,
   .dot-panel,
-  .bump-panel,
+  .rank-slope-panel,
   .bars-card,
   .treemap-card,
   .age-bars,
