@@ -1,0 +1,496 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "width": 900,
+  "background": "transparent",
+  "autosize": {
+    "type": "fit-x",
+    "contains": "padding",
+    "resize": true
+  },
+  "config": {
+    "font": "DM Sans",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": "normal",
+      "labelColor": "#56636d",
+      "titleColor": "#56636d",
+      "gridColor": "#e7e4de",
+      "domain": false,
+      "tickColor": "#d6d3cb",
+      "labelPadding": 9,
+      "titlePadding": 15
+    },
+    "legend": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "labelColor": "#56636d",
+      "titleColor": "#56636d",
+      "orient": "top",
+      "direction": "horizontal",
+      "title": null
+    },
+    "text": {
+      "font": "DM Sans"
+    }
+  },
+  "height": 470,
+  "layer": [
+    {
+      "data": {
+        "values": [
+          {
+            "national": 72.61
+          }
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "strokeDash": [
+          5,
+          4
+        ],
+        "color": "#D77750",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "x": {
+          "field": "national",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "state": "Perlis",
+            "year": 2024,
+            "occupancy": 78.09,
+            "official_beds": 517,
+            "operational_beds": 512,
+            "national_occupancy": 72.61
+          },
+          {
+            "state": "Kedah",
+            "year": 2024,
+            "occupancy": 81.92,
+            "official_beds": 2919,
+            "operational_beds": 2919,
+            "national_occupancy": 72.61
+          },
+          {
+            "state": "Pulau Pinang",
+            "year": 2024,
+            "occupancy": 77.76,
+            "official_beds": 2129,
+            "operational_beds": 2129,
+            "national_occupancy": 72.61
+          },
+          {
+            "state": "Perak",
+            "year": 2024,
+            "occupancy": 62.64,
+            "official_beds": 5871,
+            "operational_beds": 5428,
+            "national_occupancy": 72.61
+          },
+          {
+            "state": "Selangor",
+            "year": 2024,
+            "occupancy": 78.25,
+            "official_beds": 7468,
+            "operational_beds": 6832,
+            "national_occupancy": 72.61
+          },
+          {
+            "state": "W.P. Kuala Lumpur",
+            "year": 2024,
+            "occupancy": 78.72,
+            "official_beds": 2616,
+            "operational_beds": 2492,
+            "national_occupancy": 72.61
+          },
+          {
+            "state": "W.P. Putrajaya",
+            "year": 2024,
+            "occupancy": 67.48,
+            "official_beds": 844,
+            "operational_beds": 790,
+            "national_occupancy": 72.61
+          },
+          {
+            "state": "W.P. Labuan",
+            "year": 2024,
+            "occupancy": 60.68,
+            "official_beds": 122,
+            "operational_beds": 122,
+            "national_occupancy": 72.61
+          },
+          {
+            "state": "Negeri Sembilan",
+            "year": 2024,
+            "occupancy": 80.67,
+            "official_beds": 1941,
+            "operational_beds": 1678,
+            "national_occupancy": 72.61
+          },
+          {
+            "state": "Melaka",
+            "year": 2024,
+            "occupancy": 75.34,
+            "official_beds": 1349,
+            "operational_beds": 1351,
+            "national_occupancy": 72.61
+          },
+          {
+            "state": "Johor",
+            "year": 2024,
+            "occupancy": 79.58,
+            "official_beds": 5448,
+            "operational_beds": 5211,
+            "national_occupancy": 72.61
+          },
+          {
+            "state": "Pahang",
+            "year": 2024,
+            "occupancy": 66.3,
+            "official_beds": 2356,
+            "operational_beds": 2292,
+            "national_occupancy": 72.61
+          },
+          {
+            "state": "Terengganu",
+            "year": 2024,
+            "occupancy": 74.05,
+            "official_beds": 1871,
+            "operational_beds": 1843,
+            "national_occupancy": 72.61
+          },
+          {
+            "state": "Kelantan",
+            "year": 2024,
+            "occupancy": 69.31,
+            "official_beds": 2158,
+            "operational_beds": 2158,
+            "national_occupancy": 72.61
+          },
+          {
+            "state": "Sabah",
+            "year": 2024,
+            "occupancy": 64.18,
+            "official_beds": 5057,
+            "operational_beds": 4669,
+            "national_occupancy": 72.61
+          },
+          {
+            "state": "Sarawak",
+            "year": 2024,
+            "occupancy": 65.31,
+            "official_beds": 4189,
+            "operational_beds": 4144,
+            "national_occupancy": 72.61
+          }
+        ]
+      },
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "color": "#172B42",
+        "size": 90
+      },
+      "encoding": {
+        "y": {
+          "field": "state",
+          "type": "nominal",
+          "sort": [
+            "Kedah",
+            "Negeri Sembilan",
+            "Johor",
+            "W.P. Kuala Lumpur",
+            "Selangor",
+            "Perlis",
+            "Pulau Pinang",
+            "Melaka",
+            "Terengganu",
+            "Kelantan",
+            "W.P. Putrajaya",
+            "Pahang",
+            "Sarawak",
+            "Sabah",
+            "Perak",
+            "W.P. Labuan"
+          ],
+          "axis": {
+            "title": null,
+            "labelLimit": 190,
+            "labelFontSize": 12,
+            "ticks": false,
+            "labelExpr": "replace(datum.label, 'W.P. ', '')"
+          }
+        },
+        "x": {
+          "field": "occupancy",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              100
+            ]
+          },
+          "axis": {
+            "title": "Reported annual bed occupancy (%)",
+            "tickCount": 11
+          }
+        },
+        "opacity": {
+          "condition": [
+            {
+              "test": "datum[\"state\"] === hoveredState || datum[\"state\"] === \"\"",
+              "value": 1
+            },
+            {
+              "test": "hoveredState !== ''",
+              "value": 0.65
+            }
+          ],
+          "value": 1
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "title": "State / federal territory"
+          },
+          {
+            "field": "occupancy",
+            "format": ".2f",
+            "title": "Annual MOH occupancy (%)"
+          },
+          {
+            "field": "operational_beds",
+            "format": ",",
+            "title": "Operational MOH beds"
+          },
+          {
+            "field": "national_occupancy",
+            "format": ".2f",
+            "title": "National MOH occupancy (%)"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "state": "Perlis",
+            "year": 2024,
+            "occupancy": 78.09,
+            "official_beds": 517,
+            "operational_beds": 512,
+            "national_occupancy": 72.61
+          },
+          {
+            "state": "Kedah",
+            "year": 2024,
+            "occupancy": 81.92,
+            "official_beds": 2919,
+            "operational_beds": 2919,
+            "national_occupancy": 72.61
+          },
+          {
+            "state": "Pulau Pinang",
+            "year": 2024,
+            "occupancy": 77.76,
+            "official_beds": 2129,
+            "operational_beds": 2129,
+            "national_occupancy": 72.61
+          },
+          {
+            "state": "Perak",
+            "year": 2024,
+            "occupancy": 62.64,
+            "official_beds": 5871,
+            "operational_beds": 5428,
+            "national_occupancy": 72.61
+          },
+          {
+            "state": "Selangor",
+            "year": 2024,
+            "occupancy": 78.25,
+            "official_beds": 7468,
+            "operational_beds": 6832,
+            "national_occupancy": 72.61
+          },
+          {
+            "state": "W.P. Kuala Lumpur",
+            "year": 2024,
+            "occupancy": 78.72,
+            "official_beds": 2616,
+            "operational_beds": 2492,
+            "national_occupancy": 72.61
+          },
+          {
+            "state": "W.P. Putrajaya",
+            "year": 2024,
+            "occupancy": 67.48,
+            "official_beds": 844,
+            "operational_beds": 790,
+            "national_occupancy": 72.61
+          },
+          {
+            "state": "W.P. Labuan",
+            "year": 2024,
+            "occupancy": 60.68,
+            "official_beds": 122,
+            "operational_beds": 122,
+            "national_occupancy": 72.61
+          },
+          {
+            "state": "Negeri Sembilan",
+            "year": 2024,
+            "occupancy": 80.67,
+            "official_beds": 1941,
+            "operational_beds": 1678,
+            "national_occupancy": 72.61
+          },
+          {
+            "state": "Melaka",
+            "year": 2024,
+            "occupancy": 75.34,
+            "official_beds": 1349,
+            "operational_beds": 1351,
+            "national_occupancy": 72.61
+          },
+          {
+            "state": "Johor",
+            "year": 2024,
+            "occupancy": 79.58,
+            "official_beds": 5448,
+            "operational_beds": 5211,
+            "national_occupancy": 72.61
+          },
+          {
+            "state": "Pahang",
+            "year": 2024,
+            "occupancy": 66.3,
+            "official_beds": 2356,
+            "operational_beds": 2292,
+            "national_occupancy": 72.61
+          },
+          {
+            "state": "Terengganu",
+            "year": 2024,
+            "occupancy": 74.05,
+            "official_beds": 1871,
+            "operational_beds": 1843,
+            "national_occupancy": 72.61
+          },
+          {
+            "state": "Kelantan",
+            "year": 2024,
+            "occupancy": 69.31,
+            "official_beds": 2158,
+            "operational_beds": 2158,
+            "national_occupancy": 72.61
+          },
+          {
+            "state": "Sabah",
+            "year": 2024,
+            "occupancy": 64.18,
+            "official_beds": 5057,
+            "operational_beds": 4669,
+            "national_occupancy": 72.61
+          },
+          {
+            "state": "Sarawak",
+            "year": 2024,
+            "occupancy": 65.31,
+            "official_beds": 4189,
+            "operational_beds": 4144,
+            "national_occupancy": 72.61
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 10,
+        "fontSize": 11,
+        "color": "#172B42"
+      },
+      "encoding": {
+        "y": {
+          "field": "state",
+          "type": "nominal",
+          "sort": [
+            "Kedah",
+            "Negeri Sembilan",
+            "Johor",
+            "W.P. Kuala Lumpur",
+            "Selangor",
+            "Perlis",
+            "Pulau Pinang",
+            "Melaka",
+            "Terengganu",
+            "Kelantan",
+            "W.P. Putrajaya",
+            "Pahang",
+            "Sarawak",
+            "Sabah",
+            "Perak",
+            "W.P. Labuan"
+          ],
+          "axis": {
+            "title": null,
+            "labelLimit": 190,
+            "labelFontSize": 12,
+            "ticks": false,
+            "labelExpr": "replace(datum.label, 'W.P. ', '')"
+          }
+        },
+        "x": {
+          "field": "occupancy",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "occupancy",
+          "format": ".2f"
+        },
+        "opacity": {
+          "condition": [
+            {
+              "test": "datum[\"state\"] === hoveredState || datum[\"state\"] === \"\"",
+              "value": 1
+            },
+            {
+              "test": "hoveredState !== ''",
+              "value": 0.65
+            }
+          ],
+          "value": 1
+        }
+      }
+    }
+  ],
+  "params": [
+    {
+      "name": "hoveredState",
+      "value": ""
+    }
+  ],
+  "usermeta": {
+    "export": {
+      "generator": "rankedDotPlotSpec",
+      "arguments": [
+        900,
+        ""
+      ],
+      "chartId": "occupancy",
+      "note": "Shared state selection and detail panel require React. Hover emphasis is driven by the website; hoveredState starts empty. Tooltip definitions are retained. Width is a fixed snapshot; page layout and fonts are supplied by the host."
+    }
+  }
+}

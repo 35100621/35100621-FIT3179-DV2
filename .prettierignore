@@ -6,3 +6,4 @@ docs/validation/
 package-lock.json
 test-results/
 playwright-report/
+public/specs/*.vl.json

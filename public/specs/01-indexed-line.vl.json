@@ -1,0 +1,335 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "width": 900,
+  "background": "transparent",
+  "autosize": {
+    "type": "fit-x",
+    "contains": "padding",
+    "resize": true
+  },
+  "config": {
+    "font": "DM Sans",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": "normal",
+      "labelColor": "#c6d5d2",
+      "titleColor": "#c6d5d2",
+      "gridColor": "#3b5155",
+      "domain": false,
+      "tickColor": "#3b5155",
+      "labelPadding": 9,
+      "titlePadding": 15
+    },
+    "legend": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "labelColor": "#c6d5d2",
+      "titleColor": "#c6d5d2",
+      "orient": "top",
+      "direction": "horizontal",
+      "title": null
+    },
+    "text": {
+      "font": "DM Sans"
+    }
+  },
+  "height": 320,
+  "data": {
+    "values": [
+      {
+        "year": 2015,
+        "series": "Public hospital beds",
+        "index": 100,
+        "count": 45087
+      },
+      {
+        "year": 2015,
+        "series": "Population",
+        "index": 100,
+        "count": 31186100
+      },
+      {
+        "year": 2016,
+        "series": "Public hospital beds",
+        "index": 101.310799121698,
+        "count": 45678
+      },
+      {
+        "year": 2016,
+        "series": "Population",
+        "index": 101.43461349768,
+        "count": 31633500
+      },
+      {
+        "year": 2017,
+        "series": "Public hospital beds",
+        "index": 102.144742386941,
+        "count": 46054
+      },
+      {
+        "year": 2017,
+        "series": "Population",
+        "index": 102.682284735828,
+        "count": 32022600
+      },
+      {
+        "year": 2018,
+        "series": "Public hospital beds",
+        "index": 103.380131745292,
+        "count": 46611
+      },
+      {
+        "year": 2018,
+        "series": "Population",
+        "index": 103.835683205018,
+        "count": 32382300
+      },
+      {
+        "year": 2019,
+        "series": "Public hospital beds",
+        "index": 104.216292944751,
+        "count": 46988
+      },
+      {
+        "year": 2019,
+        "series": "Population",
+        "index": 104.286845742174,
+        "count": 32523000
+      },
+      {
+        "year": 2020,
+        "series": "Public hospital beds",
+        "index": 107.137312307317,
+        "count": 48305
+      },
+      {
+        "year": 2020,
+        "series": "Population",
+        "index": 104.044430050567,
+        "count": 32447400
+      },
+      {
+        "year": 2021,
+        "series": "Public hospital beds",
+        "index": 110.410983210238,
+        "count": 49781
+      },
+      {
+        "year": 2021,
+        "series": "Population",
+        "index": 104.45775521787,
+        "count": 32576300
+      },
+      {
+        "year": 2022,
+        "series": "Public hospital beds",
+        "index": 110.863441790317,
+        "count": 49985
+      },
+      {
+        "year": 2022,
+        "series": "Population",
+        "index": 104.848313832124,
+        "count": 32698100
+      },
+      {
+        "year": 2023,
+        "series": "Public hospital beds",
+        "index": 113.336438441236,
+        "count": 51100
+      },
+      {
+        "year": 2023,
+        "series": "Population",
+        "index": 107.104767829257,
+        "count": 33401800
+      },
+      {
+        "year": 2024,
+        "series": "Public hospital beds",
+        "index": 115.439040078071,
+        "count": 52048
+      },
+      {
+        "year": 2024,
+        "series": "Population",
+        "index": 109.189991695018,
+        "count": 34052100
+      }
+    ]
+  },
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "quantitative",
+      "scale": {
+        "domain": [
+          2015,
+          2024
+        ]
+      },
+      "axis": {
+        "title": null,
+        "format": "d",
+        "values": [
+          2015,
+          2016,
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "grid": false
+      }
+    },
+    "y": {
+      "field": "index",
+      "type": "quantitative",
+      "scale": {
+        "domain": [
+          98,
+          118
+        ],
+        "zero": false
+      },
+      "axis": {
+        "title": "Index · 2015 = 100",
+        "values": [
+          100,
+          105,
+          110,
+          115
+        ]
+      }
+    },
+    "color": {
+      "field": "series",
+      "type": "nominal",
+      "scale": {
+        "domain": [
+          "Public hospital beds",
+          "Population"
+        ],
+        "range": [
+          "#f36c4f",
+          "#9fc6ae"
+        ]
+      },
+      "legend": null
+    },
+    "tooltip": [
+      {
+        "field": "year",
+        "type": "ordinal",
+        "title": "Year"
+      },
+      {
+        "field": "series",
+        "title": "Series"
+      },
+      {
+        "field": "index",
+        "format": ".2f",
+        "title": "Index (2015 = 100)"
+      },
+      {
+        "field": "count",
+        "format": ",",
+        "title": "Beds / residents"
+      }
+    ]
+  },
+  "layer": [
+    {
+      "data": {
+        "values": [
+          {
+            "year": 2024
+          }
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "color": "#e8b44e",
+        "strokeDash": [
+          4,
+          4
+        ]
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "quantitative"
+        },
+        "y": {
+          "value": 0
+        },
+        "y2": {
+          "value": 320
+        },
+        "color": {
+          "value": "#e8b44e"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 3
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 52
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.year === 2024"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "dx": -7,
+        "dy": -15,
+        "fontWeight": 700,
+        "fontSize": 14
+      },
+      "encoding": {
+        "text": {
+          "field": "index",
+          "format": ".2f"
+        }
+      }
+    }
+  ],
+  "params": [
+    {
+      "name": "hoveredState",
+      "value": ""
+    }
+  ],
+  "usermeta": {
+    "export": {
+      "generator": "indexedLineChartSpec",
+      "arguments": [
+        900,
+        2024
+      ],
+      "chartId": "indexed",
+      "note": "Year slider and year readout require React. Hover emphasis is driven by the website; hoveredState starts empty. Tooltip definitions are retained. Width is a fixed snapshot; page layout and fonts are supplied by the host."
+    }
+  }
+}

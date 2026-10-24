@@ -10,8 +10,12 @@
     "typecheck": "tsc --noEmit",
     "test": "playwright test",
     "prepare:data": "python3 scripts/prepare_data.py && python3 scripts/prepare_private_locations.py && python3 scripts/prepare_population.py && python3 scripts/prepare_layouts.py",
-    "format": "prettier --write \"src/**/*.{ts,tsx,css}\" \"tests/**/*.ts\" \"*.{ts,json,html}\" \".github/workflows/*.yml\"",
-    "format:check": "prettier --check \"src/**/*.{ts,tsx,css}\" \"tests/**/*.ts\" \"*.{ts,json,html}\" \".github/workflows/*.yml\""
+    "format": "prettier --write \"scripts/**/*.mjs\" \"src/**/*.{ts,tsx,css}\" \"tests/**/*.ts\" \"*.{ts,json,html}\" \".github/workflows/*.yml\"",
+    "format:check": "prettier --check \"scripts/**/*.mjs\" \"src/**/*.{ts,tsx,css}\" \"tests/**/*.ts\" \"*.{ts,json,html}\" \".github/workflows/*.yml\"",
+    "export:specs": "node scripts/export-specs.mjs",
+    "export:specs:check": "node scripts/export-specs.mjs --check",
+    "prebuild": "npm run export:specs",
+    "test:specs": "node --test scripts/tests/export-specs.test.mjs"
   },
   "dependencies": {
     "@fontsource-variable/fraunces": "^5.2.8",
@@ -27,6 +31,7 @@
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^5.0.4",
+    "ajv": "8.20.0",
     "prettier": "3.9.10",
     "typescript": "^5.9.3",
     "vite": "^7.1.9"

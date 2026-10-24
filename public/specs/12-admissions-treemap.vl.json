@@ -1,0 +1,237 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "width": 900,
+  "background": "transparent",
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "config": {
+    "font": "Manrope",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "domain": false,
+      "labelColor": "#c6d5d2",
+      "titleColor": "#c6d5d2",
+      "gridColor": "#3b5155"
+    },
+    "legend": {
+      "labelColor": "#c6d5d2",
+      "titleColor": "#c6d5d2"
+    }
+  },
+  "height": 420,
+  "data": {
+    "values": [
+      {
+        "provider": "MOH hospitals",
+        "admissions": 2579373,
+        "year": 2024,
+        "coverage": "97.94% MOH submission",
+        "share": 60.40182598359481,
+        "x0": 0,
+        "y0": 0,
+        "x1": 0.6040182598359481,
+        "y1": 1,
+        "cx": 0.3020091299179741,
+        "cy": 0.5,
+        "percent_y": 0.5238095238095238,
+        "percentage": "60.4%",
+        "short": "MOH hospitals"
+      },
+      {
+        "provider": "Private-sector providers",
+        "admissions": 1359910,
+        "year": 2024,
+        "coverage": "82.33% private response",
+        "share": 31.845354345164665,
+        "x0": 0.6040182598359481,
+        "y0": 0,
+        "x1": 1,
+        "y1": 0.8042126975847776,
+        "cx": 0.8020091299179741,
+        "cy": 0.4021063487923888,
+        "percent_y": 0.42591587260191266,
+        "percentage": "31.8%",
+        "short": "Private providers"
+      },
+      {
+        "provider": "Other government hospitals",
+        "admissions": 197530,
+        "year": 2024,
+        "coverage": "Separate non-MOH returns",
+        "share": 4.62560966814008,
+        "x0": 0.6040182598359481,
+        "y0": 0.8042126975847776,
+        "x1": 0.8402751371246584,
+        "y1": 1,
+        "cx": 0.7221466984803033,
+        "cy": 0.9021063487923888,
+        "percent_y": 0.9259158726019127,
+        "percentage": "4.6%",
+        "short": "Other government"
+      },
+      {
+        "provider": "MOH special institutions",
+        "admissions": 133543,
+        "year": 2024,
+        "coverage": "97.94% MOH submission",
+        "share": 3.1272100031004437,
+        "x0": 0.8402751371246584,
+        "y0": 0.8042126975847776,
+        "x1": 1,
+        "y1": 1,
+        "cx": 0.9201375685623292,
+        "cy": 0.9021063487923888,
+        "percent_y": 0.9021063487923888,
+        "percentage": "3.1%",
+        "short": ""
+      }
+    ]
+  },
+  "encoding": {
+    "tooltip": [
+      {
+        "field": "provider",
+        "title": "Provider"
+      },
+      {
+        "field": "admissions",
+        "format": ",",
+        "title": "Reported admissions"
+      },
+      {
+        "field": "share",
+        "format": ".2f",
+        "title": "Share (%)"
+      },
+      {
+        "field": "coverage",
+        "title": "Coverage"
+      }
+    ]
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "stroke": "#07171d",
+        "strokeWidth": 3
+      },
+      "encoding": {
+        "x": {
+          "field": "x0",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              1
+            ]
+          },
+          "axis": null
+        },
+        "x2": {
+          "field": "x1"
+        },
+        "y": {
+          "field": "y0",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              1,
+              0
+            ]
+          },
+          "axis": null
+        },
+        "y2": {
+          "field": "y1"
+        },
+        "color": {
+          "field": "provider",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "MOH hospitals",
+              "Private-sector providers",
+              "Other government hospitals",
+              "MOH special institutions"
+            ],
+            "range": [
+              "#f36c4f",
+              "#e8b44e",
+              "#4b8294",
+              "#9fc6ae"
+            ]
+          },
+          "legend": null
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "middle",
+        "fontSize": 12,
+        "dy": -13,
+        "color": "#07171d",
+        "fontWeight": 600
+      },
+      "encoding": {
+        "x": {
+          "field": "cx",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "cy",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "short"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "middle",
+        "fontSize": 22,
+        "fontWeight": 600,
+        "color": "#07171d"
+      },
+      "encoding": {
+        "x": {
+          "field": "cx",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "percent_y",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "percentage"
+        }
+      }
+    }
+  ],
+  "params": [
+    {
+      "name": "hoveredState",
+      "value": ""
+    }
+  ],
+  "usermeta": {
+    "export": {
+      "generator": "admissionsTreemapSpec",
+      "arguments": [
+        900
+      ],
+      "chartId": "provider-treemap",
+      "note": "External provider key and source notes are React elements. Hover emphasis is driven by the website; hoveredState starts empty. Tooltip definitions are retained. Width is a fixed snapshot; page layout and fonts are supplied by the host."
+    }
+  }
+}

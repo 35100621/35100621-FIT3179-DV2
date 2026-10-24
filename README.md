@@ -134,3 +134,36 @@ React components use PascalCase. Matching Vega-Lite specification functions use 
 | Admissions treemap | `AdmissionsTreemap` | `admissionsTreemapSpec` |
 
 Components are in `src/components/StoryCharts.tsx` and `AdvancedCharts.tsx`; specifications are in `src/charts/specs.ts` and `advanced.ts`. The two bar charts retain subject prefixes to distinguish them.
+
+## Human-readable Vega-Lite JSON specifications
+
+Every chart has a committed, formatted JSON description in [public/specs](public/specs). These are generated from the **same TypeScript functions used by React**, not independently maintained chart definitions. Use GitHub’s file viewer or **Raw / Download** for the larger map files; after deployment, the same files are served under the website's `specs/` directory.
+
+```sh
+npm run export:specs        # Regenerate and validate all 12 files
+npm run export:specs:check  # Validate and fail if committed exports are stale
+npm run test:specs          # Check repeatability, coverage and source preservation
+```
+
+`npm run build` also exports specifications automatically before building. After changing a chart or its data, commit the regenerated JSON alongside the source change. The exporter checks every chart against the installed Vega-Lite JSON schema, compiles it, and renders standalone SVG to catch invalid expressions, missing signals and runtime errors. Outputs contain no timestamps or machine-specific paths. Exporting twice with unchanged sources produces identical files.
+
+| Chart / JSON description | Exported view (900 px width) | Controls supplied by React |
+|---|---|---|
+| [1. Indexed line](public/specs/01-indexed-line.vl.json) | Full 2015–2024 series; reference at 2024 | Year slider and readout |
+| [2. Choropleth](public/specs/02-choropleth-map.vl.json) | All Malaysia, no selected state | Region buttons, shared selection and detail panel |
+| [3. Heatmap](public/specs/03-heatmap.vl.json) | All states and years | Shared selection and detail panel |
+| [4. Proportional-symbol map](public/specs/04-proportional-symbol-map.vl.json) | All Malaysia | Region buttons, shared selection and detail panel |
+| [5. Connected dots](public/specs/05-connected-dot.vl.json) | Combined capacity visible, ordered by combined rate | Capacity toggle, sorting, selection and detail panel |
+| [6. Rank slope](public/specs/06-rank-slope.vl.json) | Public versus combined ranks revealed | Reveal/reset, selection and detail panel |
+| [7. Ranked occupancy dots](public/specs/07-ranked-dot.vl.json) | All states and national reference | Shared selection and detail panel |
+| [8. Admissions bars](public/specs/08-admissions-bar.vl.json) | Episode counts | Count/share buttons |
+| [9. Ageing bars](public/specs/09-ageing-bar.vl.json) | Both 2015 and 2024 | External percentage callouts and count-up animation |
+| [10. Non-contiguous cartogram](public/specs/10-non-contiguous-cartogram.vl.json) | Capacity mode, all Malaysia, original outlines visible | Mode, region, outlines, selection and detail panel |
+| [11. Population pyramid](public/specs/11-population-pyramid.vl.json) | 2024 | Year buttons |
+| [12. Admissions treemap](public/specs/12-admissions-treemap.vl.json) | All four providers | External provider key |
+
+Each file includes inline chart data, including map geometry, so it can be loaded into a compatible Vega-Lite 6 host without resolving site-relative data URLs. For example, once deployed, [the choropleth JSON](https://35100621.github.io/35100621-FIT3179-DV2/specs/02-choropleth-map.vl.json) can be passed to `vegaEmbed`. GitHub's **Raw** button provides a direct JSON URL for repository files; the normal GitHub page is an HTML code viewer.
+
+The exporter uses Vite to load the production TypeScript/JSON modules. `src/charts/presentation.ts` shares the renderer's colour adjustments and `hoveredState` parameter between the website and exports. Map URLs are replaced with the exact runtime GeoJSON features. Cartogram and treemap layouts remain the existing Python-precomputed geometry, not a new layout implementation. `usermeta.export` records the generator, arguments and limitations in every file.
+
+**Standalone limits:** all 12 chart graphics render independently, but the complete interactive webpage cannot be represented by these static snapshots. Tooltip encodings are preserved and work in a tooltip-enabled host such as Vega-Embed. Hover emphasis is driven by JavaScript event listeners in `VegaChart.tsx`; the exported `hoveredState` parameter starts empty. Cross-chart state selection, surrounding source notes, buttons, information panels, scroll animations and responsive `ResizeObserver` updates remain in React. Dark-chart colours are preserved; backgrounds remain transparent, so use an appropriate host background. Fonts must be supplied by the host for matching typography. Decorative CSS bed illustrations are page artwork, not Vega-Lite diagrams.
