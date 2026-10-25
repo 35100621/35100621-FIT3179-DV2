@@ -58,12 +58,18 @@ The original code was removed only after all 24 migrated original browser tests 
 
 ## Visual comparison
 
-Captured original and migrated hero plus all six acts at 1440, 1280, 390 and 320 pixels (28 screenshot pairs), with reduced motion and fonts loaded. Original and migrated hero captures were identical. Section and chart container dimensions matched except a 4 px heatmap height difference at 390 px. No redesign or chart/content removal was made.
+Captured original and migrated hero plus all six acts at 1440, 1280, 390 and 320 pixels (28 screenshot pairs), with reduced motion and fonts loaded. Original and migrated hero captures were identical. Final section and chart container dimensions matched at all four widths. An earlier capture showed a 4 px heatmap height difference at 390 px that did not recur in the final production capture. No redesign or chart/content removal was made.
 
-The migration is not claimed to be pixel-identical: SVG axis-label measurement/placement differs slightly, with approximately 9 px of plot-width redistribution in the 390 px occupancy chart. Screenshot comparison found up to 2.24% pixels differing by more than 12 RGB levels in equal-sized sections. Manual comparison confirmed unchanged decorative artwork, chart colours, ordering and values; map projections and geometries are unchanged. Screenshots and extracted SVG/layout records are retained locally under ignored `tmp/migration/`.
+The migration is not claimed to be pixel-identical: SVG axis-label measurement/placement differs slightly, with approximately 9 px of plot-width redistribution in an intermediate 390 px occupancy capture. Final screenshot comparison found up to 1.26% pixels differing by more than 12 RGB levels, primarily chart labels and plot spacing. Font loading/measurement timing makes these small SVG differences variable between captures. Text comparison ignoring whitespace found one default chart-label difference: the admissions zero tick reads `0` instead of `0M`, because the parameterised formatter formats each tick independently. Narrative text and displayed observations are unchanged. Manual comparison confirmed unchanged decorative artwork, chart colours, ordering and values; map projections and geometries are unchanged. Screenshots and extracted SVG/layout records are retained locally under ignored `tmp/migration/`.
 
 ## Assignment scope and remaining limits
 
 Twelve charts and three distinct map idioms remain, on one vertically scrollable page. JSON descriptions are maintained in the repository and published with the site. MOH and DOSM source citations, interpretation caveats and original data methods remain. This migration does not claim eight rubric-approved advanced idioms; the existing collection needs separate rubric assessment for that HD criterion. Decorative CSS bed artwork remains outside Vega-Lite, as before.
 
 External source websites, Google Fonts and the Unsplash hero asset remain external dependencies. Local tests verify site-owned resources; availability of every third-party citation over time is not guaranteed.
+
+## Deployment verification
+
+Migration commit `b1d3ffc` was pushed to `main`. [GitHub Pages workflow 40170360016](https://github.com/35100621/35100621-FIT3179-DV2/actions/runs/40170360016) completed successfully. The public site is https://35100621.github.io/35100621-FIT3179-DV2/.
+
+Executed `PLAYWRIGHT_BASE_URL=https://35100621.github.io/35100621-FIT3179-DV2/ npm test`: **30 passed in 2.0 minutes**, covering all six viewports against the deployed site. The data-only test in each project checks local processed data; browser/resource tests exercise the live deployment. JSON files, data URLs, CSV downloads, all 12 charts, controls, linked views, tooltips and overflow checks passed. No deployment path failures were observed.
