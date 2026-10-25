@@ -16,57 +16,64 @@ npm run preview
 ```
 
 Development URL: http://127.0.0.1:5173/35100621-FIT3179-DV2/.
-The build writes `dist/`. `vite.config.js` sets the GitHub Pages base path and copies canonical specifications into `dist/specs/`. The deployment workflow builds pushes to `main` without TypeScript compilation.
+The build writes `dist/`. `vite.config.js` sets the GitHub Pages base path. Vite publishes `public/` directly, including specifications at `dist/specs/`. The deployment workflow builds pushes to `main` without TypeScript compilation.
+
+## Repository structure
+
+```text
+.github/workflows/        GitHub Pages deployment
+public/
+  specs/                 Twelve canonical JSON specifications and manifest
+  data/                  Runtime JSON/GeoJSON and CSV downloads
+src/
+  css/                   Styles and decorative artwork
+  js/                    Rendering, controls, shared state and motion
+scripts/                 Offline data preparation and publishing
+data/                    Source manifest, hashes and local source archives
+docs/                    Data methods, chart inventory and cleanup report
+index.html               Narrative and chart containers
+package.json             Commands and dependencies
+package-lock.json        Reproducible dependency versions
+vite.config.js           GitHub Pages base path and build target
+```
+
+No separate `public/assets/` folder is needed: there are no local standalone image assets. Fonts are package imports; the existing hero image is externally hosted.
 
 ## Where the code lives
 
 | File/directory | Responsibility |
 |---|---|
 | `index.html` | Six-act narrative, headings, chart containers, controls, source notes, accessible data tables and CSV links |
-| `css/styles.css` | Layout, typography, colours, responsive styles, transitions and decorative bed artwork |
-| `specs/*.json` | **Canonical chart definitions:** marks, channels, scales, projections, layers, annotations, tooltips, parameters and transforms |
-| `specs/manifest.json` | Maps each HTML chart ID to its JSON file |
-| `js/charts.js` | Loads JSON, embeds SVG, observes width, forwards hover/click events and applies declarative metadata |
-| `js/state.js` | Central shared state and per-chart control values |
-| `js/interactions.js` | Buttons, sliders, dropdowns, state search and seven linked insight panels |
-| `js/data.js` | Shared request cache, data loading and numeric formatting |
-| `js/motion.js` | Chapter navigation, scroll entrances and count-up animation; honours reduced motion |
-| `js/main.js` | Application startup and font/style imports |
+| `src/css/styles.css` | Layout, typography, colours, responsive styles, transitions and decorative bed artwork |
+| `public/specs/*.json` | **Canonical chart definitions:** marks, channels, scales, projections, layers, annotations, tooltips, parameters and transforms |
+| `public/specs/manifest.json` | Maps each HTML chart ID to its JSON file |
+| `src/js/charts.js` | Loads JSON, embeds SVG, observes width, forwards hover/click events and applies declarative metadata |
+| `src/js/state.js` | Central shared state and per-chart control values |
+| `src/js/interactions.js` | Buttons, sliders, dropdowns, state search and seven linked insight panels |
+| `src/js/data.js` | Shared request cache, data loading and numeric formatting |
+| `src/js/motion.js` | Chapter navigation, scroll entrances and count-up animation; honours reduced motion |
+| `src/js/main.js` | Application startup and font/style imports |
 | `public/data/` | Browser-loaded JSON/GeoJSON and downloadable CSV |
 | `scripts/` | Reproducible Python data preparation and publishing |
 
 Chart specifications are **not generated from JavaScript**. Edit their JSON directly. The previous TypeScript exporter and generated snapshots were removed so there is only one maintained chart definition per chart. Runtime copies in `dist/` are build artifacts.
 
-## Every chart and its JSON
+## Visualisations
 
-All twelve specifications were schema-validated and rendered during migration. Dataset filenames refer to `public/data/`; source meanings and caveats are recorded in [data methods](docs/DATA.md).
+See the [12-chart inventory](docs/VISUALISATIONS.md) for every JSON link, idiom, dataset, control and standalone limitation. The [specification manifest](public/specs/manifest.json) connects the chart containers to these files.
 
-| Chart / canonical JSON | Dataset / source | Preserved controls and interaction |
-|---|---|---|
-| [1. Indexed line](specs/01-indexed-line.json) | `indexed_growth.json`; MOH beds + DOSM population | Year slider/reference rule, readout, tooltip |
-| [2. Choropleth](specs/02-choropleth-map.json) | `states.geojson`; DOSM boundaries joined to public-bed rates | Region, hover outline, shared state selection |
-| [3. Heatmap](specs/03-heatmap.json) | `state_rates.json`; MOH + DOSM | State/year tooltip, selection, historical insight |
-| [4. Proportional-symbol map](specs/04-proportional-symbol-map.json) | `states.geojson`, `private_bed_locations.json`; licensed private beds | Region, state selection, hover and tooltip |
-| [5. Connected dots](specs/05-connected-dot.json) | `combined_capacity.json`; public + private beds, DOSM population | Public/combined toggle, three sort orders, selection |
-| [6. Rank slope](specs/06-rank-slope.json) | `combined_capacity.json`; public/combined rates and ranks | Reveal/reset ranks, selection and tooltip |
-| [7. Ranked occupancy dots](specs/07-ranked-dot.json) | `occupancy.json`; Health Indicators 2025 table 4.6 | National reference, state selection and tooltip |
-| [8. Admissions bars](specs/08-admissions-bar.json) | `admissions.json`; Health Indicators table 4.13 | Count/share switch and tooltip |
-| [9. Ageing bars](specs/09-ageing-bar.json) | `ageing.json`; DOSM national population | Tooltip; external animated callouts |
-| [10. Non-contiguous cartogram](specs/10-non-contiguous-cartogram.json) | `capacity_shapes.json`; validated DOSM boundaries + combined capacity | Geography/capacity, region, original outlines, linked hover/selection |
-| [11. Population pyramid](specs/11-population-pyramid.json) | `population_pyramid.json`; DOSM age/sex population | 2015/2024 switch and tooltip |
-| [12. Admissions treemap](specs/12-admissions-treemap.json) | `admissions_treemap.json`; reported admissions, precomputed rectangle layout | Tooltip and responsive internal labels |
-
-Use GitHub’s **Raw** button to access JSON. Published files use the same filenames under the website’s `specs/` directory, for example [choropleth JSON](https://35100621.github.io/35100621-FIT3179-DV2/specs/02-choropleth-map.json). Each specification references `../data/...`, resolved relative to its specification URL by the website loader. When using another Vega host/editor, retain the `specs/` and `data/` relative structure or configure its loader base URL accordingly.
-
-### Standalone behaviour and external coordination
-
-Each JSON renders its default chart independently with valid data references. Native parameters and expressions implement the year/region filters, capacity/rank switches, sorting and percentage calculations. Tooltips work in a tooltip-enabled host such as Vega-Embed.
-
-The surrounding HTML buttons, state search, shared selection across seven views, detail panels, scroll animations and responsive resizing require the vanilla JavaScript host. Hover/click listeners update `hoveredState` and `selectedState`; an isolated JSON does not recreate those DOM controls or cross-chart links. No chart graphic requires React.
-
-`usermeta.responsive` contains JSON-pointer patches for axis/legend/height properties that Vega-Lite cannot express as signals. `usermeta.parameterPatches` changes the admissions axis title when switching count/share. `prepareSpec` applies these generically; chart-specific marks/encodings remain in JSON. A standalone host ignores this optional metadata and uses the supplied default layout/title. For exact appearance, provide the page’s fonts and background colours (charts have transparent backgrounds).
-
-Cartogram shapes and treemap rectangles use the existing Python-precomputed layouts. Decorative CSS beds are page artwork, not data diagrams. Legends are explanatory; the original site had no interactive legends.
+- [1. Indexed line](public/specs/01-indexed-line.json)
+- [2. Choropleth](public/specs/02-choropleth-map.json)
+- [3. Heatmap](public/specs/03-heatmap.json)
+- [4. Proportional symbols](public/specs/04-proportional-symbol-map.json)
+- [5. Connected dots](public/specs/05-connected-dot.json)
+- [6. Rank slope](public/specs/06-rank-slope.json)
+- [7. Occupancy dots](public/specs/07-ranked-dot.json)
+- [8. Admissions bars](public/specs/08-admissions-bar.json)
+- [9. Ageing bars](public/specs/09-ageing-bar.json)
+- [10. Cartogram](public/specs/10-non-contiguous-cartogram.json)
+- [11. Population pyramid](public/specs/11-population-pyramid.json)
+- [12. Treemap](public/specs/12-admissions-treemap.json)
 
 ## Data preparation and publishing
 
@@ -97,3 +104,9 @@ The build bundles the website and publishes the canonical JSON specifications. U
 Beds describe reported capacity, not affordability, staffing or access. Combined capacity adds public hospital/special-institution beds and licensed private hospital beds using the same population denominator. Occupancy is historical annual MOH utilisation. Admissions are episodes, with different provider coverage. Age structure is context, not a demand forecast.
 
 The site contains **12 charts and three map idioms**: choropleth, proportional-symbol map and non-contiguous cartogram. It remains one vertically scrollable page and uses MOH and DOSM sources. This migration preserves existing idioms; it does **not** establish that eight qualify as “advanced” under the HD rubric. That rubric interpretation remains a separate assessment.
+
+## Attribution and AI acknowledgement
+
+Authorship and original source citations remain on the website. See [data methods and source references](docs/DATA.md) for MOH, DOSM and geographic provenance. OpenAI Codex assisted with code implementation, architecture migration, repository organisation and verification. Statistical observations come from the cited sources, not AI-generated data. Confirm the wording and any additional disclosure requirements against the assignment rubric.
+
+See [repository maintenance report](docs/REPOSITORY.md) for the audit, moves, prior cleanup record and verification results.

@@ -8,8 +8,8 @@
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1",
     "prepare:data": "python3 scripts/prepare_data.py && python3 scripts/prepare_private_locations.py && python3 scripts/prepare_population.py && python3 scripts/prepare_layouts.py && npm run sync:data",
-    "format": "prettier --write \"js/**/*.js\" \"css/**/*.css\" \"specs/**/*.json\" \"scripts/**/*.mjs\" \"*.{js,json,html}\" \".github/workflows/*.yml\"",
-    "format:check": "prettier --check \"js/**/*.js\" \"css/**/*.css\" \"specs/**/*.json\" \"scripts/**/*.mjs\" \"*.{js,json,html}\" \".github/workflows/*.yml\"",
+    "format": "prettier --write \"src/js/**/*.js\" \"src/css/**/*.css\" \"public/specs/**/*.json\" \"scripts/**/*.mjs\" \"*.{js,json,html}\" \".github/workflows/*.yml\"",
+    "format:check": "prettier --check \"src/js/**/*.js\" \"src/css/**/*.css\" \"public/specs/**/*.json\" \"scripts/**/*.mjs\" \"*.{js,json,html}\" \".github/workflows/*.yml\"",
     "sync:data": "node scripts/sync-data.mjs"
   },
   "dependencies": {
