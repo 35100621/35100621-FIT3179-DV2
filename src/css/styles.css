@@ -1449,8 +1449,27 @@ h3 {
   --light-secondary: #526665;
   --paper: #e7e1d5;
   --line: rgba(16, 42, 48, 0.2);
-  --page: max(40px, calc((100vw - 1280px) / 2));
-  --chart-pad: clamp(24px, 3vw, 48px);
+  --page-width: 1280px;
+  --chart-width: var(--page-width);
+  --page-gutter: max(40px, calc((100vw - var(--page-width)) / 2));
+  --module-inset: clamp(24px, 3vw, 48px);
+  --note-inset: 20px;
+  --page: var(--page-gutter);
+  --chart-pad: var(--module-inset);
+  --space-1: 8px;
+  --space-2: 12px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
+  --space-7: 64px;
+  --type-body: 16px;
+  --type-annotation: 15px;
+  --type-source: 13px;
+  --type-control: 12px;
+  --type-chart: clamp(28px, 2.6vw, 38px);
+  --nav-clearance: 24px;
+  --focus-ring: #247c7a;
 }
 body {
   background: var(--ivory);
@@ -1465,7 +1484,7 @@ h2 {
   max-width: 1120px;
 }
 h3 {
-  font-size: clamp(28px, 2.6vw, 38px);
+  font-size: var(--type-chart);
   line-height: 1.04;
   letter-spacing: -0.025em;
   max-width: 760px;
@@ -1483,7 +1502,7 @@ h3 {
 }
 .section-head {
   width: 100%;
-  max-width: 1280px;
+  max-width: var(--page-width);
   margin: 0 auto 72px;
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -1498,9 +1517,9 @@ h3 {
   margin-bottom: 36px;
 }
 .section-head p {
-  grid-column: 5/10;
+  grid-column: 1/10;
   margin: 0;
-  max-width: none;
+  max-width: 65ch;
   font-family: var(--sans);
   font-size: 18px;
   line-height: 1.6;
@@ -1536,7 +1555,7 @@ h3 {
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 24px;
   align-items: start;
-  opacity: 0.82;
+  opacity: 1;
 }
 .chart-note p {
   font-size: 13px;
@@ -1559,13 +1578,13 @@ h3 {
 .activity-spread,
 .future-spread {
   width: 100%;
-  max-width: 1280px;
+  max-width: var(--page-width);
   margin-left: auto;
   margin-right: auto;
 }
 .line-wrap {
   padding: var(--chart-pad);
-  max-width: 1280px;
+  max-width: var(--page-width);
   box-shadow: 16px 16px 0 var(--paper);
 }
 .line-chart {
@@ -1767,7 +1786,7 @@ h3 {
 }
 .dot-panel .chart-note,
 .rank-slope-panel .chart-note {
-  margin-top: auto;
+  margin-top: var(--space-4);
 }
 .rank-slope {
   height: 510px;
@@ -1989,7 +2008,7 @@ h3 {
 .closing-grid {
   gap: 48px;
   grid-template-columns: 5fr 4fr 3fr;
-  max-width: 1280px;
+  max-width: var(--page-width);
   width: 100%;
 }
 .closing-grid > p {
@@ -2081,10 +2100,10 @@ h3 {
 
 @media (max-width: 1100px) {
   :root {
-    --page: 32px;
+    --page-gutter: 32px;
   }
   .section-head p {
-    grid-column: 4/11;
+    grid-column: 1/-1;
   }
   .map-spread,
   .comparison-spread,
@@ -2129,8 +2148,8 @@ h3 {
 }
 @media (max-width: 720px) {
   :root {
-    --page: 20px;
-    --chart-pad: 20px;
+    --page-gutter: 20px;
+    --module-inset: 20px;
   }
   body {
     font-size: 15px;
@@ -2333,8 +2352,9 @@ main {
   flex-wrap: wrap;
 }
 .chart-meta p {
-  font-size: 13px;
-  opacity: 0.8;
+  font-size: 14px;
+  line-height: 1.6;
+  opacity: 1;
 }
 .chart-meta h3 {
   margin-top: 0;
@@ -2371,7 +2391,7 @@ a:focus-visible,
 select:focus-visible,
 input:focus-visible,
 summary:focus-visible {
-  outline: 3px solid #247c7a;
+  outline: 3px solid var(--focus-ring);
   outline-offset: 4px;
 }
 .chart-hint,
@@ -2385,8 +2405,8 @@ summary:focus-visible {
   display: block;
 }
 .source {
-  opacity: 0.85;
-  margin: 24px 0 16px;
+  opacity: 1;
+  margin: var(--space-4) 0 var(--space-3);
 }
 .source a,
 .methodology a {
@@ -2565,7 +2585,7 @@ td {
   font-size: 12px;
 }
 .methodology {
-  max-width: 1280px;
+  max-width: var(--page-width);
   font-size: 12px;
   border-top: 1px solid #102a3055;
   margin-top: 40px;
@@ -2623,8 +2643,7 @@ td {
 }
 @media (min-width: 1100px) {
   .symbol-copy {
-    position: sticky;
-    top: 40px;
+    position: static;
     align-self: start;
   }
   .map-spread {
@@ -2651,7 +2670,7 @@ td {
     min-height: 220px;
   }
   .section-head p {
-    grid-column: 3/12;
+    grid-column: 1/-1;
   }
 }
 @media (max-width: 720px) {
@@ -2668,7 +2687,7 @@ td {
     display: block;
   }
   .heatmap-panel {
-    padding: 20px;
+    padding: var(--module-inset);
   }
   .chart-controls {
     align-items: stretch;
@@ -2702,7 +2721,7 @@ td {
   .treemap-card,
   .age-bars,
   .pyramid-card {
-    padding: 20px;
+    padding: var(--module-inset);
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -2830,7 +2849,7 @@ select {
 }
 .state-insight {
   border-left: 3px solid var(--coral);
-  padding: 16px 20px;
+  padding: var(--space-3) var(--note-inset);
   margin: var(--space-md) 0;
   background: #80938e14;
   font-size: 13px;
@@ -2920,7 +2939,9 @@ select {
   max-width: 800px;
   font-size: 17px;
   color: #d2e1dd;
-  margin: 48px auto 24px;
+  margin: var(--space-6) auto var(--space-4);
+  padding-inline: var(--module-inset);
+  max-width: var(--page-width);
 }
 .comparison-spread {
   align-items: stretch;
@@ -2932,8 +2953,8 @@ select {
   height: 100%;
 }
 .comparison-spread .source {
-  margin-top: auto;
-  padding-top: 20px;
+  margin-top: var(--space-4);
+  padding-top: 0;
 }
 .vega-frame[data-ready='true'] > div {
   animation: chart-settle 0.16s ease-out;
@@ -2985,4 +3006,240 @@ select {
 /* Controls hidden by vanilla JavaScript retain the native hidden semantics. */
 [hidden] {
   display: none !important;
+}
+
+/* Shared chart guides. Hero offsets remain an intentional editorial composition. */
+.chart-module {
+  min-width: 0;
+  text-align: left;
+  --focus-ring: #247c7a;
+}
+.act-three,
+.act-six,
+.line-wrap,
+.treemap-card,
+.progress-nav,
+.chapter-overview {
+  --focus-ring: #e6b34c;
+}
+.act-three .chart-module,
+.act-six .chart-module,
+.line-wrap .chart-module,
+.treemap-card .chart-module {
+  --focus-ring: #e6b34c;
+}
+.chart-module .chart-meta {
+  display: block;
+}
+.chart-module .chart-meta .eyebrow {
+  margin: 0 0 var(--space-2);
+}
+.chart-module .inline-legend {
+  margin-top: var(--space-3);
+  font-size: var(--type-source);
+}
+.chart-module :is(.chart-hint, .chart-note, .rank-note, .year-readout) {
+  font-size: var(--type-annotation);
+  line-height: 1.65;
+}
+.chart-module :is(.source, .data-table),
+.methodology,
+.chart-module > a[download],
+.age-summary > div > span {
+  font-size: var(--type-source);
+  line-height: 1.65;
+}
+.chart-module .source {
+  opacity: 1;
+}
+.chart-module
+  :is(
+    .chart-meta,
+    .chart-controls,
+    .vega-frame,
+    .chart-note,
+    .rank-note,
+    .source,
+    .data-table
+  ) {
+  margin-inline: 0;
+  max-width: 100%;
+}
+.chart-module .chart-controls {
+  margin-block: var(--space-4);
+}
+.chart-module .vega-frame {
+  margin-block: var(--space-4);
+}
+.chart-module
+  :is(button, select, .region-control legend, .chart-controls label),
+.year-switch button,
+.state-explorer label,
+.outline-toggle {
+  font-size: var(--type-control);
+}
+.chart-module .chart-controls :is(button, select) {
+  min-height: 44px;
+}
+.chart-module .range-row {
+  grid-template-columns: auto minmax(0, 1fr) 4ch;
+  gap: var(--space-3);
+  font-size: var(--type-control);
+}
+.range-row b {
+  text-align: right;
+}
+.state-insight,
+.state-insight p {
+  font-size: 14px;
+}
+.region-labels,
+.cartogram-key,
+.provider-key,
+.reference-legend {
+  font-size: var(--type-source);
+}
+#vg-tooltip-element {
+  font-size: 14px;
+  line-height: 1.5;
+  max-width: min(360px, calc(100vw - 24px));
+}
+.act,
+.state-explorer {
+  scroll-margin-top: var(--nav-clearance);
+}
+html {
+  scroll-padding-bottom: var(--nav-clearance);
+}
+.progress-nav > a:focus-visible span {
+  opacity: 1;
+  transform: none;
+}
+.table-scroll:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+.chart-module .chart-note,
+.chart-module .rank-note {
+  margin-top: var(--space-4);
+}
+
+/* Shared content-sized rows align both comparison plots without fixed spacers. */
+@media (min-width: 1101px) {
+  .paired-grid {
+    row-gap: 0;
+  }
+  .paired-grid > .module-panel {
+    display: grid;
+    grid-row: 1 / span var(--paired-rows, 8);
+    grid-template-rows: subgrid;
+    row-gap: 0;
+  }
+  .paired-grid > .module-panel:first-child {
+    grid-column: 1;
+  }
+  .paired-grid > .module-panel:last-child {
+    grid-column: 2;
+  }
+  .paired-grid .chart-module {
+    display: contents;
+  }
+  .map-spread {
+    --paired-rows: 9;
+  }
+  .map-spread .chart-meta {
+    grid-row: 1;
+  }
+  .map-spread .chart-controls {
+    grid-row: 2;
+  }
+  .map-spread .chart-hint {
+    grid-row: 3;
+  }
+  .map-spread :is(.map-stage, .heatmap-chart > .vega-frame) {
+    grid-row: 4;
+  }
+  .map-spread :is(.region-labels, .heatmap-chart > .state-insight) {
+    grid-row: 5;
+  }
+  .map-spread .state-readout {
+    grid-row: 6;
+  }
+  .map-spread .chart-note {
+    grid-row: 7;
+  }
+  .map-spread .source {
+    grid-row: 8;
+  }
+  .map-spread .data-table {
+    grid-row: 9;
+  }
+  .comparison-spread .chart-meta {
+    grid-row: 1;
+  }
+  .comparison-spread .chart-controls {
+    grid-row: 2;
+  }
+  .comparison-spread .chart-hint {
+    grid-row: 3;
+  }
+  .comparison-spread .vega-frame {
+    grid-row: 4;
+  }
+  .comparison-spread .state-insight {
+    grid-row: 5;
+  }
+  .comparison-spread :is(.chart-note, .rank-note) {
+    grid-row: 6;
+  }
+  .comparison-spread .source {
+    grid-row: 7;
+    align-self: start;
+  }
+  .comparison-spread .data-table {
+    grid-row: 8;
+    align-self: start;
+  }
+}
+@media (max-width: 720px) {
+  :root {
+    --note-inset: 14px;
+    --nav-clearance: 82px;
+  }
+  .chart-module .range-row {
+    grid-template-columns: 1fr 4ch;
+  }
+  .chart-module .range-row input {
+    grid-row: 2;
+    grid-column: 1/-1;
+  }
+  .chart-module .range-row b {
+    grid-row: 1;
+    grid-column: 2;
+  }
+  .chart-module .region-control .segmented button {
+    font-size: 12px;
+  }
+  .section-head h2 {
+    max-width: 100%;
+  }
+}
+
+.chart-module .eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+button,
+input,
+select,
+summary,
+a {
+  scroll-margin-block: var(--nav-clearance);
+}
+
+@media (max-width: 360px) {
+  :root {
+    --page-gutter: 16px;
+    --module-inset: 16px;
+  }
 }

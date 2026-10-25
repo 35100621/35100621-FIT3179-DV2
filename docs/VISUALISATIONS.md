@@ -29,3 +29,7 @@ The surrounding HTML buttons, state search, shared selection across seven views,
 
 Cartogram shapes and treemap rectangles use the existing Python-precomputed layouts. Decorative CSS beds are page artwork, not data diagrams. Legends are explanatory; the original site had no interactive legends.
 
+
+### Idiom classification and visual review
+
+Under the teaching-team definitions supplied in the visual-polish brief, charts 2, 3, 4, 5, 6, 10, 11 and 12 are advanced; charts 1, 7, 8 and 9 are basic. The three map idioms remain distinct. See the [visual-polish report](VISUAL-POLISH.md) for chart-by-chart checks and limitations.

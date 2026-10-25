@@ -37,6 +37,12 @@ export function prepareSpec(original, width, values = {}) {
 }
 
 export async function initializeCharts() {
+  // Measure SVG labels with the actual chart fonts, not a temporary fallback.
+  // A failed external font still leaves the declared fallback usable.
+  await Promise.allSettled([
+    document.fonts.load('12px "DM Sans"'),
+    document.fonts.load('12px "Manrope"'),
+  ])
   const manifest = await loadJSON('./specs/manifest.json')
   const controllers = new Map()
   for (const entry of manifest) {

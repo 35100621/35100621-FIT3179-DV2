@@ -137,7 +137,17 @@
   ],
   "usermeta": {
     "chartId": "ageing",
-    "responsive": [],
+    "responsive": [
+      {
+        "maxWidth": 299,
+        "set": {
+          "/encoding/x/axis/title": [
+            "Share of resident population",
+            "aged 65+ (%)"
+          ]
+        }
+      }
+    ],
     "description": "Canonical editable Vega-Lite specification. Controls update declared parameters; responsive settings are applied by the generic host."
   }
 }

@@ -152,10 +152,22 @@
       {
         "maxWidth": 499,
         "set": {
-          "/encoding/y/axis/labelFontSize": 11,
+          "/encoding/y/axis/labelFontSize": 12,
           "/encoding/y/axis/labelLimit": 105,
           "/encoding/x/axis/tickCount": 3,
-          "/layer/1/mark/fontSize": 10
+          "/layer/1/mark/fontSize": 12
+        }
+      },
+      {
+        "maxWidth": 299,
+        "set": {
+          "/encoding/x/axis/title": ["Reported admission", "episodes"],
+          "/layer/1/mark/align": {
+            "expr": "datum.value > (showShare ? 40 : 2000000) ? 'right' : 'left'"
+          },
+          "/layer/1/mark/dx": {
+            "expr": "datum.value > (showShare ? 40 : 2000000) ? -6 : 6"
+          }
         }
       }
     ],
@@ -165,7 +177,7 @@
         "parameter": "showShare",
         "equals": true,
         "set": {
-          "/encoding/x/axis/title": "Share of reported admissions (%)"
+          "/encoding/x/axis/title": ["Share of reported", "admissions (%)"]
         }
       }
     ]

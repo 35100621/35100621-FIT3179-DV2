@@ -162,7 +162,7 @@
       {
         "maxWidth": 399,
         "set": {
-          "/layer/1/mark/fontSize": 10,
+          "/layer/1/mark/fontSize": 12,
           "/layer/2/mark/fontSize": 15
         }
       }

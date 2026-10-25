@@ -103,10 +103,12 @@ The build bundles the website and publishes the canonical JSON specifications. U
 
 Beds describe reported capacity, not affordability, staffing or access. Combined capacity adds public hospital/special-institution beds and licensed private hospital beds using the same population denominator. Occupancy is historical annual MOH utilisation. Admissions are episodes, with different provider coverage. Age structure is context, not a demand forecast.
 
-The site contains **12 charts and three map idioms**: choropleth, proportional-symbol map and non-contiguous cartogram. It remains one vertically scrollable page and uses MOH and DOSM sources. This migration preserves existing idioms; it does **not** establish that eight qualify as “advanced” under the HD rubric. That rubric interpretation remains a separate assessment.
+The site contains **12 charts and three map idioms**: choropleth, proportional-symbol map and non-contiguous cartogram. It remains one vertically scrollable page and uses MOH and DOSM sources. Under the teaching-team definitions supplied for the visual-polish review, eight are advanced: the three maps, heatmap, connected dots, rank slope, population pyramid and treemap. The indexed line, occupancy dots, admissions bars and ageing bars remain basic. This classification does not guarantee an assessment outcome.
 
 ## Attribution and AI acknowledgement
 
 Authorship and original source citations remain on the website. See [data methods and source references](docs/DATA.md) for MOH, DOSM and geographic provenance. OpenAI Codex assisted with code implementation, architecture migration, repository organisation and verification. Statistical observations come from the cited sources, not AI-generated data. Confirm the wording and any additional disclosure requirements against the assignment rubric.
 
 See [repository maintenance report](docs/REPOSITORY.md) for the audit, moves, prior cleanup record and verification results.
+
+See the [visual polish and accessibility review](docs/VISUAL-POLISH.md) for the audit, layout system, chart checklist, viewport comparisons and verification results.

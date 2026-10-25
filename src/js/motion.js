@@ -49,10 +49,41 @@ export function initializeMotion() {
     overview.classList.toggle('open', open)
     toggle.setAttribute('aria-expanded', String(open))
   }
-  toggle.addEventListener('click', () => setOpen(overview.hidden))
-  overview
-    .querySelectorAll('button,a')
-    .forEach((el) => el.addEventListener('click', () => setOpen(false)))
+  const closeOverview = () => {
+    setOpen(false)
+    toggle.focus()
+  }
+  toggle.addEventListener('click', () => {
+    const opening = overview.hidden
+    setOpen(opening)
+    if (opening) overview.querySelector('button').focus()
+  })
+  overview.querySelector('button').addEventListener('click', closeOverview)
+  overview.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      setOpen(false)
+      document
+        .querySelector(link.getAttribute('href'))
+        .focus({ preventScroll: true })
+    })
+  })
+  overview.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      event.preventDefault()
+      closeOverview()
+    }
+    if (event.key !== 'Tab') return
+    const targets = [...overview.querySelectorAll('button, a')]
+    const first = targets[0],
+      last = targets.at(-1)
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault()
+      last.focus()
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault()
+      first.focus()
+    }
+  })
   const chapters = new IntersectionObserver(
     (entries) => {
       for (const entry of entries) {

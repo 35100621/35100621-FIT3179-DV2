@@ -147,14 +147,17 @@
         "type": "text",
         "align": "left",
         "dx": 10,
-        "fontSize": 12
+        "fontSize": 12,
+        "fontWeight": {
+          "expr": "datum.state === selectedState || datum.state === hoveredState ? 700 : 400"
+        }
       },
       "encoding": {
         "text": {
           "field": "label"
         },
         "color": {
-          "value": "#f36c4f"
+          "value": "#f3efe5"
         }
       }
     }
@@ -184,7 +187,13 @@
         "maxWidth": 499,
         "set": {
           "/encoding/x/scale/domain": [-0.05, 2.7],
-          "/layer/2/mark/fontSize": 10
+          "/layer/2/mark/fontSize": 12
+        }
+      },
+      {
+        "maxWidth": 299,
+        "set": {
+          "/encoding/x/scale/domain": [-0.05, 3.4]
         }
       }
     ],

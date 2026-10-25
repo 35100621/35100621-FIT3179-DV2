@@ -15,11 +15,15 @@
       "domain": false,
       "labelColor": "#c6d5d2",
       "titleColor": "#c6d5d2",
-      "gridColor": "#3b5155"
+      "gridColor": "#3b5155",
+      "labelFontSize": 12,
+      "titleFontSize": 12
     },
     "legend": {
       "labelColor": "#c6d5d2",
-      "titleColor": "#c6d5d2"
+      "titleColor": "#c6d5d2",
+      "labelFontSize": 12,
+      "titleFontSize": 12
     }
   },
   "height": 450,

@@ -157,7 +157,7 @@
         "type": "text",
         "align": "left",
         "dx": 10,
-        "fontSize": 11,
+        "fontSize": 12,
         "color": "#172B42"
       },
       "encoding": {
@@ -237,6 +237,17 @@
         "maxWidth": 499,
         "set": {
           "/layer/1/encoding/x/axis/tickCount": 5
+        }
+      },
+      {
+        "maxWidth": 299,
+        "set": {
+          "/layer/1/encoding/x/axis/title": [
+            "Reported annual",
+            "bed occupancy (%)"
+          ],
+          "/layer/2/mark/align": "right",
+          "/layer/2/mark/dx": -8
         }
       }
     ],

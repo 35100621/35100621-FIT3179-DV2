@@ -170,7 +170,7 @@
         "type": "text",
         "align": "left",
         "dx": 11,
-        "fontSize": 11,
+        "fontSize": 12,
         "color": "#f36c4f"
       },
       "encoding": {
@@ -219,6 +219,12 @@
         "maxWidth": 499,
         "set": {
           "/layer/0/encoding/x/axis/tickCount": 5
+        }
+      },
+      {
+        "maxWidth": 299,
+        "set": {
+          "/layer/0/encoding/x/axis/title": ["Beds per 10,000", "residents"]
         }
       }
     ],
