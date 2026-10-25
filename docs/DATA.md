@@ -8,7 +8,7 @@
 - Health Indicators 2025: 2024 private hospital capacity (table 4.4), MOH occupancy (table 4.6) and reported admissions (table 4.13). The exact publication URL and file hash are recorded in `data/additional/source_manifest.csv`.
 - DOSM state boundaries: https://github.com/dosm-malaysia/data-open/tree/main/datasets/geodata
 
-The source manifest and `data/additional/validation/` retain acquisition and provenance evidence. Original local datasets and publications are excluded from Git and are not bundled into the website.
+The source manifest and `data/additional/validation/original_hashes.json` retain source locations and expected hashes. Original local datasets and publications are excluded from Git and are not bundled into the website.
 
 ## Calculations
 
@@ -36,6 +36,6 @@ The 2024 totals reconcile to 52,048 public beds, 19,920 licensed private hospita
 
 Four admission groups total 4,270,356 reported episodes. MOH submission is 97.94%; private response is 82.33%. No missing-report adjustment is made. Private admissions include maternity homes, nursing homes and hospices, whereas private bed capacity covers licensed hospitals only. Admissions are episodes, not unique people.
 
-Population age-bin rounding is retained and recorded in `validation/population.json`. Core source, join and geometry checks are in `validation/core.json`; cartogram and treemap checks are in `validation/layouts.json`. Saved reports record their generation runs; rerun the processing scripts to refresh them.
+Population age-bin rounding is retained. Running the data-preparation scripts regenerates intermediate datasets and validation reports in ignored directories; these are not required to build the website.
 
 Source and boundary reuse terms remain unresolved. Public availability does not establish an open licence. No blanket licence is granted to third-party data, and the geometry is not a legal boundary reference.

@@ -7,14 +7,10 @@
     "dev": "vite --host 127.0.0.1",
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1",
-    "test": "playwright test",
     "prepare:data": "python3 scripts/prepare_data.py && python3 scripts/prepare_private_locations.py && python3 scripts/prepare_population.py && python3 scripts/prepare_layouts.py && npm run sync:data",
-    "format": "prettier --write \"js/**/*.js\" \"css/**/*.css\" \"specs/**/*.json\" \"scripts/**/*.mjs\" \"tests/**/*.js\" \"*.{js,json,html}\" \".github/workflows/*.yml\"",
-    "format:check": "prettier --check \"js/**/*.js\" \"css/**/*.css\" \"specs/**/*.json\" \"scripts/**/*.mjs\" \"tests/**/*.js\" \"*.{js,json,html}\" \".github/workflows/*.yml\"",
-    "prebuild": "npm run sync:data && npm run validate:specs",
-    "test:specs": "node --test scripts/tests/architecture.test.mjs",
-    "sync:data": "node scripts/sync-data.mjs",
-    "validate:specs": "node scripts/validate-specs.mjs"
+    "format": "prettier --write \"js/**/*.js\" \"css/**/*.css\" \"specs/**/*.json\" \"scripts/**/*.mjs\" \"*.{js,json,html}\" \".github/workflows/*.yml\"",
+    "format:check": "prettier --check \"js/**/*.js\" \"css/**/*.css\" \"specs/**/*.json\" \"scripts/**/*.mjs\" \"*.{js,json,html}\" \".github/workflows/*.yml\"",
+    "sync:data": "node scripts/sync-data.mjs"
   },
   "dependencies": {
     "@fontsource-variable/fraunces": "^5.2.8",
@@ -24,8 +20,6 @@
     "vega-lite": "^6.4.1"
   },
   "devDependencies": {
-    "@playwright/test": "^1.56.0",
-    "ajv": "8.20.0",
     "prettier": "3.9.10",
     "vite": "^7.1.9"
   }

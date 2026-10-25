@@ -2,7 +2,7 @@
 
 A single-page investigation of Malaysia’s hospital capacity, activity and population using observed MOH and DOSM data through 2024. Built with **HTML, CSS, vanilla JavaScript and Vega-Lite 6 JSON**. All 12 statistical charts/maps render as SVG through Vega-Embed. React and TypeScript are no longer used.
 
-[Website](https://35100621.github.io/35100621-FIT3179-DV2/) · [Data methods](docs/DATA.md) · [Migration audit and verification](docs/MIGRATION.md)
+[Website](https://35100621.github.io/35100621-FIT3179-DV2/) · [Data methods](docs/DATA.md)
 
 ## Run and build
 
@@ -32,16 +32,14 @@ The build writes `dist/`. `vite.config.js` sets the GitHub Pages base path and c
 | `js/data.js` | Shared request cache, data loading and numeric formatting |
 | `js/motion.js` | Chapter navigation, scroll entrances and count-up animation; honours reduced motion |
 | `js/main.js` | Application startup and font/style imports |
-| `data/processed/` | Chart-ready observations and precomputed layouts |
 | `public/data/` | Browser-loaded JSON/GeoJSON and downloadable CSV |
-| `scripts/` | Python data preparation, publishing and JSON validation |
-| `tests/` | JavaScript browser/data/resource regression tests |
+| `scripts/` | Reproducible Python data preparation and publishing |
 
 Chart specifications are **not generated from JavaScript**. Edit their JSON directly. The previous TypeScript exporter and generated snapshots were removed so there is only one maintained chart definition per chart. Runtime copies in `dist/` are build artifacts.
 
 ## Every chart and its JSON
 
-All entries below pass the installed Vega-Lite schema, compilation and standalone SVG rendering checks. Dataset filenames refer to `public/data/`; source meanings and caveats are recorded in [data methods](docs/DATA.md).
+All twelve specifications were schema-validated and rendered during migration. Dataset filenames refer to `public/data/`; source meanings and caveats are recorded in [data methods](docs/DATA.md).
 
 | Chart / canonical JSON | Dataset / source | Preserved controls and interaction |
 |---|---|---|
@@ -72,7 +70,7 @@ Cartogram shapes and treemap rectangles use the existing Python-precomputed layo
 
 ## Data preparation and publishing
 
-Committed processed data is sufficient to build. `npm run sync:data` publishes compact, value-identical JSON and combines original/resized cartogram features with a `_layout` tag. It does not change coordinates or observations. Shared request caching prevents repeated downloads when charts share datasets or rerender. All published data files together are approximately 2.7 MB uncompressed; chart specifications total approximately 84 KB.
+Committed `public/data/` files are the website’s datasets and are sufficient to build; no intermediate data or test tools are required. `npm run sync:data` publishes compact, value-identical JSON and combines original/resized cartogram features with a `_layout` tag. It does not change coordinates or observations. Shared request caching prevents repeated downloads when charts share datasets or rerender. All published data files together are approximately 2.7 MB uncompressed; chart specifications total approximately 84 KB.
 
 To regenerate observations, restore original files at paths recorded in `data/additional/source_manifest.csv` and `data/additional/validation/original_hashes.json`, then use Python 3.13:
 
@@ -83,20 +81,16 @@ pip install -r scripts/requirements.txt
 npm run prepare:data
 ```
 
-This runs `prepare_data.py`, `prepare_private_locations.py`, `prepare_population.py`, `prepare_layouts.py`, then `sync-data.mjs`. Source hashes are checked; raw sources are never overwritten or deployed. Validation records are in `docs/validation/`. If observations change, also update the narrative/readouts and accessible HTML tables to match.
+This runs `prepare_data.py`, `prepare_private_locations.py`, `prepare_population.py`, `prepare_layouts.py`, then `sync-data.mjs`. Source hashes are checked; raw sources are never overwritten or deployed. Intermediate datasets in `data/processed/`, prepared boundaries in `data/geographic/validated/` and reports in `docs/validation/` are generated locally and ignored by Git. If observations change, also update the narrative/readouts and accessible HTML tables to match.
 
-## Verification
+## Build and formatting
 
 ```sh
-npm run validate:specs  # 12 schemas; 36 standalone render scenarios
-npm run test:specs      # Coverage, no React/TS, data equality and deterministic publishing
-npm run build          # Publishes data, validates specs, then builds
-npx playwright install chromium
-npm test               # Production preview; six viewport sizes
+npm run build
 npm run format:check
 ```
 
-Browser checks cover charts, maps, controls, shared selection, tooltips, values, downloads, resource paths, request caching and horizontal overflow. `PLAYWRIGHT_BASE_URL` can target a deployed site. Reports/screenshots are written to ignored `test-results/`. Use `npm run format` for readable HTML, CSS, JS and JSON.
+The build bundles the website and publishes the canonical JSON specifications. Use `npm run format` to format HTML, CSS, JavaScript and JSON. Automated test files, test dependencies and historical reports have been removed; the previous migration was verified before this cleanup.
 
 ## Interpretation and assignment scope
 

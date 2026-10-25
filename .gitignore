@@ -20,3 +20,8 @@ playwright-report/
 # Local exports and scratch files
 /output/
 /tmp/
+
+# Reproducible intermediate data and processing reports
+/data/processed/
+/data/geographic/validated/
+/docs/validation/
