@@ -1,0 +1,241 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "width": 900,
+  "background": "transparent",
+  "autosize": {
+    "type": "fit-x",
+    "contains": "padding",
+    "resize": true
+  },
+  "config": {
+    "font": "DM Sans",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": "normal",
+      "labelColor": "#c6d5d2",
+      "titleColor": "#c6d5d2",
+      "gridColor": "#3b5155",
+      "domain": false,
+      "tickColor": "#3b5155",
+      "labelPadding": 9,
+      "titlePadding": 15
+    },
+    "legend": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "labelColor": "#c6d5d2",
+      "titleColor": "#c6d5d2",
+      "orient": "top",
+      "direction": "horizontal",
+      "title": null
+    },
+    "text": {
+      "font": "DM Sans"
+    }
+  },
+  "height": 560,
+  "data": {
+    "url": "../data/combined_capacity.json"
+  },
+  "encoding": {
+    "y": {
+      "field": "state",
+      "type": "nominal",
+      "sort": {
+        "field": "sort_value",
+        "op": "max",
+        "order": "descending"
+      },
+      "axis": {
+        "title": null,
+        "labelLimit": 190,
+        "labelFontSize": 12,
+        "ticks": false,
+        "labelExpr": "replace(datum.label, 'W.P. ', '')"
+      }
+    },
+    "opacity": {
+      "condition": [
+        {
+          "test": "datum[\"state\"] === hoveredState || datum[\"state\"] === selectedState",
+          "value": 1
+        },
+        {
+          "test": "hoveredState !== ''",
+          "value": 0.65
+        }
+      ],
+      "value": {
+        "expr": "selectedState ? 0.6 : 1"
+      }
+    },
+    "tooltip": [
+      {
+        "field": "state",
+        "title": "State / federal territory"
+      },
+      {
+        "field": "public_rate",
+        "format": ".2f",
+        "title": "Public beds / 10,000"
+      },
+      {
+        "field": "combined_rate",
+        "format": ".2f",
+        "title": "Combined beds / 10,000"
+      },
+      {
+        "field": "rank_label",
+        "title": "Public → combined rank"
+      },
+      {
+        "field": "public_beds",
+        "format": ",",
+        "title": "Public beds"
+      },
+      {
+        "field": "private_beds",
+        "format": ",",
+        "title": "Private hospital beds"
+      },
+      {
+        "field": "residents",
+        "format": ",",
+        "title": "Residents"
+      }
+    ]
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "strokeWidth": 3,
+        "color": "#b5bfc9"
+      },
+      "encoding": {
+        "x": {
+          "field": "public_rate",
+          "type": "quantitative",
+          "scale": {
+            "domain": [0, 80]
+          },
+          "axis": {
+            "title": "Beds per 10,000 residents",
+            "tickCount": 9
+          }
+        },
+        "x2": {
+          "field": "display_combined"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 100,
+        "color": "#e8b44e",
+        "stroke": "#fffefa",
+        "strokeWidth": 1.5
+      },
+      "encoding": {
+        "x": {
+          "field": "display_combined",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 46,
+        "color": "#f36c4f",
+        "stroke": "#fffefa",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "x": {
+          "field": "public_rate",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 11,
+        "fontSize": 11,
+        "color": "#f36c4f"
+      },
+      "encoding": {
+        "x": {
+          "field": "display_combined",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "display_combined",
+          "format": ".2f"
+        }
+      },
+      "transform": [
+        {
+          "filter": "containerWidth > 700"
+        }
+      ]
+    }
+  ],
+  "params": [
+    {
+      "name": "hoveredState",
+      "value": ""
+    },
+    {
+      "name": "selectedState",
+      "value": ""
+    },
+    {
+      "name": "containerWidth",
+      "value": 900
+    },
+    {
+      "name": "showCombined",
+      "value": true
+    },
+    {
+      "name": "sortBy",
+      "value": "Combined capacity"
+    }
+  ],
+  "usermeta": {
+    "chartId": "connected",
+    "responsive": [
+      {
+        "maxWidth": 499,
+        "set": {
+          "/layer/0/encoding/x/axis/tickCount": 5
+        }
+      }
+    ],
+    "description": "Canonical editable Vega-Lite specification. Controls update declared parameters; responsive settings are applied by the generic host."
+  },
+  "transform": [
+    {
+      "calculate": "showCombined ? datum.combined_rate : datum.public_rate",
+      "as": "display_combined"
+    },
+    {
+      "calculate": "'#' + datum.public_rank + ' → #' + datum.combined_rank",
+      "as": "rank_label"
+    },
+    {
+      "calculate": "sortBy === 'Public capacity' ? datum.public_rate : sortBy === 'Private contribution' ? datum.private_share : datum.combined_rate",
+      "as": "sort_value"
+    }
+  ]
+}

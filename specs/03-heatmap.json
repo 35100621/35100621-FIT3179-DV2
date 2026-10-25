@@ -1,0 +1,171 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "width": 900,
+  "background": "transparent",
+  "autosize": {
+    "type": "fit-x",
+    "contains": "padding",
+    "resize": true
+  },
+  "config": {
+    "font": "DM Sans",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": "normal",
+      "labelColor": "#56636d",
+      "titleColor": "#56636d",
+      "gridColor": "#e7e4de",
+      "domain": false,
+      "tickColor": "#d6d3cb",
+      "labelPadding": 9,
+      "titlePadding": 15
+    },
+    "legend": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "labelColor": "#56636d",
+      "titleColor": "#56636d",
+      "orient": "top",
+      "direction": "horizontal",
+      "title": null
+    },
+    "text": {
+      "font": "DM Sans"
+    }
+  },
+  "height": 448,
+  "data": {
+    "url": "../data/state_rates.json"
+  },
+  "mark": {
+    "type": "rect",
+    "stroke": "#fffefa",
+    "strokeWidth": 2,
+    "cornerRadius": 1
+  },
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "ordinal",
+      "axis": {
+        "title": null,
+        "labelAngle": 0
+      }
+    },
+    "y": {
+      "field": "state",
+      "type": "nominal",
+      "sort": [
+        "W.P. Putrajaya",
+        "W.P. Kuala Lumpur",
+        "Perak",
+        "Perlis",
+        "Sarawak",
+        "Terengganu",
+        "Negeri Sembilan",
+        "Pahang",
+        "Kelantan",
+        "Sabah",
+        "Kedah",
+        "Johor",
+        "Melaka",
+        "W.P. Labuan",
+        "Pulau Pinang",
+        "Selangor"
+      ],
+      "axis": {
+        "title": null,
+        "labelLimit": 190,
+        "labelFontSize": 12,
+        "ticks": false,
+        "labelExpr": "replace(datum.label, 'W.P. ', '')"
+      }
+    },
+    "color": {
+      "field": "rate",
+      "type": "quantitative",
+      "scale": {
+        "domain": [10, 75],
+        "range": ["#e2eeeb", "#527F78", "#172B42"]
+      },
+      "legend": {
+        "orient": "bottom",
+        "title": "Public beds per 10,000 residents",
+        "gradientLength": 280,
+        "titleLimit": 300
+      }
+    },
+    "opacity": {
+      "condition": [
+        {
+          "test": "datum[\"state\"] === hoveredState || datum[\"state\"] === selectedState",
+          "value": 1
+        },
+        {
+          "test": "hoveredState !== ''",
+          "value": 0.65
+        }
+      ],
+      "value": {
+        "expr": "selectedState ? 0.6 : 1"
+      }
+    },
+    "tooltip": [
+      {
+        "field": "state",
+        "title": "State / federal territory"
+      },
+      {
+        "field": "year",
+        "type": "ordinal",
+        "title": "Year"
+      },
+      {
+        "field": "rate",
+        "format": ".2f",
+        "title": "Public beds / 10,000"
+      },
+      {
+        "field": "beds",
+        "format": ",",
+        "title": "Public beds"
+      },
+      {
+        "field": "residents",
+        "format": ",",
+        "title": "Residents"
+      }
+    ]
+  },
+  "params": [
+    {
+      "name": "hoveredState",
+      "value": ""
+    },
+    {
+      "name": "selectedState",
+      "value": ""
+    },
+    {
+      "name": "containerWidth",
+      "value": 900
+    }
+  ],
+  "usermeta": {
+    "chartId": "heatmap",
+    "responsive": [
+      {
+        "maxWidth": 499,
+        "set": {
+          "/encoding/x/axis/labelAngle": -45,
+          "/encoding/color/legend/gradientLength": 160
+        }
+      }
+    ],
+    "description": "Canonical editable Vega-Lite specification. Controls update declared parameters; responsive settings are applied by the generic host."
+  }
+}

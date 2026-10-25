@@ -1,0 +1,134 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "width": 900,
+  "background": "transparent",
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "config": {
+    "font": "Manrope",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "domain": false,
+      "labelColor": "#c6d5d2",
+      "titleColor": "#c6d5d2",
+      "gridColor": "#3b5155"
+    },
+    "legend": {
+      "labelColor": "#c6d5d2",
+      "titleColor": "#c6d5d2"
+    }
+  },
+  "height": 450,
+  "data": {
+    "url": "../data/population_pyramid.json"
+  },
+  "mark": {
+    "type": "bar"
+  },
+  "encoding": {
+    "y": {
+      "field": "age",
+      "type": "ordinal",
+      "sort": [
+        "85+",
+        "80-84",
+        "75-79",
+        "70-74",
+        "65-69",
+        "60-64",
+        "55-59",
+        "50-54",
+        "45-49",
+        "40-44",
+        "35-39",
+        "30-34",
+        "25-29",
+        "20-24",
+        "15-19",
+        "10-14",
+        "5-9",
+        "0-4"
+      ],
+      "axis": {
+        "title": null
+      }
+    },
+    "x": {
+      "field": "signed_share",
+      "type": "quantitative",
+      "scale": {
+        "domain": [-6, 6]
+      },
+      "axis": {
+        "title": "Share of total population (%)",
+        "values": [-6, -3, 0, 3, 6],
+        "labelExpr": "abs(datum.value)"
+      }
+    },
+    "color": {
+      "field": "sex",
+      "type": "nominal",
+      "scale": {
+        "domain": ["male", "female"],
+        "range": ["#4b8294", "#f36c4f"]
+      },
+      "legend": {
+        "title": null,
+        "orient": "top"
+      }
+    },
+    "tooltip": [
+      {
+        "field": "year",
+        "type": "ordinal"
+      },
+      {
+        "field": "sex"
+      },
+      {
+        "field": "age"
+      },
+      {
+        "field": "residents",
+        "format": ","
+      },
+      {
+        "field": "share",
+        "format": ".2f",
+        "title": "% of total population"
+      }
+    ]
+  },
+  "params": [
+    {
+      "name": "hoveredState",
+      "value": ""
+    },
+    {
+      "name": "selectedState",
+      "value": ""
+    },
+    {
+      "name": "containerWidth",
+      "value": 900
+    },
+    {
+      "name": "selectedYear",
+      "value": 2024
+    }
+  ],
+  "usermeta": {
+    "chartId": "population-pyramid",
+    "responsive": [],
+    "description": "Canonical editable Vega-Lite specification. Controls update declared parameters; responsive settings are applied by the generic host."
+  },
+  "transform": [
+    {
+      "filter": "datum.year === selectedYear"
+    }
+  ]
+}

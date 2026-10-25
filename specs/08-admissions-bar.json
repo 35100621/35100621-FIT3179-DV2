@@ -1,0 +1,183 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "width": 900,
+  "background": "transparent",
+  "autosize": {
+    "type": "fit-x",
+    "contains": "padding",
+    "resize": true
+  },
+  "config": {
+    "font": "DM Sans",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": "normal",
+      "labelColor": "#56636d",
+      "titleColor": "#56636d",
+      "gridColor": "#e7e4de",
+      "domain": false,
+      "tickColor": "#d6d3cb",
+      "labelPadding": 9,
+      "titlePadding": 15
+    },
+    "legend": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "labelColor": "#56636d",
+      "titleColor": "#56636d",
+      "orient": "top",
+      "direction": "horizontal",
+      "title": null
+    },
+    "text": {
+      "font": "DM Sans"
+    }
+  },
+  "height": 260,
+  "data": {
+    "url": "../data/admissions.json"
+  },
+  "encoding": {
+    "y": {
+      "field": "provider",
+      "type": "nominal",
+      "sort": [
+        "MOH hospitals",
+        "Private-sector providers",
+        "Other government hospitals",
+        "MOH special institutions"
+      ],
+      "axis": {
+        "title": null,
+        "ticks": false,
+        "labelFontSize": 12,
+        "labelLimit": 200,
+        "labelExpr": "datum.label === 'Other government hospitals' ? 'Other govt.' : datum.label === 'Private-sector providers' ? 'Private providers' : datum.label === 'MOH special institutions' ? 'MOH special inst.' : datum.label"
+      }
+    },
+    "x": {
+      "field": "value",
+      "type": "quantitative",
+      "scale": {
+        "domain": {
+          "expr": "showShare ? [0,75] : [0,3200000]"
+        }
+      },
+      "axis": {
+        "title": "Reported admission episodes",
+        "tickCount": 5,
+        "labelExpr": "format(datum.value, showShare ? '.0f' : '~s')"
+      }
+    },
+    "tooltip": [
+      {
+        "field": "provider",
+        "title": "Provider group"
+      },
+      {
+        "field": "admissions",
+        "format": ",",
+        "title": "Reported admissions"
+      },
+      {
+        "field": "coverage",
+        "title": "Reporting coverage"
+      }
+    ]
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "height": 26,
+        "cornerRadiusEnd": 2
+      },
+      "encoding": {
+        "color": {
+          "field": "provider",
+          "type": "nominal",
+          "legend": null,
+          "scale": {
+            "domain": [
+              "MOH hospitals",
+              "Private-sector providers",
+              "Other government hospitals",
+              "MOH special institutions"
+            ],
+            "range": ["#f36c4f", "#e8b44e", "#4b8294", "#9fc6ae"]
+          }
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 8,
+        "fontSize": 13,
+        "color": "#172B42"
+      },
+      "encoding": {
+        "text": {
+          "field": "valueLabel"
+        }
+      }
+    }
+  ],
+  "params": [
+    {
+      "name": "hoveredState",
+      "value": ""
+    },
+    {
+      "name": "selectedState",
+      "value": ""
+    },
+    {
+      "name": "containerWidth",
+      "value": 900
+    },
+    {
+      "name": "showShare",
+      "value": false
+    }
+  ],
+  "usermeta": {
+    "chartId": "admissions",
+    "responsive": [
+      {
+        "maxWidth": 499,
+        "set": {
+          "/encoding/y/axis/labelFontSize": 11,
+          "/encoding/y/axis/labelLimit": 105,
+          "/encoding/x/axis/tickCount": 3,
+          "/layer/1/mark/fontSize": 10
+        }
+      }
+    ],
+    "description": "Canonical editable Vega-Lite specification. Controls update declared parameters; responsive settings are applied by the generic host.",
+    "parameterPatches": [
+      {
+        "parameter": "showShare",
+        "equals": true,
+        "set": {
+          "/encoding/x/axis/title": "Share of reported admissions (%)"
+        }
+      }
+    ]
+  },
+  "transform": [
+    {
+      "calculate": "showShare ? datum.admissions / 4270356 * 100 : datum.admissions",
+      "as": "value"
+    },
+    {
+      "calculate": "format(datum.value, showShare ? '.1f' : containerWidth < 500 ? '.3s' : ',')",
+      "as": "valueLabel"
+    }
+  ]
+}

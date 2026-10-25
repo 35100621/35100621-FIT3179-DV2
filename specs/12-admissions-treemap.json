@@ -1,0 +1,186 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "width": 900,
+  "background": "transparent",
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "config": {
+    "font": "Manrope",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "domain": false,
+      "labelColor": "#c6d5d2",
+      "titleColor": "#c6d5d2",
+      "gridColor": "#3b5155"
+    },
+    "legend": {
+      "labelColor": "#c6d5d2",
+      "titleColor": "#c6d5d2"
+    }
+  },
+  "height": 420,
+  "data": {
+    "url": "../data/admissions_treemap.json"
+  },
+  "encoding": {
+    "tooltip": [
+      {
+        "field": "provider",
+        "title": "Provider"
+      },
+      {
+        "field": "admissions",
+        "format": ",",
+        "title": "Reported admissions"
+      },
+      {
+        "field": "share",
+        "format": ".2f",
+        "title": "Share (%)"
+      },
+      {
+        "field": "coverage",
+        "title": "Coverage"
+      }
+    ]
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "stroke": "#07171d",
+        "strokeWidth": 3
+      },
+      "encoding": {
+        "x": {
+          "field": "x0",
+          "type": "quantitative",
+          "scale": {
+            "domain": [0, 1]
+          },
+          "axis": null
+        },
+        "x2": {
+          "field": "x1"
+        },
+        "y": {
+          "field": "y0",
+          "type": "quantitative",
+          "scale": {
+            "domain": [1, 0]
+          },
+          "axis": null
+        },
+        "y2": {
+          "field": "y1"
+        },
+        "color": {
+          "field": "provider",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "MOH hospitals",
+              "Private-sector providers",
+              "Other government hospitals",
+              "MOH special institutions"
+            ],
+            "range": ["#f36c4f", "#e8b44e", "#4b8294", "#9fc6ae"]
+          },
+          "legend": null
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "middle",
+        "fontSize": 12,
+        "dy": -13,
+        "color": "#07171d",
+        "fontWeight": 600
+      },
+      "encoding": {
+        "x": {
+          "field": "cx",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "cy",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "short"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "middle",
+        "fontSize": 22,
+        "fontWeight": 600,
+        "color": "#07171d"
+      },
+      "encoding": {
+        "x": {
+          "field": "cx",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "percent_y",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "percentage"
+        }
+      }
+    }
+  ],
+  "params": [
+    {
+      "name": "hoveredState",
+      "value": ""
+    },
+    {
+      "name": "selectedState",
+      "value": ""
+    },
+    {
+      "name": "containerWidth",
+      "value": 900
+    }
+  ],
+  "usermeta": {
+    "chartId": "provider-treemap",
+    "responsive": [
+      {
+        "maxWidth": 399,
+        "set": {
+          "/layer/1/mark/fontSize": 10,
+          "/layer/2/mark/fontSize": 15
+        }
+      }
+    ],
+    "description": "Canonical editable Vega-Lite specification. Controls update declared parameters; responsive settings are applied by the generic host."
+  },
+  "transform": [
+    {
+      "calculate": "datum.cy + (((datum.x1-datum.x0)*containerWidth < 145 || (datum.y1-datum.y0)*420 < 50) ? 0 : 10/420)",
+      "as": "percent_y"
+    },
+    {
+      "calculate": "format(datum.share, '.1f') + '%'",
+      "as": "percentage"
+    },
+    {
+      "calculate": "((datum.x1-datum.x0)*containerWidth < 145 || (datum.y1-datum.y0)*420 < 50) ? '' : datum.provider === 'Private-sector providers' ? 'Private providers' : datum.provider === 'Other government hospitals' ? 'Other government' : datum.provider === 'MOH special institutions' ? 'MOH special inst.' : datum.provider",
+      "as": "short"
+    }
+  ]
+}

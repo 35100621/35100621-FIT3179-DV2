@@ -1,0 +1,197 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "width": 900,
+  "background": "transparent",
+  "autosize": {
+    "type": "fit-x",
+    "contains": "padding",
+    "resize": true
+  },
+  "config": {
+    "font": "DM Sans",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": "normal",
+      "labelColor": "#c6d5d2",
+      "titleColor": "#c6d5d2",
+      "gridColor": "#3b5155",
+      "domain": false,
+      "tickColor": "#3b5155",
+      "labelPadding": 9,
+      "titlePadding": 15
+    },
+    "legend": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "labelColor": "#c6d5d2",
+      "titleColor": "#c6d5d2",
+      "orient": "top",
+      "direction": "horizontal",
+      "title": null
+    },
+    "text": {
+      "font": "DM Sans"
+    }
+  },
+  "height": 430,
+  "projection": {
+    "type": "mercator"
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "../data/states.geojson",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+      "transform": [
+        {
+          "filter": "region === 'All Malaysia' || (indexof(['Sabah','Sarawak','W.P. Labuan'], datum.properties.state) >= 0) === (region === 'East Malaysia')"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "fill": "#e2e8e2",
+        "stroke": "#80938e",
+        "strokeWidth": 0.8
+      }
+    },
+    {
+      "data": {
+        "url": "../data/private_bed_locations.json"
+      },
+      "mark": {
+        "type": "circle",
+        "color": "#D77750",
+        "fillOpacity": 0.55,
+        "stroke": "#f36c4f",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "opacity": {
+          "condition": [
+            {
+              "test": "datum[\"state\"] === hoveredState || datum[\"state\"] === selectedState",
+              "value": 1
+            },
+            {
+              "test": "hoveredState !== ''",
+              "value": 0.65
+            }
+          ],
+          "value": {
+            "expr": "selectedState ? 0.6 : 1"
+          }
+        },
+        "strokeWidth": {
+          "condition": {
+            "test": "datum.state === hoveredState || datum.state === selectedState",
+            "value": 3
+          },
+          "value": 1
+        },
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "size": {
+          "field": "private_beds",
+          "type": "quantitative",
+          "scale": {
+            "type": "linear",
+            "domain": [0, 7000],
+            "range": [0, 3500]
+          },
+          "legend": {
+            "orient": "bottom",
+            "title": "Licensed private hospital beds",
+            "values": [1000, 3000, 6000],
+            "symbolOpacity": 0.6,
+            "titleLimit": 280
+          }
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "title": "State / territory"
+          },
+          {
+            "field": "private_beds",
+            "format": ",",
+            "title": "Licensed private hospital beds (2024)"
+          },
+          {
+            "field": "private_hospitals",
+            "format": ",",
+            "title": "Licensed private hospitals"
+          }
+        ],
+        "order": {
+          "field": "private_beds",
+          "type": "quantitative",
+          "sort": "descending"
+        }
+      },
+      "transform": [
+        {
+          "filter": "region === 'All Malaysia' || (indexof(['Sabah','Sarawak','W.P. Labuan'], datum.state) >= 0) === (region === 'East Malaysia')"
+        },
+        {
+          "window": [
+            {
+              "op": "row_number",
+              "as": "drawOrder"
+            }
+          ],
+          "sort": [
+            {
+              "field": "private_beds",
+              "order": "descending"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "params": [
+    {
+      "name": "hoveredState",
+      "value": ""
+    },
+    {
+      "name": "selectedState",
+      "value": ""
+    },
+    {
+      "name": "containerWidth",
+      "value": 900
+    },
+    {
+      "name": "region",
+      "value": "All Malaysia"
+    }
+  ],
+  "usermeta": {
+    "chartId": "private-symbols",
+    "responsive": [
+      {
+        "maxWidth": 499,
+        "set": {
+          "/height": 330,
+          "/layer/1/encoding/size/scale/range": [0, 1500]
+        }
+      }
+    ],
+    "description": "Canonical editable Vega-Lite specification. Controls update declared parameters; responsive settings are applied by the generic host."
+  }
+}

@@ -5,35 +5,28 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
-    "build": "tsc -b && vite build",
+    "build": "vite build",
     "preview": "vite preview --host 127.0.0.1",
-    "typecheck": "tsc --noEmit",
     "test": "playwright test",
-    "prepare:data": "python3 scripts/prepare_data.py && python3 scripts/prepare_private_locations.py && python3 scripts/prepare_population.py && python3 scripts/prepare_layouts.py",
-    "format": "prettier --write \"scripts/**/*.mjs\" \"src/**/*.{ts,tsx,css}\" \"tests/**/*.ts\" \"*.{ts,json,html}\" \".github/workflows/*.yml\"",
-    "format:check": "prettier --check \"scripts/**/*.mjs\" \"src/**/*.{ts,tsx,css}\" \"tests/**/*.ts\" \"*.{ts,json,html}\" \".github/workflows/*.yml\"",
-    "export:specs": "node scripts/export-specs.mjs",
-    "export:specs:check": "node scripts/export-specs.mjs --check",
-    "prebuild": "npm run export:specs",
-    "test:specs": "node --test scripts/tests/export-specs.test.mjs"
+    "prepare:data": "python3 scripts/prepare_data.py && python3 scripts/prepare_private_locations.py && python3 scripts/prepare_population.py && python3 scripts/prepare_layouts.py && npm run sync:data",
+    "format": "prettier --write \"js/**/*.js\" \"css/**/*.css\" \"specs/**/*.json\" \"scripts/**/*.mjs\" \"tests/**/*.js\" \"*.{js,json,html}\" \".github/workflows/*.yml\"",
+    "format:check": "prettier --check \"js/**/*.js\" \"css/**/*.css\" \"specs/**/*.json\" \"scripts/**/*.mjs\" \"tests/**/*.js\" \"*.{js,json,html}\" \".github/workflows/*.yml\"",
+    "prebuild": "npm run sync:data && npm run validate:specs",
+    "test:specs": "node --test scripts/tests/architecture.test.mjs",
+    "sync:data": "node scripts/sync-data.mjs",
+    "validate:specs": "node scripts/validate-specs.mjs"
   },
   "dependencies": {
     "@fontsource-variable/fraunces": "^5.2.8",
     "@fontsource/dm-sans": "^5.2.8",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
     "vega": "^6.2.0",
     "vega-embed": "^7.0.2",
     "vega-lite": "^6.4.1"
   },
   "devDependencies": {
     "@playwright/test": "^1.56.0",
-    "@types/react": "^19.2.0",
-    "@types/react-dom": "^19.2.0",
-    "@vitejs/plugin-react": "^5.0.4",
     "ajv": "8.20.0",
     "prettier": "3.9.10",
-    "typescript": "^5.9.3",
     "vite": "^7.1.9"
   }
 }

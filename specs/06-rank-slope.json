@@ -1,0 +1,219 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "width": 900,
+  "background": "transparent",
+  "autosize": {
+    "type": "fit-x",
+    "contains": "padding",
+    "resize": true
+  },
+  "config": {
+    "font": "DM Sans",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": "normal",
+      "labelColor": "#c6d5d2",
+      "titleColor": "#c6d5d2",
+      "gridColor": "#3b5155",
+      "domain": false,
+      "tickColor": "#3b5155",
+      "labelPadding": 9,
+      "titlePadding": 15
+    },
+    "legend": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "labelColor": "#c6d5d2",
+      "titleColor": "#c6d5d2",
+      "orient": "top",
+      "direction": "horizontal",
+      "title": null
+    },
+    "text": {
+      "font": "DM Sans"
+    }
+  },
+  "height": 510,
+  "data": {
+    "url": "../data/combined_capacity.json"
+  },
+  "encoding": {
+    "opacity": {
+      "condition": [
+        {
+          "test": "datum[\"state\"] === hoveredState || datum[\"state\"] === selectedState",
+          "value": 1
+        },
+        {
+          "test": "hoveredState !== ''",
+          "value": 0.65
+        }
+      ],
+      "value": {
+        "expr": "selectedState ? 0.6 : 1"
+      }
+    },
+    "x": {
+      "field": "side",
+      "type": "quantitative",
+      "scale": {
+        "domain": [-0.05, 1.7]
+      },
+      "axis": {
+        "title": null,
+        "values": [0, 1],
+        "labelExpr": "datum.value === 0 ? 'Public' : 'Combined'",
+        "grid": false,
+        "labelFontWeight": 700
+      }
+    },
+    "y": {
+      "field": "rank",
+      "type": "quantitative",
+      "scale": {
+        "domain": [16.5, 0.5],
+        "zero": false
+      },
+      "axis": {
+        "title": "Rank · 1 = highest rate",
+        "values": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+        "format": "d"
+      }
+    },
+    "color": {
+      "field": "movement",
+      "type": "nominal",
+      "scale": {
+        "domain": ["Gain", "Loss", "Unchanged", "Pulau Pinang"],
+        "range": ["#9fc6ae", "#e8b44e", "#a8a49b", "#D77750"]
+      },
+      "legend": {
+        "orient": "bottom",
+        "columns": 2
+      }
+    },
+    "detail": {
+      "field": "state"
+    },
+    "tooltip": [
+      {
+        "field": "state",
+        "title": "State / territory"
+      },
+      {
+        "field": "public_rank",
+        "title": "Public rank"
+      },
+      {
+        "field": "combined_rank",
+        "title": "Combined rank"
+      },
+      {
+        "field": "gain",
+        "title": "Places gained (negative = lost)"
+      }
+    ]
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 2.5
+      },
+      "encoding": {
+        "order": {
+          "field": "side"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 55
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.side === 1"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 10,
+        "fontSize": 12
+      },
+      "encoding": {
+        "text": {
+          "field": "label"
+        },
+        "color": {
+          "value": "#f36c4f"
+        }
+      }
+    }
+  ],
+  "params": [
+    {
+      "name": "hoveredState",
+      "value": ""
+    },
+    {
+      "name": "selectedState",
+      "value": ""
+    },
+    {
+      "name": "containerWidth",
+      "value": 900
+    },
+    {
+      "name": "reveal",
+      "value": true
+    }
+  ],
+  "usermeta": {
+    "chartId": "rank-slope",
+    "responsive": [
+      {
+        "maxWidth": 499,
+        "set": {
+          "/encoding/x/scale/domain": [-0.05, 2.7],
+          "/layer/2/mark/fontSize": 10
+        }
+      }
+    ],
+    "description": "Canonical editable Vega-Lite specification. Controls update declared parameters; responsive settings are applied by the generic host."
+  },
+  "transform": [
+    {
+      "fold": ["public_rank", "combined_rank"],
+      "as": ["rank_type", "original_rank"]
+    },
+    {
+      "calculate": "datum.rank_type === 'public_rank' ? 0 : 1",
+      "as": "side"
+    },
+    {
+      "calculate": "datum.side && reveal ? datum.combined_rank : datum.public_rank",
+      "as": "rank"
+    },
+    {
+      "calculate": "datum.public_rank - datum.combined_rank",
+      "as": "gain"
+    },
+    {
+      "calculate": "datum.state === 'Pulau Pinang' ? 'Pulau Pinang' : datum.gain > 0 ? 'Gain' : datum.gain < 0 ? 'Loss' : 'Unchanged'",
+      "as": "movement"
+    },
+    {
+      "calculate": "replace(datum.state, 'W.P. ', '') + ' (' + (datum.gain > 0 ? '+' : '') + datum.gain + ')'",
+      "as": "label"
+    }
+  ]
+}

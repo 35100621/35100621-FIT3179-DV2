@@ -1,0 +1,235 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "width": 900,
+  "background": "transparent",
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "config": {
+    "font": "Manrope",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "domain": false,
+      "labelColor": "#c6d5d2",
+      "titleColor": "#c6d5d2",
+      "gridColor": "#3b5155"
+    },
+    "legend": {
+      "labelColor": "#c6d5d2",
+      "titleColor": "#c6d5d2"
+    }
+  },
+  "height": 460,
+  "projection": {
+    "type": "identity",
+    "reflectY": false
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "geoshape",
+        "opacity": 0
+      }
+    },
+    {
+      "name": "original_footprints",
+      "mark": {
+        "type": "geoshape",
+        "fill": null,
+        "strokeDash": [4, 3]
+      },
+      "encoding": {
+        "stroke": {
+          "condition": {
+            "test": "datum.properties.state === hoveredState || datum.properties.state === selectedState",
+            "value": "#f36c4f"
+          },
+          "value": "#8aa5a0"
+        },
+        "strokeWidth": {
+          "condition": {
+            "test": "datum.properties.state === hoveredState || datum.properties.state === selectedState",
+            "value": 2.8
+          },
+          "value": 1
+        },
+        "opacity": {
+          "value": 0.9
+        },
+        "tooltip": [
+          {
+            "field": "properties.state",
+            "title": "State / territory"
+          },
+          {
+            "field": "properties.combined_beds",
+            "title": "Combined beds",
+            "format": ","
+          },
+          {
+            "field": "properties.combined_rate",
+            "title": "Beds / 10,000",
+            "format": ".2f"
+          }
+        ]
+      },
+      "transform": [
+        {
+          "filter": "mode === 'Capacity' && showOutlines && datum._layout === 'Geography'"
+        }
+      ]
+    },
+    {
+      "name": "capacity_shapes",
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#f2eee3",
+        "strokeWidth": 0.7
+      },
+      "encoding": {
+        "color": {
+          "field": "properties.combined_rate",
+          "type": "quantitative",
+          "scale": {
+            "domain": [10, 75],
+            "range": ["#9fc6ae", "#247c7a", "#123e48"]
+          },
+          "legend": {
+            "title": "Combined beds / 10,000",
+            "orient": "bottom",
+            "gradientLength": 160
+          }
+        },
+        "stroke": {
+          "condition": {
+            "test": "datum.properties.state === hoveredState || datum.properties.state === selectedState",
+            "value": "#f36c4f"
+          },
+          "value": "#f2eee3"
+        },
+        "strokeWidth": {
+          "condition": {
+            "test": "datum.properties.state === hoveredState || datum.properties.state === selectedState",
+            "value": 3
+          },
+          "value": 0.7
+        },
+        "opacity": {
+          "condition": {
+            "test": "datum.properties.state === hoveredState || datum.properties.state === selectedState",
+            "value": 1
+          },
+          "value": {
+            "expr": "selectedState ? 0.65 : 1"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "properties.state",
+            "title": "State / territory"
+          },
+          {
+            "field": "properties.combined_beds",
+            "title": "Combined beds",
+            "format": ","
+          },
+          {
+            "field": "properties.combined_rate",
+            "title": "Beds / 10,000",
+            "format": ".2f"
+          }
+        ]
+      },
+      "transform": [
+        {
+          "filter": "datum._layout === mode"
+        }
+      ]
+    },
+    {
+      "name": "linked_footprints",
+      "transform": [
+        {
+          "filter": "mode === 'Capacity' && showOutlines && datum._layout === 'Geography'"
+        },
+        {
+          "filter": "datum.properties.state === hoveredState || datum.properties.state === selectedState"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "fill": null,
+        "stroke": "#f36c4f",
+        "strokeWidth": 2.5,
+        "strokeDash": [4, 3]
+      },
+      "encoding": {
+        "tooltip": [
+          {
+            "field": "properties.state",
+            "title": "State / territory"
+          },
+          {
+            "field": "properties.combined_beds",
+            "title": "Combined beds",
+            "format": ","
+          },
+          {
+            "field": "properties.combined_rate",
+            "title": "Beds / 10,000",
+            "format": ".2f"
+          }
+        ]
+      }
+    }
+  ],
+  "params": [
+    {
+      "name": "hoveredState",
+      "value": ""
+    },
+    {
+      "name": "selectedState",
+      "value": ""
+    },
+    {
+      "name": "containerWidth",
+      "value": 900
+    },
+    {
+      "name": "region",
+      "value": "All Malaysia"
+    },
+    {
+      "name": "mode",
+      "value": "Capacity"
+    },
+    {
+      "name": "showOutlines",
+      "value": true
+    }
+  ],
+  "usermeta": {
+    "chartId": "capacity-cartogram",
+    "responsive": [
+      {
+        "maxWidth": 499,
+        "set": {
+          "/height": 300
+        }
+      }
+    ],
+    "description": "Canonical editable Vega-Lite specification. Controls update declared parameters; responsive settings are applied by the generic host."
+  },
+  "data": {
+    "url": "../data/capacity_shapes.json"
+  },
+  "transform": [
+    {
+      "filter": "region === 'All Malaysia' || (indexof(['Sabah','Sarawak','W.P. Labuan'], datum.properties.state) >= 0) === (region === 'East Malaysia')"
+    }
+  ]
+}

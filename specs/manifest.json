@@ -1,0 +1,50 @@
+[
+  {
+    "id": "indexed",
+    "spec": "01-indexed-line.json"
+  },
+  {
+    "id": "choropleth",
+    "spec": "02-choropleth-map.json"
+  },
+  {
+    "id": "heatmap",
+    "spec": "03-heatmap.json"
+  },
+  {
+    "id": "private-symbols",
+    "spec": "04-proportional-symbol-map.json"
+  },
+  {
+    "id": "connected",
+    "spec": "05-connected-dot.json"
+  },
+  {
+    "id": "rank-slope",
+    "spec": "06-rank-slope.json"
+  },
+  {
+    "id": "occupancy",
+    "spec": "07-ranked-dot.json"
+  },
+  {
+    "id": "admissions",
+    "spec": "08-admissions-bar.json"
+  },
+  {
+    "id": "ageing",
+    "spec": "09-ageing-bar.json"
+  },
+  {
+    "id": "capacity-cartogram",
+    "spec": "10-non-contiguous-cartogram.json"
+  },
+  {
+    "id": "population-pyramid",
+    "spec": "11-population-pyramid.json"
+  },
+  {
+    "id": "provider-treemap",
+    "spec": "12-admissions-treemap.json"
+  }
+]

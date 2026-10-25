@@ -1,0 +1,202 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "width": 900,
+  "background": "transparent",
+  "autosize": {
+    "type": "fit-x",
+    "contains": "padding",
+    "resize": true
+  },
+  "config": {
+    "font": "DM Sans",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": "normal",
+      "labelColor": "#c6d5d2",
+      "titleColor": "#c6d5d2",
+      "gridColor": "#3b5155",
+      "domain": false,
+      "tickColor": "#3b5155",
+      "labelPadding": 9,
+      "titlePadding": 15
+    },
+    "legend": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "labelColor": "#c6d5d2",
+      "titleColor": "#c6d5d2",
+      "orient": "top",
+      "direction": "horizontal",
+      "title": null
+    },
+    "text": {
+      "font": "DM Sans"
+    }
+  },
+  "height": 320,
+  "data": {
+    "url": "../data/indexed_growth.json"
+  },
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "quantitative",
+      "scale": {
+        "domain": [2015, 2024]
+      },
+      "axis": {
+        "title": null,
+        "format": "d",
+        "values": [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024],
+        "grid": false
+      }
+    },
+    "y": {
+      "field": "index",
+      "type": "quantitative",
+      "scale": {
+        "domain": [98, 118],
+        "zero": false
+      },
+      "axis": {
+        "title": "Index · 2015 = 100",
+        "values": [100, 105, 110, 115]
+      }
+    },
+    "color": {
+      "field": "series",
+      "type": "nominal",
+      "scale": {
+        "domain": ["Public hospital beds", "Population"],
+        "range": ["#f36c4f", "#9fc6ae"]
+      },
+      "legend": null
+    },
+    "tooltip": [
+      {
+        "field": "year",
+        "type": "ordinal",
+        "title": "Year"
+      },
+      {
+        "field": "series",
+        "title": "Series"
+      },
+      {
+        "field": "index",
+        "format": ".2f",
+        "title": "Index (2015 = 100)"
+      },
+      {
+        "field": "count",
+        "format": ",",
+        "title": "Beds / residents"
+      }
+    ]
+  },
+  "layer": [
+    {
+      "data": {
+        "values": [
+          {
+            "year": 2024
+          }
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "color": "#e8b44e",
+        "strokeDash": [4, 4]
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "quantitative"
+        },
+        "y": {
+          "value": 0
+        },
+        "y2": {
+          "value": 320
+        },
+        "color": {
+          "value": "#e8b44e"
+        }
+      },
+      "transform": [
+        {
+          "calculate": "selectedYear",
+          "as": "year"
+        }
+      ]
+    },
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 3
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 52
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.year === 2024"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "dx": -7,
+        "dy": -15,
+        "fontWeight": 700,
+        "fontSize": 14
+      },
+      "encoding": {
+        "text": {
+          "field": "index",
+          "format": ".2f"
+        }
+      }
+    }
+  ],
+  "params": [
+    {
+      "name": "hoveredState",
+      "value": ""
+    },
+    {
+      "name": "selectedState",
+      "value": ""
+    },
+    {
+      "name": "containerWidth",
+      "value": 900
+    },
+    {
+      "name": "selectedYear",
+      "value": 2024
+    }
+  ],
+  "usermeta": {
+    "chartId": "indexed",
+    "responsive": [
+      {
+        "maxWidth": 499,
+        "set": {
+          "/encoding/x/axis/values": [2015, 2018, 2021, 2024]
+        }
+      }
+    ],
+    "description": "Canonical editable Vega-Lite specification. Controls update declared parameters; responsive settings are applied by the generic host."
+  }
+}

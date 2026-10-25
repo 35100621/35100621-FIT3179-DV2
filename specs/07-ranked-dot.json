@@ -1,0 +1,245 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "width": 900,
+  "background": "transparent",
+  "autosize": {
+    "type": "fit-x",
+    "contains": "padding",
+    "resize": true
+  },
+  "config": {
+    "font": "DM Sans",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": "normal",
+      "labelColor": "#56636d",
+      "titleColor": "#56636d",
+      "gridColor": "#e7e4de",
+      "domain": false,
+      "tickColor": "#d6d3cb",
+      "labelPadding": 9,
+      "titlePadding": 15
+    },
+    "legend": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "labelColor": "#56636d",
+      "titleColor": "#56636d",
+      "orient": "top",
+      "direction": "horizontal",
+      "title": null
+    },
+    "text": {
+      "font": "DM Sans"
+    }
+  },
+  "height": 470,
+  "layer": [
+    {
+      "data": {
+        "values": [
+          {
+            "national": 72.61
+          }
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "strokeDash": [5, 4],
+        "color": "#D77750",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "x": {
+          "field": "national",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "data": {
+        "url": "../data/occupancy.json"
+      },
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "color": "#172B42",
+        "size": 90
+      },
+      "encoding": {
+        "y": {
+          "field": "state",
+          "type": "nominal",
+          "sort": [
+            "Kedah",
+            "Negeri Sembilan",
+            "Johor",
+            "W.P. Kuala Lumpur",
+            "Selangor",
+            "Perlis",
+            "Pulau Pinang",
+            "Melaka",
+            "Terengganu",
+            "Kelantan",
+            "W.P. Putrajaya",
+            "Pahang",
+            "Sarawak",
+            "Sabah",
+            "Perak",
+            "W.P. Labuan"
+          ],
+          "axis": {
+            "title": null,
+            "labelLimit": 190,
+            "labelFontSize": 12,
+            "ticks": false,
+            "labelExpr": "replace(datum.label, 'W.P. ', '')"
+          }
+        },
+        "x": {
+          "field": "occupancy",
+          "type": "quantitative",
+          "scale": {
+            "domain": [0, 100]
+          },
+          "axis": {
+            "title": "Reported annual bed occupancy (%)",
+            "tickCount": 11
+          }
+        },
+        "opacity": {
+          "condition": [
+            {
+              "test": "datum[\"state\"] === hoveredState || datum[\"state\"] === selectedState",
+              "value": 1
+            },
+            {
+              "test": "hoveredState !== ''",
+              "value": 0.65
+            }
+          ],
+          "value": {
+            "expr": "selectedState ? 0.6 : 1"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "title": "State / federal territory"
+          },
+          {
+            "field": "occupancy",
+            "format": ".2f",
+            "title": "Annual MOH occupancy (%)"
+          },
+          {
+            "field": "operational_beds",
+            "format": ",",
+            "title": "Operational MOH beds"
+          },
+          {
+            "field": "national_occupancy",
+            "format": ".2f",
+            "title": "National MOH occupancy (%)"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "../data/occupancy.json"
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 10,
+        "fontSize": 11,
+        "color": "#172B42"
+      },
+      "encoding": {
+        "y": {
+          "field": "state",
+          "type": "nominal",
+          "sort": [
+            "Kedah",
+            "Negeri Sembilan",
+            "Johor",
+            "W.P. Kuala Lumpur",
+            "Selangor",
+            "Perlis",
+            "Pulau Pinang",
+            "Melaka",
+            "Terengganu",
+            "Kelantan",
+            "W.P. Putrajaya",
+            "Pahang",
+            "Sarawak",
+            "Sabah",
+            "Perak",
+            "W.P. Labuan"
+          ],
+          "axis": {
+            "title": null,
+            "labelLimit": 190,
+            "labelFontSize": 12,
+            "ticks": false,
+            "labelExpr": "replace(datum.label, 'W.P. ', '')"
+          }
+        },
+        "x": {
+          "field": "occupancy",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "occupancy",
+          "format": ".2f"
+        },
+        "opacity": {
+          "condition": [
+            {
+              "test": "datum[\"state\"] === hoveredState || datum[\"state\"] === selectedState",
+              "value": 1
+            },
+            {
+              "test": "hoveredState !== ''",
+              "value": 0.65
+            }
+          ],
+          "value": {
+            "expr": "selectedState ? 0.6 : 1"
+          }
+        }
+      }
+    }
+  ],
+  "params": [
+    {
+      "name": "hoveredState",
+      "value": ""
+    },
+    {
+      "name": "selectedState",
+      "value": ""
+    },
+    {
+      "name": "containerWidth",
+      "value": 900
+    }
+  ],
+  "usermeta": {
+    "chartId": "occupancy",
+    "responsive": [
+      {
+        "maxWidth": 499,
+        "set": {
+          "/layer/1/encoding/x/axis/tickCount": 5
+        }
+      }
+    ],
+    "description": "Canonical editable Vega-Lite specification. Controls update declared parameters; responsive settings are applied by the generic host."
+  }
+}
