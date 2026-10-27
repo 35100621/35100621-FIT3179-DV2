@@ -13,8 +13,8 @@
       "stroke": null
     },
     "axis": {
-      "labelFontSize": 12,
-      "titleFontSize": 12,
+      "labelFontSize": 14,
+      "titleFontSize": 14,
       "titleFontWeight": "normal",
       "labelColor": "#56636d",
       "titleColor": "#56636d",
@@ -37,7 +37,7 @@
       "font": "DM Sans"
     }
   },
-  "height": 470,
+  "height": 520,
   "layer": [
     {
       "data": {
@@ -95,7 +95,7 @@
           "axis": {
             "title": null,
             "labelLimit": 190,
-            "labelFontSize": 12,
+            "labelFontSize": 14,
             "ticks": false,
             "labelExpr": "replace(datum.label, 'W.P. ', '')"
           }
@@ -157,8 +157,11 @@
         "type": "text",
         "align": "left",
         "dx": 10,
-        "fontSize": 12,
-        "color": "#172B42"
+        "fontSize": 14,
+        "color": "#172B42",
+        "fontWeight": {
+          "expr": "datum.state === selectedState || datum.state === hoveredState ? 700 : 400"
+        }
       },
       "encoding": {
         "y": {
@@ -185,7 +188,7 @@
           "axis": {
             "title": null,
             "labelLimit": 190,
-            "labelFontSize": 12,
+            "labelFontSize": 14,
             "ticks": false,
             "labelExpr": "replace(datum.label, 'W.P. ', '')"
           }
@@ -236,7 +239,13 @@
       {
         "maxWidth": 499,
         "set": {
-          "/layer/1/encoding/x/axis/tickCount": 5
+          "/layer/1/encoding/x/axis/tickCount": 5,
+          "/height": 470,
+          "/config/axis/labelFontSize": 12,
+          "/config/axis/titleFontSize": 12,
+          "/layer/1/encoding/y/axis/labelFontSize": 12,
+          "/layer/2/encoding/y/axis/labelFontSize": 12,
+          "/layer/2/mark/fontSize": 12
         }
       },
       {

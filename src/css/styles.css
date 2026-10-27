@@ -3243,3 +3243,93 @@ a {
     --module-inset: 16px;
   }
 }
+
+/* Occupancy: give the evidence the full editorial width. */
+.occupancy-card {
+  display: block;
+  min-height: 0;
+  background: transparent;
+}
+.occupancy-chart {
+  padding: 0;
+}
+.occupancy-chart .chart-meta p,
+.occupancy-chart .reference-legend,
+.occupancy-chart .state-insight {
+  font-size: 16px;
+  line-height: 1.65;
+}
+.occupancy-chart .source,
+.occupancy-chart .data-table summary {
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* Conclusion: neutral paper, readable sources and a compact narrative flow. */
+.closing {
+  min-height: 0;
+  background: var(--ivory);
+  color: var(--ink);
+}
+.closing > .eyebrow {
+  color: color-mix(in srgb, var(--teal) 85%, var(--ink));
+}
+.closing h2 {
+  max-width: 22ch;
+  font-size: clamp(38px, 5.5vw, 80px);
+  line-height: 1.08;
+  margin: var(--space-4) 0 var(--space-6);
+}
+.closing h2 em {
+  color: inherit;
+}
+.closing-grid {
+  grid-template-columns: 1.1fr 1fr;
+  gap: var(--space-4) var(--space-6);
+  margin-top: 0;
+  border-color: var(--line);
+}
+.closing-grid > p {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.55;
+}
+.closing-grid > div {
+  font-size: 16px;
+  line-height: 1.7;
+}
+.closing-grid > div b {
+  color: color-mix(in srgb, var(--teal) 85%, var(--ink));
+  font: 600 16px/1.5 var(--sans);
+  text-transform: none;
+}
+.closing-grid > a {
+  font-size: 14px;
+  text-transform: none;
+  min-height: 44px;
+}
+.closing small {
+  font: 14px/1.6 var(--sans);
+  text-transform: none;
+  margin-top: var(--space-5);
+}
+.closing .methodology {
+  font-size: 16px;
+  line-height: 1.7;
+  margin-top: var(--space-4);
+}
+.closing .methodology p {
+  max-width: 78ch;
+}
+.closing .methodology a {
+  display: inline;
+  font: inherit;
+  text-transform: none;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+@media (max-width: 900px) {
+  .closing-grid {
+    grid-template-columns: 1fr;
+  }
+}
